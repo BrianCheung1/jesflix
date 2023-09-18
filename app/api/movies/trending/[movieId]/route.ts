@@ -53,8 +53,7 @@ export async function GET(
         url: `https://api.themoviedb.org/3/movie/${id}?&append_to_response=videos`,
         headers: {
           accept: "application/json",
-          Authorization:
-          `Bearer ${process.env.TMDB_BEARER_TOKEN}`,
+          Authorization: `Bearer ${process.env.TMDB_BEARER_TOKEN}`,
         },
       }
       const movie = await axios.request(options)

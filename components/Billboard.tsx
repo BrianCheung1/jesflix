@@ -8,7 +8,7 @@ const Billboard = () => {
   const { data } = useBillboard()
   const { openModal } = useInfoModal()
   const video = data?.videos?.results?.filter(
-    (result:any) => result.type == "Trailer"
+    (result: any) => result.type == "Trailer"
   )[0]["key"]
   const handleOpenModal = useCallback(() => {
     openModal(data?.id)

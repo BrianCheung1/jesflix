@@ -25,20 +25,19 @@ export async function GET(req: Request) {
       }
 
       let movies = []
-      for(let i = 0; i < user["favoriteIds"].length;i++){
+      for (let i = 0; i < user["favoriteIds"].length; i++) {
         const id = user["favoriteIds"][i]
         const options = {
-            method: "GET",
-            url: `https://api.themoviedb.org/3/movie/${id}`,
-            params: {language: 'en-US'},
-            headers: {
-              accept: "application/json",
-              Authorization:
-              `Bearer ${process.env.TMDB_BEARER_TOKEN}`,
-            },
-          }
+          method: "GET",
+          url: `https://api.themoviedb.org/3/movie/${id}`,
+          params: { language: "en-US" },
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${process.env.TMDB_BEARER_TOKEN}`,
+          },
+        }
         const movie = await axios.request(options)
-        
+
         movies.push(movie.data)
       }
       return NextResponse.json(movies)

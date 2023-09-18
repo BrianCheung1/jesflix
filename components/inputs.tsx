@@ -1,25 +1,19 @@
 interface InputProps {
-    id: string
-    onChange: any
-    value: string
-    label: string
-    type?: string
+  id: string
+  onChange: any
+  value: string
+  label: string
+  type?: string
 }
 
-const Input: React.FC<InputProps> = ({
-    id,
-    onChange,
-    value,
-    label,
-    type
-}) => {
-    return (
-        <div id={id} className="relative">
-            <input
-                onChange={onChange}
-                type={type}
-                value={value}
-                className="
+const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
+  return (
+    <div id={id} className="relative">
+      <input
+        onChange={onChange}
+        type={type}
+        value={value}
+        className="
         block
         rounded-md
         px-6
@@ -33,11 +27,10 @@ const Input: React.FC<InputProps> = ({
         focus:outline-none
         focus:ring-0
         peer"
-
-                placeholder=" "
-            />
-            <label
-                className="absolute
+        placeholder=" "
+      />
+      <label
+        className="absolute
                 text-md
             text-zinc-400
             duration-150
@@ -52,11 +45,12 @@ const Input: React.FC<InputProps> = ({
             peer-placeholder-shown:translate-y-0
             peer-focus:scale-75
             peer-focus:-translate-y-3"
-                htmlFor={id}>
-                {label}
-            </label>
-        </div>
-    )
+        htmlFor={id}
+      >
+        {label}
+      </label>
+    </div>
+  )
 }
 
-export default Input;
+export default Input
