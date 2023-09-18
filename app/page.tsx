@@ -46,7 +46,8 @@ const Home = () => {
         <Billboard />
         <div className="pb-40">
           <MovieList title="My List" data={favorites} />
-          <MovieList title="Trending" data={trending} />
+          <MovieList title="Trending Movies" data={trending} />
+          <MovieList title="Trending Shows" data={trending} />
         </div>
       </>
     )

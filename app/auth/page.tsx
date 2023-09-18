@@ -8,6 +8,10 @@ import { useSession } from "next-auth/react"
 
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
+import { ToastContainer, toast } from "react-toastify"
+import validator from "validator"
+import "react-toastify/dist/ReactToastify.css"
+
 const Auth = () => {
   const { data: session } = useSession()
   const router = useRouter()
@@ -15,6 +19,12 @@ const Auth = () => {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState("")
+  const [errorEmailMessage, setEmailErrorMessage] = useState("")
+  const [errorUsernameMessage, setUsernameErrorMessage] = useState("")
+  const [validPassword, setValidPassword] = useState(false)
+  const [validEmail, setValidEmail] = useState(false)
+  const [validUsername, setValidUsername] = useState(false)
 
   const [variant, setVariant] = useState("login")
   const toggleVariant = useCallback(() => {
@@ -22,6 +32,83 @@ const Auth = () => {
       currentVariant === "login" ? "register" : "login"
     )
   }, [])
+
+  const validateUsername = (value: string) => {
+    if (
+      validator.isLength(value, {
+        min: 1,
+      })
+    ) {
+      setValidUsername(true)
+      setUsernameErrorMessage("Valid Username")
+    } else {
+      setValidUsername(false)
+      setUsernameErrorMessage("Username has less than 3 characters")
+    }
+  }
+
+  const validateEmail = (value: string) => {
+    if (validator.isEmail(value)) {
+      setValidEmail(true)
+      setEmailErrorMessage("Valid Email")
+    } else {
+      setValidEmail(false)
+      setEmailErrorMessage("Invalid Email")
+    }
+  }
+
+  const validatePassword = (value: string) => {
+    if (
+      !validator.isStrongPassword(value, {
+        minLength: 8,
+        minLowercase: 0,
+        minUppercase: 0,
+        minNumbers: 0,
+        minSymbols: 0,
+      })
+    ) {
+      setValidPassword(false)
+      setErrorPasswordMessage("Password has less than 8 characters")
+    } else if (
+      !validator.isStrongPassword(value, {
+        minLength: 8,
+        minLowercase: 0,
+        minUppercase: 0,
+        minNumbers: 1,
+        minSymbols: 0,
+      })
+    ) {
+      setValidPassword(false)
+      setErrorPasswordMessage("Password has no numbers")
+    } else if (
+      !validator.isStrongPassword(value, {
+        minLength: 8,
+        minLowercase: 0,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 0,
+      })
+    ) {
+      setValidPassword(false)
+      setErrorPasswordMessage("Password has no capital letters")
+    } else if (
+      !validator.isStrongPassword(value, {
+        minLength: 8,
+        minLowercase: 0,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      setValidPassword(false)
+      setErrorPasswordMessage("Password has no capital symbols")
+    } else {
+      setValidPassword(true)
+      setErrorPasswordMessage("Strong password")
+    }
+  }
+
+  const notify = () => toast("Email already exists")
 
   const login = useCallback(async () => {
     try {
@@ -37,22 +124,39 @@ const Auth = () => {
 
   const register = useCallback(async () => {
     try {
-      await axios.post("/api/register", {
+      const res = await axios.post("/api/register", {
         email,
         name,
         password,
       })
+      login()
     } catch (error) {
+      notify()
       console.log(error)
     }
-  }, [email, name, password])
+  }, [email, name, password, login])
   if (session) {
     router.push("/")
   }
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
+      <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          limit={3}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </div>
       <div className="bg-black w-full h-full lg:bg-opacity-50">
-        <nav className="px-12 py-5">
+        <nav className="md:px-12 md:py-5 lg:justify-normal flex justify-center py-5">
           <img src="/images/logo.png" alt="Logo" className="h-12" />
         </nav>
         <div className="flex justify-center">
@@ -67,36 +171,68 @@ const Auth = () => {
                   id="name"
                   value={name}
                   onChange={(event: any) => {
+                    validateUsername(event.target.value)
                     setName(event.target.value)
                   }}
                 />
               )}
-
+              {errorUsernameMessage === "" ? null : (
+                <p
+                className="text-xs text-red-500 font-bold"
+              >
+                  {errorUsernameMessage}
+                </p>
+              )}
               <Input
                 label="Email"
                 id="email"
                 type="email"
                 value={email}
                 onChange={(event: any) => {
+                  validateEmail(event.target.value)
                   setEmail(event.target.value)
                 }}
               />
+              {errorEmailMessage === "" ? null : (
+                <p className="text-xs text-red-500 font-bold">
+                  {errorEmailMessage}
+                </p>
+              )}
               <Input
                 label="Password"
                 id="password"
                 type="password"
                 value={password}
                 onChange={(event: any) => {
+                  validatePassword(event.target.value)
                   setPassword(event.target.value)
                 }}
               />
+              {errorPasswordMessage === "" ? null : (
+                <p className="text-xs text-red-500 font-bold">
+                  {errorPasswordMessage}
+                </p>
+              )}
             </div>
-            <button
-              onClick={variant === "login" ? login : register}
-              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
-            >
-              {variant === "login" ? "Login" : "Sign up"}
-            </button>
+            {variant == "login" && (
+              <button
+                onClick={login}
+                className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+              >
+                Login
+              </button>
+            )}
+
+            {variant == "register" && (
+              <button
+                disabled={!validPassword || !validEmail || !validUsername}
+                onClick={register}
+                className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+              >
+                Sign up
+              </button>
+            )}
+
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
                 onClick={() => signIn("google", { callbackUrl: "/profiles" })}

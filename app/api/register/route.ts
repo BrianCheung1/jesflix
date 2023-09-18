@@ -11,10 +11,12 @@ export const POST = async (req: Request) => {
       },
     })
     if (existingUser) {
-      return NextResponse.json({ error: "Email already exists" })
+      return NextResponse.json(
+        { error: "Email already exists" },
+        { status: 409 }
+      )
     }
     const hashedPassword = await bcrypt.hash(password, 12)
-    console.log(hashedPassword)
     const user = await prismadb.user.create({
       data: {
         name,
