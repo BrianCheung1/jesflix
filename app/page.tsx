@@ -45,7 +45,6 @@ const Home = () => {
         <Navbar />
         <Billboard />
         <div className="pb-40">
-          {/* <MovieList title="Trending Now" data={movies} /> */}
           <MovieList title="My List" data={favorites} />
           <MovieList title="Trending" data={trending} />
         </div>
