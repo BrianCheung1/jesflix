@@ -12,6 +12,7 @@ import useFavorites from "@/hooks/useFavorites"
 import InfoModal from "@/components/InfoModal"
 import useInfoModal from "@/hooks/useInfoModal"
 import useTrendingList from "@/hooks/useTrendingList"
+import useBillboard from "@/hooks/useBillboard"
 
 const Home = () => {
   const { data: user } = useCurrentUser()
@@ -25,8 +26,9 @@ const Home = () => {
   const { data: favorites = [] } = useFavorites()
   const { data: trending = [], isLoading } = useTrendingList()
   const { isOpen, closeModal } = useInfoModal()
+  const { isLoading: isBillBoardLoading } = useBillboard()
 
-  if (isLoading) {
+  if (isLoading || isBillBoardLoading) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
         <div

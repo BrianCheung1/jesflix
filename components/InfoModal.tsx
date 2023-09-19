@@ -14,7 +14,8 @@ interface InfoModalProps {
 const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
   const { movieId } = useInfoModal()
-  const { data } = useMovie(movieId)
+  const { data, isLoading } = useMovie(movieId)
+
   const video = data?.videos?.results?.filter(
     (result: any) => result.type == "Trailer"
   )[0]["key"]
@@ -32,7 +33,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   if (!isVisible) {
     return null
   }
-
   return (
     <div className="z-50 transition duraiton-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
       <div className="relative w-auto mx-auto max-w-3xl rounded-md overlfow-hidden">

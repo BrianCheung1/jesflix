@@ -166,22 +166,22 @@ const Auth = () => {
             </h2>
             <div className="flex flex-col gap-4">
               {variant === "register" && (
-                <Input
-                  label="Username"
-                  id="name"
-                  value={name}
-                  onChange={(event: any) => {
-                    validateUsername(event.target.value)
-                    setName(event.target.value)
-                  }}
-                />
-              )}
-              {errorUsernameMessage === "" ? null : (
-                <p
-                className="text-xs text-red-500 font-bold"
-              >
-                  {errorUsernameMessage}
-                </p>
+                <div>
+                  <Input
+                    label="Username"
+                    id="name"
+                    value={name}
+                    onChange={(event: any) => {
+                      validateUsername(event.target.value)
+                      setName(event.target.value)
+                    }}
+                  />
+                  {errorUsernameMessage === "" ? null : (
+                    <p className="text-xs text-red-500 font-bold">
+                      {errorUsernameMessage}
+                    </p>
+                  )}
+                </div>
               )}
               <Input
                 label="Email"
@@ -193,7 +193,7 @@ const Auth = () => {
                   setEmail(event.target.value)
                 }}
               />
-              {errorEmailMessage === "" ? null : (
+              {variant === "login" || errorEmailMessage === "" ? null : (
                 <p className="text-xs text-red-500 font-bold">
                   {errorEmailMessage}
                 </p>
@@ -208,7 +208,7 @@ const Auth = () => {
                   setPassword(event.target.value)
                 }}
               />
-              {errorPasswordMessage === "" ? null : (
+              {variant === "login" || errorPasswordMessage === "" ? null : (
                 <p className="text-xs text-red-500 font-bold">
                   {errorPasswordMessage}
                 </p>

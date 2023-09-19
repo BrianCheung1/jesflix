@@ -35,18 +35,18 @@ const Navbar = () => {
   }, [])
 
   return (
-    <nav className="w-full fixed z-40">
+    <nav className="w-full fixed z-40 ">
       <div
         className={`
         px-4
         md:px-16
-        py-6
+        py-5
         flex
         flex-row
         items-center
         transition
         duration-500
-        ${ShowBackground ? "bg-zinc-900 bg-opacity-90" : ""}`}
+        ${ShowBackground ? "bg-black bg-opacity-70" : "bg-black"}`}
       >
         <img className="h-4 md:h-7" src="/images/logo.png" alt="Logo=" />
         <div
