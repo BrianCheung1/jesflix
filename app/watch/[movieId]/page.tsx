@@ -20,31 +20,28 @@ const Watch = () => {
   )[0]["key"]
 
   return (
-    <div className="h-screen w-screen bg-black">
-      <nav
+    <div className="h-screen w-screen bg-black flex flex-col justify-end">
+      <div
         className="
-        fixed w-full p-4 z-10 
-        flex flex-row items-center 
+         w-full p-4 z-10 
+         items-center 
         gap-8 bg-black bg-opacity-70
-        
       "
       >
         <AiOutlineArrowLeft
-          onClick={() => router.back()}
+          onClick={() => router.push("/")}
           className="text-white cursor-pointer"
-          size={40}
+          size={30}
         />
-        <p className="text-white text-xl md:text-3xl font-bold">
-          <span className="font-light">Watching: </span>
-          {data?.title}
-        </p>
-      </nav>
-      <iframe
-        id="video"
-        className="h-full w-full "
-        src={`https://www.youtube.com/embed/${video}?autoplay=1&quality=high`}
-        allowFullScreen
-      ></iframe>
+      </div>
+      <div className="bg-green-400 flex justify-center items-center flex-grow">
+        <iframe
+          id="video"
+          className="h-full w-full"
+          src={`https://multiembed.mov/?video_id=${data?.id}&tmdb=1`}
+          allowFullScreen
+        ></iframe>
+      </div>
     </div>
   )
 }
