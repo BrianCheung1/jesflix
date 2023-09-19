@@ -34,7 +34,7 @@ const Watch = () => {
           size={30}
         />
       </div>
-      <div className="bg-green-400 flex justify-center items-center flex-grow">
+      <div className="flex justify-center items-center flex-grow">
         <iframe
           id="video"
           className="h-full w-full"
