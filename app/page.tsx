@@ -53,7 +53,7 @@ const Home = () => {
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <Navbar />
-        {/* <Billboard /> */}
+        <Billboard />
         <div className="pb-40">
           <FavoriteList title="Favorites" data={favorites} />
           <MovieList title="Trending Movies Today" data={trending} />
