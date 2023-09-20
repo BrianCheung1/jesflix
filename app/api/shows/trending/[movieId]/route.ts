@@ -19,7 +19,7 @@ export async function GET(
     try {
       const options = {
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${id}?&append_to_response=videos`,
+        url: `https://api.themoviedb.org/3/tv/${id}?&append_to_response=videos`,
         headers: {
           accept: "application/json",
           Authorization: `Bearer ${process.env.TMDB_BEARER_TOKEN}`,

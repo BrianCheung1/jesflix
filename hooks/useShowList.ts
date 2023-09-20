@@ -1,8 +1,8 @@
 import useSWR from "swr"
 import fetcher from "@/libs/fetcher"
 
-const useTrendingList = () => {
-  const { data, error, isLoading } = useSWR("/api/movies/trending", fetcher, {
+const useShowList = () => {
+  const { data, error, isLoading } = useSWR("/api/shows/trending", fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
@@ -15,4 +15,4 @@ const useTrendingList = () => {
   }
 }
 
-export default useTrendingList
+export default useShowList

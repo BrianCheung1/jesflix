@@ -1,9 +1,9 @@
 "use client"
 
-import useMovie from "@/hooks/useMovie"
 import { useSession } from "next-auth/react"
 import { redirect, useParams, useRouter } from "next/navigation"
 import { AiOutlineArrowLeft } from "react-icons/ai"
+import useShow from "@/hooks/useShow"
 
 const Watch = () => {
   const { data: session } = useSession({
@@ -13,11 +13,22 @@ const Watch = () => {
     },
   })
   const router = useRouter()
-  const { movieId } = useParams()
-  const { data } = useMovie(movieId as string)
-  const video = data?.videos?.results?.filter(
-    (result: any) => result.type == "Trailer"
-  )[0]["key"]
+  const { showId } = useParams()
+  const { data, isLoading } = useShow(showId as string)
+
+  if (isLoading) {
+    return (
+      <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
+        <div
+          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-red-600 rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="h-screen w-screen bg-black flex flex-col justify-end">
@@ -38,7 +49,7 @@ const Watch = () => {
         <iframe
           id="video"
           className="h-full w-full"
-          src={`https://multiembed.mov/?video_id=${data?.id}&tmdb=1`}
+          src={`https://multiembed.mov/?video_id=${data?.id}`}
           allowFullScreen
         ></iframe>
       </div>

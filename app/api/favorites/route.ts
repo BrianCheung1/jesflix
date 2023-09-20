@@ -13,20 +13,13 @@ export async function GET(req: Request) {
           email: session?.user?.email || "",
         },
       })
-      // const favoriteMovies = await prismadb.movie.findMany({
-      //     where: {
-      //         id: {
-      //             in: user?.favoriteIds
-      //         }
-      //     }
-      // })
       if (!user) {
         return null
       }
-
-      let movies = []
-      for (let i = 0; i < user["favoriteIds"].length; i++) {
-        const id = user["favoriteIds"][i]
+ 
+      let list = {movies: [] as any[], shows: [] as any[]}
+      for (let i = 0; i < user["favoriteMovieIds"].length; i++) {
+        const id = user["favoriteMovieIds"][i]
         const options = {
           method: "GET",
           url: `https://api.themoviedb.org/3/movie/${id}`,
@@ -38,9 +31,24 @@ export async function GET(req: Request) {
         }
         const movie = await axios.request(options)
 
-        movies.push(movie.data)
+        list["movies"].push(movie.data)
       }
-      return NextResponse.json(movies)
+      for (let i = 0; i < user["favoriteShowIds"].length; i++) {
+        const id = user["favoriteShowIds"][i]
+        const options = {
+          method: "GET",
+          url: `https://api.themoviedb.org/3/tv/${id}`,
+          params: { language: "en-US" },
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${process.env.TMDB_BEARER_TOKEN}`,
+          },
+        }
+        const show = await axios.request(options)
+        
+        list["shows"].push(show.data)
+      }
+      return NextResponse.json(list)
     } catch (error) {
       return NextResponse.json(error)
     }

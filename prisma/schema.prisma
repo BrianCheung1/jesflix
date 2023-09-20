@@ -11,17 +11,18 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  image          String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  favoriteIds    Int[]
-  sessions       Session[]
-  accounts       Account[]
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  image            String?
+  email            String?   @unique
+  emailVerified    DateTime?
+  hashedPassword   String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  favoriteMovieIds Int[]
+  favoriteShowIds  Int[]
+  sessions         Session[]
+  accounts         Account[]
 }
 
 model Account {

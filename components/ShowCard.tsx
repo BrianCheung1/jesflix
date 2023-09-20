@@ -1,18 +1,18 @@
-import React from "react"
+import React, { useState } from "react"
 
 import { BsFillPlayFill } from "react-icons/bs"
 import FavoriteButton from "./FavoriteButton"
 import { useRouter } from "next/navigation"
-import useInfoModal from "@/hooks/useInfoModal"
+import useShowInfoModal from "@/hooks/useShowInfoModal"
 import { BiChevronDown } from "react-icons/bi"
 
-interface MovieCardProps {
+interface ShowCardProps {
   data: Record<string, any>
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
   const router = useRouter()
-  const { openModal } = useInfoModal()
+  const { openModal } = useShowInfoModal()
 
   return (
     <div className="group bg-zinc-900 relative">
@@ -28,11 +28,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         <div className="flex flex-row items-center gap-3">
           <div
             className="cursor-pointer text-white transition"
-            onClick={() => router.push(`/watch/movie/${data?.id}`)}
+            onClick={() => router.push(`/watch/show/${data?.id}/1/1`)}
           >
             <BsFillPlayFill size={30} />
           </div>
-          <FavoriteButton movieId={data?.id} type="movie"/>
+          <FavoriteButton movieId={data?.id} type="show" />
           <div
             onClick={() => {
               openModal(data?.id)
@@ -50,4 +50,4 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   )
 }
 
-export default MovieCard
+export default ShowCard

@@ -3,8 +3,8 @@ import { AiOutlineClose } from "react-icons/ai"
 
 import PlayButton from "./PlayButton"
 import FavoriteButton from "./FavoriteButton"
-import useInfoModal from "@/hooks/useInfoModal"
-import useMovie from "@/hooks/useMovie"
+import useShowInfoModal from "@/hooks/useShowInfoModal"
+import useShow from "@/hooks/useShow"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
 import { BiSolidTimeFive } from "react-icons/bi"
@@ -14,24 +14,74 @@ interface InfoModalProps {
   onClose: any
 }
 
-const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
+const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
-  const { movieId } = useInfoModal()
-  const { data, isLoading } = useMovie(movieId)
+  const { movieId } = useShowInfoModal()
+  const { data, isLoading } = useShow(movieId)
+  const [isOpen, setOpen] = useState(false)
+  const [isOpenEps, setOpenEps] = useState(false)
+  const [season, setSeason] = useState(0)
+  const [episode, setEpisode] = useState(0)
 
-  const video = data?.videos?.results?.filter(
-    (result: any) => result.type == "Trailer"
-  )[0]["key"]
+  const handleDropDown = () => {
+    setOpen(!isOpen)
+    if (isOpenEps) {
+      setOpenEps(false)
+    }
+  }
+  const handleDropDownEps = () => {
+    setOpenEps(!isOpenEps)
+    if (isOpen) {
+      setOpen(false)
+    }
+  }
+
   useEffect(() => {
     setIsVisible(!!visible)
   }, [visible])
 
   const handleClose = useCallback(() => {
     setIsVisible(false)
+    setOpen(false)
+    setOpenEps(false)
+    setSeason(0)
+    setEpisode(0)
     setTimeout(() => {
       onClose()
     }, 300)
   }, [onClose])
+
+  const renderSeasons = () => {
+    const listItems = []
+    for (let i = 0; i < data?.number_of_seasons; i++) {
+      listItems.push(
+        <li
+          onClick={() => setSeason(i)}
+          className="block py-2 px-4 hover:bg-gray-100"
+          key={i}
+        >
+          Season {i + 1}
+        </li>
+      )
+    }
+    return listItems
+  }
+
+  const renderEpisodes = () => {
+    const listItems = []
+    for (let i = 0; i < data?.seasons[season].episode_count; i++) {
+      listItems.push(
+        <li
+          onClick={() => setEpisode(i)}
+          className="block py-2 px-4 hover:bg-gray-100"
+          key={i}
+        >
+          Episode {i + 1}
+        </li>
+      )
+    }
+    return listItems
+  }
 
   if (!isVisible) {
     return null
@@ -75,7 +125,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 muted
                 loop
                 poster={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
-                src={`https://www.youtube.com/watch?v=${video}`}
               ></video>
               <div
                 className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
@@ -88,8 +137,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   {data?.title}
                 </p>
                 <div className="flex flex-row gap-4 items-center">
-                  <PlayButton movieId={data?.id} type="movie" />
-                  <FavoriteButton movieId={data?.id} type="movie" />
+                  <PlayButton
+                    movieId={data?.id}
+                    type="show"
+                    episode={episode+1}
+                    season={season+1}
+                  />
+                  <FavoriteButton movieId={data?.id} type="show" />
                 </div>
               </div>
             </div>
@@ -98,7 +152,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 <BsFillCalendarFill size={15} />
               </p>
               <p className="text-white font-semibold text-1xl">
-                {data?.release_date}
+                {data?.first_air_date}
               </p>
               <p className="text-green-400">
                 <AiFillStar size={20} />
@@ -106,14 +160,46 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               <p className="text-white font-semibold text-1xl">
                 {data?.vote_average.toFixed(1)}
               </p>
-              <p className="text-green-400">
-                <BiSolidTimeFive size={20} />
-              </p>
-              <p className="text-white font-semibold text-1xl">
-                {Math.floor(data?.runtime / 60)}h {data?.runtime % 60}m
-              </p>
+              <div>
+                <button
+                  className="text-white bg-blue-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
+                  onClick={handleDropDown}
+                >
+                  Seasons
+                </button>
+
+                <div
+                  id="dropdown"
+                  className={`absolute h-44 w-44 overflow-y-auto bg-white rounded divide-y divide-gray-100 shadow ${
+                    isOpen ? "block" : "hidden"
+                  }`}
+                >
+                  <ul className=" bg-white divide-gray-100 shadow ">
+                    {renderSeasons()}
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <button
+                  className="text-white bg-blue-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
+                  onClick={handleDropDownEps}
+                >
+                  Episode
+                </button>
+
+                <div
+                  id="dropdownEps"
+                  className={`absolute h-44 w-44 overflow-y-auto bg-white rounded divide-y divide-gray-100 shadow ${
+                    isOpenEps ? "block" : "hidden"
+                  }`}
+                >
+                  <ul className=" bg-white divide-gray-100 shadow ">
+                    {renderEpisodes()}
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div className="px-4 py-4 pb-6">
+            <div className="px-4 py-1 pb-4">
               <p className="text-white text-1xl">{data?.overview}</p>
             </div>
           </div>
@@ -123,4 +209,4 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   }
 }
 
-export default InfoModal
+export default ShowInfoModal

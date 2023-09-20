@@ -17,6 +17,7 @@ const Billboard = () => {
   return (
     <div className="relative flex items-center h-screen mb-12 pt-32">
       <iframe
+        
         className="w-full h-screen object-cover brightness-[60%]"
         src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&vq=hd1080&controls=0&modestbranding=1&showinfo=0&loop=1&playlist=${video}`}
       ></iframe>
@@ -29,7 +30,7 @@ const Billboard = () => {
         </p> */}
 
         <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
-          <PlayButton movieId={data?.id} />
+          <PlayButton movieId={data?.id} type="movie"/>
           <button
             onClick={handleOpenModal}
             className="bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex flex-row items-center hover:bg-opacity-20 transition"

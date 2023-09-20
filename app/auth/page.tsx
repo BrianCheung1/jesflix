@@ -101,7 +101,7 @@ const Auth = () => {
       })
     ) {
       setValidPassword(false)
-      setErrorPasswordMessage("Password has no capital symbols")
+      setErrorPasswordMessage("Password has no symbols")
     } else {
       setValidPassword(true)
       setErrorPasswordMessage("Strong password")

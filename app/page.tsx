@@ -10,9 +10,14 @@ import MovieList from "@/components/MovieList"
 import useMovieList from "@/hooks/useMovieList"
 import useFavorites from "@/hooks/useFavorites"
 import InfoModal from "@/components/InfoModal"
+import ShowInfoModal from "@/components/ShowInfoModal"
 import useInfoModal from "@/hooks/useInfoModal"
-import useTrendingList from "@/hooks/useTrendingList"
+import useShowInfoModal from "@/hooks/useShowInfoModal"
+import useTrendingMovieList from "@/hooks/useTrendingMovieList"
 import useBillboard from "@/hooks/useBillboard"
+import useShowList from "@/hooks/useShowList"
+import ShowList from "@/components/ShowList"
+import FavoriteList from "@/components/FavoriteList"
 
 const Home = () => {
   const { data: user } = useCurrentUser()
@@ -24,8 +29,10 @@ const Home = () => {
   })
   const { data: movies = [] } = useMovieList()
   const { data: favorites = [] } = useFavorites()
-  const { data: trending = [], isLoading } = useTrendingList()
+  const { data: trending = [], isLoading } = useTrendingMovieList()
+  const { data: trendingShows = [], isLoading: isLoadingShows } = useShowList()
   const { isOpen, closeModal } = useInfoModal()
+  const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal()
   const { isLoading: isBillBoardLoading } = useBillboard()
 
   if (isLoading || isBillBoardLoading) {
@@ -44,12 +51,13 @@ const Home = () => {
     return (
       <>
         <InfoModal visible={isOpen} onClose={closeModal} />
+        <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <Navbar />
-        <Billboard />
+        {/* <Billboard /> */}
         <div className="pb-40">
-          <MovieList title="My List" data={favorites} />
-          <MovieList title="Trending Movies" data={trending} />
-          <MovieList title="Trending Shows" data={trending} />
+          <FavoriteList title="Favorites" data={favorites} />
+          <MovieList title="Trending Movies Today" data={trending} />
+          <ShowList title="Trending Shows Today" data={trendingShows} />
         </div>
       </>
     )

@@ -9,7 +9,7 @@ export async function GET(req: Request) {
     try {
       const options = {
         method: "GET",
-        url: "https://api.themoviedb.org/3/trending/movie/day",
+        url: "https://api.themoviedb.org/3/trending/tv/day",
         params: { language: "en-US" },
         headers: {
           accept: "application/json",
