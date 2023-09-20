@@ -21,7 +21,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           openModal(data?.id)
         }}
         className="cursor-pointer object-cover transition duraiton shadow-xl rounded-t-md w-full "
-        src={`https://image.tmdb.org/t/p/original/${data?.poster_path}`}
+        src={
+          data?.poster_path
+            ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`
+            : "https://critics.io/img/movies/poster-placeholder.png"
+        }
         alt="Thumbnail"
       />
       <div className="bg-zinc-800 p-2 lg:p-4 w-full shadow-md rounded-b-md ">
@@ -32,7 +36,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           >
             <BsFillPlayFill size={30} />
           </div>
-          <FavoriteButton movieId={data?.id} type="movie"/>
+          <FavoriteButton movieId={data?.id} type="movie" />
           <div
             onClick={() => {
               openModal(data?.id)

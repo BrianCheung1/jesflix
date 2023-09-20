@@ -47,7 +47,9 @@ const Profiles = () => {
       <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
       <div className="flex items-center h-full justify-center pt-5">
         <MovieList
-          title={`Search results for ${title(query as string)}`}
+          title={`Search results for ${title(
+            (query as string).replaceAll("%20", " ")
+          )}`}
           data={movies}
         />
       </div>

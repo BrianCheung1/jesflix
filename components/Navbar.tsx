@@ -3,12 +3,17 @@ import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs"
 import MobileMenu from "./MobileMenu"
 import { useCallback, useState, useEffect } from "react"
 import AccountMenu from "./AccountMenu"
+import Input from "./inputs"
+import { useRouter } from "next/navigation"
 
 const TOP_OFFSET = 66
 const Navbar = () => {
+  const router = useRouter()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showAccountMenu, setShowAccountMenu] = useState(false)
-  const [ShowBackground, setShowBackground] = useState(false)
+  const [showBackground, setShowBackground] = useState(false)
+  const [showSearchBar, setShowSearchBar] = useState(false)
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +39,16 @@ const Navbar = () => {
     setShowAccountMenu((current) => !current)
   }, [])
 
+  const toggleSearchBar = useCallback(() => {
+    setShowSearchBar((current) => !current)
+  }, [])
+
+  const handleSearch = (event: any) => {
+    event.preventDefault()
+    console.log(query)
+    router.push(`/search/${query}`)
+  }
+
   return (
     <nav className="w-full fixed z-40 ">
       <div
@@ -46,9 +61,15 @@ const Navbar = () => {
         items-center
         transition
         duration-500
-        ${ShowBackground ? "bg-black bg-opacity-70" : "bg-black"}`}
+        ${showBackground ? "bg-black bg-opacity-70" : "bg-black"}`}
       >
-        <img className="h-4 md:h-7" src="/images/logo.png" alt="Logo=" />
+        <div
+          onClick={() => {
+            router.push(`/`)
+          }}
+        >
+          <img className="h-4 md:h-7" src="/images/logo.png" alt="Logo=" />
+        </div>
         <div
           className="flex-row
         ml-8
@@ -76,12 +97,28 @@ const Navbar = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value)
+              }}
+            />
+            <input type="submit" value="Submit" />
+          </form>
+          <div
+            onClick={() => {
+              router.push(`/search/${query}`)
+            }}
+            className="text-gray-200 hover:text-gray-300 cursor-pointer transition"
+          >
             <BsSearch />
           </div>
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+
+          {/* <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsBell />
-          </div>
+          </div> */}
           <div
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"

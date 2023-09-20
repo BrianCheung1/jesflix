@@ -10,7 +10,9 @@ export async function GET(
   const session = await getServerSession(authOptions)
   if (session) {
     try {
+      
       const query = params.query
+      console.log(query)
       const options = {
         method: "GET",
         url: `https://api.themoviedb.org/3/search/movie?query=${query}&language=en-US`,
