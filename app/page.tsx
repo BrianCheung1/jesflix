@@ -1,13 +1,10 @@
 "use client"
-import Image from "next/image"
 import { useSession, signOut } from "next-auth/react"
-import { NextPageContext } from "next"
 import { redirect } from "next/navigation"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import Navbar from "@/components/Navbar"
 import Billboard from "@/components/Billboard"
 import MovieList from "@/components/MovieList"
-import useMovieList from "@/hooks/useMovieList"
 import useFavorites from "@/hooks/useFavorites"
 import InfoModal from "@/components/InfoModal"
 import ShowInfoModal from "@/components/ShowInfoModal"
@@ -27,7 +24,7 @@ const Home = () => {
       redirect("/auth")
     },
   })
-  const { data: movies = [] } = useMovieList()
+
   const { data: favorites = [] } = useFavorites()
   const { data: trending = [], isLoading } = useTrendingMovieList()
   const { data: trendingShows = [], isLoading: isLoadingShows } = useShowList()
