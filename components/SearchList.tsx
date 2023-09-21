@@ -3,12 +3,12 @@ import { isEmpty } from "lodash"
 import ShowCard from "./ShowCard"
 import MovieCard from "./MovieCard"
 
-interface FavoriteListProps {
+interface SearchListProps {
   data: { movies: any; shows: any }
   title: string
 }
 
-const FavoriteList: React.FC<FavoriteListProps> = ({ data, title }) => {
+const SearchList: React.FC<SearchListProps> = ({ data, title }) => {
   {
     console.log(data)
   }
@@ -17,6 +17,7 @@ const FavoriteList: React.FC<FavoriteListProps> = ({ data, title }) => {
   }
   return (
     <div className="px-4 md:px-12 mt-4 pt-10 space-y-8">
+
       <div>
         <p className="text-white text-md md:text-xl lg:text-2xl font-semibold mb-4">
           {title}
@@ -34,4 +35,4 @@ const FavoriteList: React.FC<FavoriteListProps> = ({ data, title }) => {
   )
 }
 
-export default FavoriteList
+export default SearchList

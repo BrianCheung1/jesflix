@@ -21,7 +21,8 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   const video = data?.videos?.results?.filter(
     (result: any) => result.type == "Trailer"
-  )[0]["key"]
+  )?.[0]?.["key"]
+
   useEffect(() => {
     setIsVisible(!!visible)
   }, [visible])
@@ -74,8 +75,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 autoPlay
                 muted
                 loop
-                poster={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
-                src={`https://www.youtube.com/watch?v=${video}`}
+                poster={data?.backdrop_path
+                  ? `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
+                  : "https://critics.io/img/movies/poster-placeholder.png"}
+                // src={`https://www.youtube.com/watch?v=${video}`}
+                
               ></video>
               <div
                 className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"

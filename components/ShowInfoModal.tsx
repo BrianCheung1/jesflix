@@ -124,7 +124,11 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 autoPlay
                 muted
                 loop
-                poster={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
+                poster={
+                  data?.backdrop_path
+                    ? `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
+                    : "https://critics.io/img/movies/poster-placeholder.png"
+                }
               ></video>
               <div
                 className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
@@ -140,8 +144,8 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   <PlayButton
                     movieId={data?.id}
                     type="show"
-                    episode={episode+1}
-                    season={season+1}
+                    episode={episode + 1}
+                    season={season + 1}
                   />
                   <FavoriteButton movieId={data?.id} type="show" />
                 </div>

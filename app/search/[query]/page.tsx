@@ -8,8 +8,9 @@ import InfoModal from "@/components/InfoModal"
 import ShowInfoModal from "@/components/ShowInfoModal"
 import useInfoModal from "@/hooks/useInfoModal"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
+import SearchList from "@/components/SearchList"
 
-const Profiles = () => {
+const Search = () => {
   const router = useRouter()
   const { query } = useParams()
   const { data: movies = [], isLoading } = useSearchList(query as string)
@@ -46,7 +47,7 @@ const Profiles = () => {
       <InfoModal visible={isOpen} onClose={closeModal} />
       <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
       <div className="flex items-center h-full justify-center pt-5">
-        <MovieList
+        <SearchList
           title={`Search results for ${title(
             (query as string).replaceAll("%20", " ")
           )}`}
@@ -57,4 +58,4 @@ const Profiles = () => {
   )
 }
 
-export default Profiles
+export default Search

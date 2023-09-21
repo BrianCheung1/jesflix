@@ -54,7 +54,7 @@ const Navbar = () => {
       <div
         className={`
         px-4
-        md:px-16
+        md:px-6
         py-5
         flex
         flex-row
@@ -63,19 +63,21 @@ const Navbar = () => {
         duration-500
         ${showBackground ? "bg-black bg-opacity-70" : "bg-black"}`}
       >
-        <div
-          onClick={() => {
-            router.push(`/`)
-          }}
-        >
-          <img className="h-4 md:h-7" src="/images/logo.png" alt="Logo=" />
-        </div>
+        <img
+          onClick={() => router.push(`/`)}
+          className="h-4 md:h-7 cursor-pointer"
+          src="/images/logo.png"
+          alt="Logo="
+        />
+
         <div
           className="flex-row
         ml-8
         gap-7
         hidden
-        lg:flex"
+        lg:flex
+        whitespace-nowrap
+        "
         >
           <NavbarItem label="Home" />
           <NavbarItem label="Series" />
@@ -96,17 +98,19 @@ const Navbar = () => {
           />
           <MobileMenu visible={showMobileMenu} />
         </div>
-        <div className="flex flex-row ml-auto gap-7 items-center">
-          <form onSubmit={handleSearch}>
-            <input
-              type="text"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value)
-              }}
-            />
-            <input type="submit" value="Submit" />
-          </form>
+        <div className="flex flex-row items-center gap-4 ml-auto">
+          <div className="px-3">
+            <form onSubmit={handleSearch}>
+              <input
+                className="w-full rounded-md bg-neutral-700 text-white outline-none px-2 text-sm h-6 lg:h-8"
+                type="text"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value)
+                }}
+              />
+            </form>
+          </div>
           <div
             onClick={() => {
               router.push(`/search/${query}`)
@@ -123,7 +127,7 @@ const Navbar = () => {
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
           >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+            <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-md overflow-hidden">
               <img src="/images/default-blue.png" alt="" />
             </div>
             <BsChevronDown
