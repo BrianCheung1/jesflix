@@ -4,9 +4,10 @@ import { authOptions } from "../auth/[...nextauth]/route"
 import { getServerSession } from "next-auth"
 import prismadb from "@/libs/prismadb"
 export async function GET(req: Request) {
+  console.log("running")
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
-    return new Error("Not signed in")
+    return new NextResponse("Not signed in")
   }
 
   const currentUser = await prismadb.user.findUnique({

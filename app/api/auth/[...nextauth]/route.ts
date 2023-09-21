@@ -5,6 +5,7 @@ import Credentials from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { compare } from "bcrypt"
 import prismadb from "@/libs/prismadb"
+import { NextResponse } from "next/server"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -57,6 +58,7 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+
   pages: {
     signIn: "/auth",
   },

@@ -9,9 +9,6 @@ interface FavoriteListProps {
 }
 
 const FavoriteList: React.FC<FavoriteListProps> = ({ data, title }) => {
-  {
-    console.log(data)
-  }
   if (isEmpty(data.movies) && isEmpty(data.shows)) {
     return null
   }

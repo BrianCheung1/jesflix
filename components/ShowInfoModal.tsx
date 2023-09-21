@@ -18,23 +18,8 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
   const { movieId } = useShowInfoModal()
   const { data, isLoading } = useShow(movieId)
-  const [isOpen, setOpen] = useState(false)
-  const [isOpenEps, setOpenEps] = useState(false)
   const [season, setSeason] = useState(0)
   const [episode, setEpisode] = useState(0)
-
-  const handleDropDown = () => {
-    setOpen(!isOpen)
-    if (isOpenEps) {
-      setOpenEps(false)
-    }
-  }
-  const handleDropDownEps = () => {
-    setOpenEps(!isOpenEps)
-    if (isOpen) {
-      setOpen(false)
-    }
-  }
 
   useEffect(() => {
     setIsVisible(!!visible)
@@ -42,8 +27,6 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   const handleClose = useCallback(() => {
     setIsVisible(false)
-    setOpen(false)
-    setOpenEps(false)
     setSeason(0)
     setEpisode(0)
     setTimeout(() => {
@@ -51,17 +34,21 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     }, 300)
   }, [onClose])
 
+  const handleEpisodeChange = (e: any) => {
+    setEpisode(Number(e.target.value))
+  }
+
+  const handleSeasonsChange = (e: any) => {
+    setSeason(Number(e.target.value))
+  }
+
   const renderSeasons = () => {
     const listItems = []
     for (let i = 0; i < data?.number_of_seasons; i++) {
       listItems.push(
-        <li
-          onClick={() => setSeason(i)}
-          className="block py-2 px-4 hover:bg-gray-100"
-          key={i}
-        >
+        <option className="block py-2 px-4 hover:bg-gray-100" value={i}>
           Season {i + 1}
-        </li>
+        </option>
       )
     }
     return listItems
@@ -71,13 +58,9 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     const listItems = []
     for (let i = 0; i < data?.seasons[season].episode_count; i++) {
       listItems.push(
-        <li
-          onClick={() => setEpisode(i)}
-          className="block py-2 px-4 hover:bg-gray-100"
-          key={i}
-        >
+        <option className="block py-2 px-4 hover:bg-gray-100" value={i}>
           Episode {i + 1}
-        </li>
+        </option>
       )
     }
     return listItems
@@ -165,42 +148,24 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 {data?.vote_average.toFixed(1)}
               </p>
               <div>
-                <button
+                <select
+                  onChange={handleSeasonsChange}
+                  id="Seasons"
                   className="text-white bg-blue-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
-                  onClick={handleDropDown}
                 >
-                  Seasons
-                </button>
-
-                <div
-                  id="dropdown"
-                  className={`absolute h-44 w-44 overflow-y-auto bg-white rounded divide-y divide-gray-100 shadow ${
-                    isOpen ? "block" : "hidden"
-                  }`}
-                >
-                  <ul className=" bg-white divide-gray-100 shadow ">
-                    {renderSeasons()}
-                  </ul>
-                </div>
+                  <option selected>Choose an episode</option>
+                  {renderSeasons()}
+                </select>
               </div>
               <div>
-                <button
+                <select
+                  onChange={handleEpisodeChange}
+                  id="Episodes"
                   className="text-white bg-blue-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
-                  onClick={handleDropDownEps}
                 >
-                  Episode
-                </button>
-
-                <div
-                  id="dropdownEps"
-                  className={`absolute h-44 w-44 overflow-y-auto bg-white rounded divide-y divide-gray-100 shadow ${
-                    isOpenEps ? "block" : "hidden"
-                  }`}
-                >
-                  <ul className=" bg-white divide-gray-100 shadow ">
-                    {renderEpisodes()}
-                  </ul>
-                </div>
+                  <option selected>Choose an episode</option>
+                  {renderEpisodes()}
+                </select>
               </div>
             </div>
             <div className="px-4 py-1 pb-4">
