@@ -121,7 +121,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               </div>
               <div className="absolute bottom-[10%] left-10">
                 <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-4">
-                  {data?.title}
+                  {data?.name ? data?.name : data?.original_name}
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton
