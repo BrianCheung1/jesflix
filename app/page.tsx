@@ -1,23 +1,21 @@
 "use client"
 import { useSession, signOut } from "next-auth/react"
 import { redirect } from "next/navigation"
-import useCurrentUser from "@/hooks/useCurrentUser"
 import Navbar from "@/components/Navbar"
 import Billboard from "@/components/Billboard"
 import MovieList from "@/components/MovieList"
 import useFavorites from "@/hooks/useFavorites"
 import InfoModal from "@/components/InfoModal"
 import ShowInfoModal from "@/components/ShowInfoModal"
-import useInfoModal from "@/hooks/useInfoModal"
+import useInfoModal from "@/hooks/useMovieInfoModal"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
 import useTrendingMovieList from "@/hooks/useTrendingMovieList"
 import useBillboard from "@/hooks/useBillboard"
-import useShowList from "@/hooks/useShowList"
+import useTrendingShowList from "@/hooks/useTrendingShowList"
 import ShowList from "@/components/ShowList"
 import FavoriteList from "@/components/FavoriteList"
 
 const Home = () => {
-  const { data: user } = useCurrentUser()
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
@@ -27,12 +25,13 @@ const Home = () => {
 
   const { data: favorites = [] } = useFavorites()
   const { data: trending = [], isLoading } = useTrendingMovieList()
-  const { data: trendingShows = [], isLoading: isLoadingShows } = useShowList()
+  const { data: trendingShows = [], isLoading: isLoadingShows } =
+    useTrendingShowList()
   const { isOpen, closeModal } = useInfoModal()
   const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal()
   const { isLoading: isBillBoardLoading } = useBillboard()
 
-  if (isLoading || isBillBoardLoading) {
+  if (isLoading || isBillBoardLoading || isLoadingShows) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
         <div

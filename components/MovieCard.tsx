@@ -3,7 +3,7 @@ import React from "react"
 import { BsFillPlayFill } from "react-icons/bs"
 import FavoriteButton from "./FavoriteButton"
 import { useRouter } from "next/navigation"
-import useInfoModal from "@/hooks/useInfoModal"
+import useInfoModal from "@/hooks/useMovieInfoModal"
 import { BiChevronDown } from "react-icons/bi"
 
 interface MovieCardProps {

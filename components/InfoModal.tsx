@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai"
 
 import PlayButton from "./PlayButton"
 import FavoriteButton from "./FavoriteButton"
-import useInfoModal from "@/hooks/useInfoModal"
+import useInfoModal from "@/hooks/useMovieInfoModal"
 import useMovie from "@/hooks/useMovie"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
@@ -75,11 +75,12 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 autoPlay
                 muted
                 loop
-                poster={data?.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
-                  : "https://critics.io/img/movies/poster-placeholder.png"}
+                poster={
+                  data?.backdrop_path
+                    ? `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
+                    : "https://critics.io/img/movies/poster-placeholder.png"
+                }
                 // src={`https://www.youtube.com/watch?v=${video}`}
-                
               ></video>
               <div
                 className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"

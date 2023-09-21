@@ -5,11 +5,11 @@ import axios from "axios"
 
 export async function GET(
   req: Request,
-  { params }: { params: { movieId: string } }
+  { params }: { params: { showId: string } }
 ) {
   const session = await getServerSession(authOptions)
   if (session) {
-    const id = params.movieId
+    const id = params.showId
     if (typeof id !== "string") {
       throw new Error("Invalid ID")
     }

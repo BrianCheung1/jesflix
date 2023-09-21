@@ -3,7 +3,7 @@ import React, { useCallback } from "react"
 
 import { AiOutlineInfoCircle } from "react-icons/ai"
 import PlayButton from "./PlayButton"
-import useInfoModal from "@/hooks/useInfoModal"
+import useInfoModal from "@/hooks/useMovieInfoModal"
 const Billboard = () => {
   const { data } = useBillboard()
   const { openModal } = useInfoModal()

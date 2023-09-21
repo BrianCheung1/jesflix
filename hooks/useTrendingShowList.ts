@@ -1,7 +1,7 @@
 import useSWR from "swr"
 import fetcher from "@/libs/fetcher"
 
-const useShowList = () => {
+const useTrendingShowList = () => {
   const { data, error, isLoading } = useSWR("/api/shows/trending", fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
@@ -15,4 +15,4 @@ const useShowList = () => {
   }
 }
 
-export default useShowList
+export default useTrendingShowList

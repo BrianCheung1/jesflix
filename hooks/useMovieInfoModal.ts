@@ -7,11 +7,11 @@ export interface ModalStoreInterface {
   closeModal: () => void
 }
 
-const useInfoModal = create<ModalStoreInterface>((set) => ({
+const useMovieInfoModal = create<ModalStoreInterface>((set) => ({
   movieId: undefined,
   isOpen: false,
   openModal: (movieId: string) => set({ isOpen: true, movieId }),
   closeModal: () => set({ isOpen: false, movieId: undefined }),
 }))
 
-export default useInfoModal
+export default useMovieInfoModal

@@ -16,8 +16,8 @@ interface InfoModalProps {
 
 const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
-  const { movieId } = useShowInfoModal()
-  const { data, isLoading } = useShow(movieId)
+  const { showId } = useShowInfoModal()
+  const { data, isLoading } = useShow(showId)
   const [season, setSeason] = useState(0)
   const [episode, setEpisode] = useState(0)
 

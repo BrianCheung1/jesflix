@@ -3,7 +3,6 @@ import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs"
 import MobileMenu from "./MobileMenu"
 import { useCallback, useState, useEffect } from "react"
 import AccountMenu from "./AccountMenu"
-import Input from "./inputs"
 import { useRouter } from "next/navigation"
 
 const TOP_OFFSET = 66
@@ -12,7 +11,6 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showAccountMenu, setShowAccountMenu] = useState(false)
   const [showBackground, setShowBackground] = useState(false)
-  const [showSearchBar, setShowSearchBar] = useState(false)
   const [query, setQuery] = useState("")
 
   useEffect(() => {
@@ -37,10 +35,6 @@ const Navbar = () => {
 
   const toggleAccountMenu = useCallback(() => {
     setShowAccountMenu((current) => !current)
-  }, [])
-
-  const toggleSearchBar = useCallback(() => {
-    setShowSearchBar((current) => !current)
   }, [])
 
   const handleSearch = (event: any) => {
@@ -70,25 +64,13 @@ const Navbar = () => {
           alt="Logo="
         />
 
-        <div
-          className="flex-row
-        ml-8
-        gap-7
-        hidden
-        lg:flex
-        whitespace-nowrap
-        "
-        >
-          <NavbarItem label="Home" />
-          <NavbarItem label="Series" />
-          <NavbarItem label="Film" />
-          <NavbarItem label="New & Popular" />
-          <NavbarItem label="My List" />
-          <NavbarItem label="Browse by languages" />
-        </div>
+        <NavbarItem visible={showMobileMenu} />
+
         <div
           onClick={toggleMobileMenu}
-          className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
+          className="flex-row flex
+          lg:hidden
+          whitespace-nowrap items-center gap-2 ml-8 cursor-pointer "
         >
           <p className="text-white text-sm">Browse</p>
           <BsChevronDown
@@ -96,7 +78,7 @@ const Navbar = () => {
               showMobileMenu ? "rotate-180" : "rotate-0"
             } `}
           />
-          <MobileMenu visible={showMobileMenu} />
+          {/* <MobileMenu visible={showMobileMenu} /> */}
         </div>
         <div className="flex flex-row items-center gap-4 ml-auto">
           <div className="px-3">

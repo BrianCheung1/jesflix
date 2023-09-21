@@ -1,6 +1,4 @@
 "use client"
-import MovieList from "@/components/MovieList"
-import useSearchList from "@/hooks/useSearch"
 import { useSession } from "next-auth/react"
 import { redirect, useRouter, useParams } from "next/navigation"
 import Navbar from "@/components/Navbar"
@@ -8,12 +6,12 @@ import InfoModal from "@/components/InfoModal"
 import ShowInfoModal from "@/components/ShowInfoModal"
 import useInfoModal from "@/hooks/useMovieInfoModal"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
-import SearchList from "@/components/SearchList"
+import ShowList from "@/components/ShowList"
+import useTrendingShowList from "@/hooks/useTrendingShowList"
 
-const Search = () => {
+const Shows = () => {
   const router = useRouter()
-  const { query } = useParams()
-  const { data: results = [], isLoading } = useSearchList(query as string)
+  const { data: trendingShows = [], isLoading } = useTrendingShowList()
   const { isOpen, closeModal } = useInfoModal()
   const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal()
   const { data: session } = useSession({
@@ -22,12 +20,6 @@ const Search = () => {
       redirect("/auth")
     },
   })
-  function title(str: string) {
-    return str.replace(/(^|\s)\S/g, function (t) {
-      return t.toUpperCase()
-    })
-  }
-
   if (isLoading) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
@@ -44,18 +36,13 @@ const Search = () => {
   return (
     <div>
       <Navbar />
-      <InfoModal visible={isOpen} onClose={closeModal} />
-      <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-      <div className="flex items-center h-full justify-center pt-5">
-        <SearchList
-          title={`Search results for ${title(
-            (query as string).replaceAll("%20", " ")
-          )}`}
-          data={results}
-        />
+      <div className="pt-5">
+        <InfoModal visible={isOpen} onClose={closeModal} />
+        <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
+        <ShowList title="Trending Shows Today" data={trendingShows} />
       </div>
     </div>
   )
 }
 
-export default Search
+export default Shows
