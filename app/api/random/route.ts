@@ -7,13 +7,6 @@ export async function GET(req: Request) {
   const session = await getServerSession(authOptions)
   if (session) {
     try {
-      // const movieCount = await prismadb.movie.count()
-
-      // const randomMovies = await prismadb.movie.findMany({
-      //     take: 1,
-      //     skip: randomInd
-      // })
-
       const options = {
         method: "GET",
         url: "https://api.themoviedb.org/3/trending/movie/day?&append_to_response=videos",

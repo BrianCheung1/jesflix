@@ -9,9 +9,6 @@ interface SearchListProps {
 }
 
 const SearchList: React.FC<SearchListProps> = ({ data, title }) => {
-  {
-    console.log(data)
-  }
   if (isEmpty(data.movies) && isEmpty(data.shows)) {
     return null
   }

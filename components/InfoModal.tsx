@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai"
 
 import PlayButton from "./PlayButton"
 import FavoriteButton from "./FavoriteButton"
-import useInfoModal from "@/hooks/useMovieInfoModal"
+import useMovieInfoModal from "@/hooks/useMovieInfoModal"
 import useMovie from "@/hooks/useMovie"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
@@ -16,7 +16,7 @@ interface InfoModalProps {
 
 const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
-  const { movieId } = useInfoModal()
+  const { movieId } = useMovieInfoModal()
   const { data, isLoading } = useMovie(movieId)
 
   const video = data?.videos?.results?.filter(

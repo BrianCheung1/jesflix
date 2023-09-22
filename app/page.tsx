@@ -24,7 +24,7 @@ const Home = () => {
   })
 
   const { data: favorites = [] } = useFavorites()
-  const { data: trending = [], isLoading } = useTrendingMovieList()
+  const { data: trendingMovies = [], isLoading } = useTrendingMovieList()
   const { data: trendingShows = [], isLoading: isLoadingShows } =
     useTrendingShowList()
   const { isOpen, closeModal } = useInfoModal()
@@ -52,7 +52,7 @@ const Home = () => {
         <Billboard />
         <div className="pb-40">
           <FavoriteList title="Favorites" data={favorites} />
-          <MovieList title="Trending Movies Today" data={trending} />
+          <MovieList title="Trending Movies Today" data={trendingMovies} />
           <ShowList title="Trending Shows Today" data={trendingShows} />
         </div>
       </>

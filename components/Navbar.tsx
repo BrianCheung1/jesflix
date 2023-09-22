@@ -49,7 +49,7 @@ const Navbar = () => {
         className={`
         px-4
         md:px-6
-        py-5
+        py-3
         flex
         flex-row
         items-center
@@ -59,7 +59,7 @@ const Navbar = () => {
       >
         <img
           onClick={() => router.push(`/`)}
-          className="h-4 md:h-7 cursor-pointer"
+          className="h-4 md:h-10 cursor-pointer"
           src="/images/logo.png"
           alt="Logo="
         />

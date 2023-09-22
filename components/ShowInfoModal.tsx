@@ -151,9 +151,9 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 <select
                   onChange={handleSeasonsChange}
                   id="Seasons"
-                  className="text-white bg-blue-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
+                  className="text-white bg-neutral-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
                 >
-                  <option selected>Choose an episode</option>
+                  <option selected>Choose a season</option>
                   {renderSeasons()}
                 </select>
               </div>
@@ -161,7 +161,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 <select
                   onChange={handleEpisodeChange}
                   id="Episodes"
-                  className="text-white bg-blue-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
+                  className="text-white bg-neutral-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
                 >
                   <option selected>Choose an episode</option>
                   {renderEpisodes()}
