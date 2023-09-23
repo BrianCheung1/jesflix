@@ -10,17 +10,9 @@ const Billboard = () => {
   let video = data?.videos?.results?.find(
     (result: any) => result.type == "Trailer"
   )
-  video =
-    "key" in video
-      ? data?.videos?.results?.find((result: any) => result.type == "Trailer")["key"]
-      : null
-  // if (video[0]) {
-  //   video = video[0]
-  // }
-  console.log(video)
-  // if ("key" in video) {
-  //   video = video["key"]
-  // }
+  if (video) {
+    video = "key" in video ? video["key"] : null
+  }
   const handleOpenModal = useCallback(() => {
     openModal(data?.id)
   }, [openModal, data?.id])

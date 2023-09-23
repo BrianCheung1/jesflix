@@ -51,15 +51,17 @@ export const POST = async (req: Request) => {
       from: "hello@example.com",
       to: email,
       subject: "Verification for Buttflix",
-      text: `http://localhost:3000/api/activate/${token.token}`,
+      text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
     }
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error)
-      } else {
-        console.log("Email sent: " + token.token)
-      }
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log("Email sent: " + token.token)
+        }
+      })
     })
     return NextResponse.json(user)
   } catch (error) {

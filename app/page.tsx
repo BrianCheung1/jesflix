@@ -31,7 +31,35 @@ const Home = () => {
   const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal()
   const { isLoading: isBillBoardLoading } = useBillboard()
 
-  if (isLoading || isBillBoardLoading || isLoadingShows) {
+  if (session) {
+    if (isLoading || isBillBoardLoading || isLoadingShows) {
+      return (
+        <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
+          <div
+            className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-red-600 rounded-full"
+            role="status"
+            aria-label="loading"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <>
+          <InfoModal visible={isOpen} onClose={closeModal} />
+          <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
+          <Navbar />
+          <Billboard />
+          <div className="pb-40">
+            <FavoriteList title="Favorites" data={favorites} />
+            <MovieList title="Trending Movies Today" data={trendingMovies} />
+            <ShowList title="Trending Shows Today" data={trendingShows} />
+          </div>
+        </>
+      )
+    }
+  } else {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
         <div
@@ -42,20 +70,6 @@ const Home = () => {
           <span className="sr-only">Loading...</span>
         </div>
       </div>
-    )
-  } else {
-    return (
-      <>
-        <InfoModal visible={isOpen} onClose={closeModal} />
-        <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-        <Navbar />
-        <Billboard />
-        <div className="pb-40">
-          <FavoriteList title="Favorites" data={favorites} />
-          <MovieList title="Trending Movies Today" data={trendingMovies} />
-          <ShowList title="Trending Shows Today" data={trendingShows} />
-        </div>
-      </>
     )
   }
 }
