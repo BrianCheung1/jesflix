@@ -2,10 +2,8 @@
 import Input from "@/components/inputs"
 import { useState, useCallback } from "react"
 import axios from "axios"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useRouter, redirect } from "next/navigation"
-import { useSession } from "next-auth/react"
-
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 import { ToastContainer, toast } from "react-toastify"
@@ -109,14 +107,17 @@ const Auth = () => {
   }
 
   const notify = () => toast("Email already exists")
+  const notifyEmail = () => toast("Please check your email to activate account")
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", {
+      const success = await signIn("credentials", {
+        redirect: false,
         email,
         password,
         callbackUrl: "/profiles",
       })
+      console.log(success)
     } catch (error) {
       console.log(error)
     }
@@ -125,16 +126,18 @@ const Auth = () => {
   const register = useCallback(async () => {
     try {
       const res = await axios.post("/api/register", {
+        redirect: false,
         email,
         name,
         password,
       })
-      login()
+      notifyEmail()
+      router.push("/auth")
     } catch (error) {
-      notify()
       console.log(error)
+      notify()
     }
-  }, [email, name, password, login])
+  }, [email, name, password, router])
   if (session) {
     router.push("/")
   }
@@ -227,7 +230,11 @@ const Auth = () => {
               <button
                 disabled={!validPassword || !validEmail || !validUsername}
                 onClick={register}
-                className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+                className={
+                  validPassword
+                    ? `bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition`
+                    : `bg-gray-300 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition`
+                }
               >
                 Sign up
               </button>

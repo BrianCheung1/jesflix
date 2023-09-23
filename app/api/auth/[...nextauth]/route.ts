@@ -5,7 +5,6 @@ import Credentials from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { compare } from "bcrypt"
 import prismadb from "@/libs/prismadb"
-import { NextResponse } from "next/server"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -45,6 +44,12 @@ export const authOptions: AuthOptions = {
           throw new Error("Email does not exist")
         }
 
+        if (!user.active) {
+          throw new Error(
+            JSON.stringify({ errors: "User not active", status: false })
+          )
+        }
+
         const isCorrectPassword = await compare(
           credentials.password,
           user.hashedPassword
@@ -53,12 +58,10 @@ export const authOptions: AuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Incorrect password")
         }
-
         return user
       },
     }),
   ],
-
   pages: {
     signIn: "/auth",
   },

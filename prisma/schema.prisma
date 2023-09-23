@@ -11,18 +11,29 @@ datasource db {
 }
 
 model User {
-  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
   name             String
   image            String?
-  email            String?   @unique
+  email            String?           @unique
   emailVerified    DateTime?
   hashedPassword   String?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   favoriteMovieIds Int[]
   favoriteShowIds  Int[]
   sessions         Session[]
   accounts         Account[]
+  active           Boolean           @default(false)
+  activationTokens activationToken[]
+}
+
+model activationToken {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  token       String    @unique
+  createdAt   DateTime  @default(now())
+  activatedAt DateTime?
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @db.ObjectId
 }
 
 model Account {

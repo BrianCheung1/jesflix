@@ -7,15 +7,26 @@ import useInfoModal from "@/hooks/useMovieInfoModal"
 const Billboard = () => {
   const { data } = useBillboard()
   const { openModal } = useInfoModal()
-  const video = data?.videos?.results?.filter(
+  let video = data?.videos?.results?.find(
     (result: any) => result.type == "Trailer"
-  )[0]["key"]
+  )
+  video =
+    "key" in video
+      ? data?.videos?.results?.find((result: any) => result.type == "Trailer")["key"]
+      : null
+  // if (video[0]) {
+  //   video = video[0]
+  // }
+  console.log(video)
+  // if ("key" in video) {
+  //   video = video["key"]
+  // }
   const handleOpenModal = useCallback(() => {
     openModal(data?.id)
   }, [openModal, data?.id])
 
   return (
-    <div className="relative flex items-center h-screen mb-12 pt-32">
+    <div className="relative flex items-center h-screen mb-12 pt-24">
       <iframe
         className="w-full h-screen object-cover brightness-[60%] pointer-events-none"
         src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&vq=hd1080&controls=0&modestbranding=1&showinfo=0&loop=1&playlist=${video}`}
