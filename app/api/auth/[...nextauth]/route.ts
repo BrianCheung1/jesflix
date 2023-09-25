@@ -44,11 +44,11 @@ export const authOptions: AuthOptions = {
           throw new Error("Email does not exist")
         }
 
-        if (!user.active) {
-          throw new Error(
-            JSON.stringify({ errors: "User not active", status: false })
-          )
-        }
+        // if (!user.active) {
+        //   throw new Error(
+        //     JSON.stringify({ errors: "User not active", status: false })
+        //   )
+        // }
 
         const isCorrectPassword = await compare(
           credentials.password,

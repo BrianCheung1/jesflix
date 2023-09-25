@@ -53,15 +53,21 @@ export const POST = async (req: Request) => {
       to: email,
       subject: "Verification for Buttflix",
       text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
-      html: `
-        <p>If you ever forget your password, you can reset it here: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
+      html: "<html><body>Hello World....</body></html>",
     }
 
     try {
-      let info = await transporter.sendMail(mailOptions)
-      console.log("Email Sent : ", info)
-    } catch (error) {
-      console.log("Email Sent : ", error)
+      let info = await transporter.sendMail({
+        from: '"Buttflix" ' + process.env.EMAIL_SERVER_USER,
+        to: email,
+        subject: "Buttflix Confirmation",
+        html: `Your account has been activated, Enjoy watching on buttflix!`,
+        //text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
+        //html: `<p>Activate your account with this link: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
+      })
+      console.log(info)
+    } catch (err) {
+      console.log("Email (Sign Up) Error", err)
     }
 
     return NextResponse.json(user)

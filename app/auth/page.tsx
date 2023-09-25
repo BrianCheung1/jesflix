@@ -56,7 +56,6 @@ const Auth = () => {
   }
 
   const validatePassword = (value: string) => {
-    console.log(value)
     if (
       !validator.isStrongPassword(value, {
         minLength: 8,
@@ -132,14 +131,15 @@ const Auth = () => {
         name,
         password,
       })
-      notifyEmail()
-      setVariant("login")
-      setEmail("")
-      setName("")
-      setPassword("")
-      setUsernameErrorMessage("")
-      setEmailErrorMessage("")
-      setPasswordErrorMessage("")
+      // notifyEmail()
+      // setVariant("login")
+      // setEmail("")
+      // setName("")
+      // setPassword("")
+      // setUsernameErrorMessage("")
+      // setEmailErrorMessage("")
+      // setPasswordErrorMessage("")
+      login()
     } catch (error) {
       console.log(error)
       notify()
@@ -175,6 +175,9 @@ const Auth = () => {
               {variant === "login" ? "Sign in" : "Register"}
             </h2>
             <div className="flex flex-col gap-4">
+              <p className="text-xs text-red-500 font-bold">
+                Do not use your real netflix password
+              </p>
               {variant === "register" && (
                 <div>
                   <Input
@@ -193,6 +196,7 @@ const Auth = () => {
                   )}
                 </div>
               )}
+
               <Input
                 label="Email"
                 id="email"
