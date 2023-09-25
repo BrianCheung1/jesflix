@@ -51,17 +51,17 @@ export const POST = async (req: Request) => {
     const mailOptions = {
       from: process.env.EMAIL_SERVER_USER,
       to: email,
-      subject: "Verification for Buttflix",
+      subject: "Verification for Jesflix",
       text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
       html: "<html><body>Hello World....</body></html>",
     }
 
     try {
       let info = await transporter.sendMail({
-        from: '"Buttflix" ' + process.env.EMAIL_SERVER_USER,
+        from: '"Jesflix" ' + process.env.EMAIL_SERVER_USER,
         to: email,
-        subject: "Buttflix Confirmation",
-        html: `Your account has been activated, Enjoy watching on buttflix!`,
+        subject: "Jesflix Confirmation",
+        html: `Your account has been activated, Enjoy watching on Jesflix!`,
         //text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
         //html: `<p>Activate your account with this link: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
       })
