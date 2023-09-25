@@ -17,7 +17,7 @@ const Auth = () => {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
-  const [errorPasswordMessage, setErrorPasswordMessage] = useState("")
+  const [errorPasswordMessage, setPasswordErrorMessage] = useState("")
   const [errorEmailMessage, setEmailErrorMessage] = useState("")
   const [errorUsernameMessage, setUsernameErrorMessage] = useState("")
   const [validPassword, setValidPassword] = useState(false)
@@ -56,6 +56,7 @@ const Auth = () => {
   }
 
   const validatePassword = (value: string) => {
+    console.log(value)
     if (
       !validator.isStrongPassword(value, {
         minLength: 8,
@@ -66,7 +67,7 @@ const Auth = () => {
       })
     ) {
       setValidPassword(false)
-      setErrorPasswordMessage("Password has less than 8 characters")
+      setPasswordErrorMessage("Password has less than 8 characters")
     } else if (
       !validator.isStrongPassword(value, {
         minLength: 8,
@@ -77,7 +78,7 @@ const Auth = () => {
       })
     ) {
       setValidPassword(false)
-      setErrorPasswordMessage("Password has no numbers")
+      setPasswordErrorMessage("Password has no numbers")
     } else if (
       !validator.isStrongPassword(value, {
         minLength: 8,
@@ -88,7 +89,7 @@ const Auth = () => {
       })
     ) {
       setValidPassword(false)
-      setErrorPasswordMessage("Password has no capital letters")
+      setPasswordErrorMessage("Password has no capital letters")
     } else if (
       !validator.isStrongPassword(value, {
         minLength: 8,
@@ -99,10 +100,10 @@ const Auth = () => {
       })
     ) {
       setValidPassword(false)
-      setErrorPasswordMessage("Password has no symbols")
+      setPasswordErrorMessage("Password has no symbols")
     } else {
       setValidPassword(true)
-      setErrorPasswordMessage("Strong password")
+      setPasswordErrorMessage("Strong password")
     }
   }
 
@@ -132,12 +133,18 @@ const Auth = () => {
         password,
       })
       notifyEmail()
-      router.push("/auth")
+      setVariant("login")
+      setEmail("")
+      setName("")
+      setPassword("")
+      setUsernameErrorMessage("")
+      setEmailErrorMessage("")
+      setPasswordErrorMessage("")
     } catch (error) {
       console.log(error)
       notify()
     }
-  }, [email, name, password, router])
+  }, [email, name, password])
   if (session) {
     router.push("/")
   }
@@ -192,8 +199,8 @@ const Auth = () => {
                 type="email"
                 value={email}
                 onChange={(event: any) => {
-                  validateEmail(event.target.value)
                   setEmail(event.target.value)
+                  validateEmail(event.target.value)
                 }}
               />
               {variant === "login" || errorEmailMessage === "" ? null : (
@@ -207,8 +214,8 @@ const Auth = () => {
                 type="password"
                 value={password}
                 onChange={(event: any) => {
-                  validatePassword(event.target.value)
                   setPassword(event.target.value)
+                  validatePassword(event.target.value)
                 }}
               />
               {variant === "login" || errorPasswordMessage === "" ? null : (

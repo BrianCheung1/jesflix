@@ -41,6 +41,7 @@ export const POST = async (req: Request) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       host: "smtp.gmail.com",
+      port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_SERVER_USER,
@@ -48,21 +49,21 @@ export const POST = async (req: Request) => {
       },
     })
     const mailOptions = {
-      from: "hello@example.com",
+      from: process.env.EMAIL_SERVER_USER,
       to: email,
       subject: "Verification for Buttflix",
       text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
+      html: `
+        <p>If you ever forget your password, you can reset it here: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
     }
 
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error)
-        } else {
-          console.log("Email sent: " + token.token)
-        }
-      })
-    })
+    try {
+      let info = await transporter.sendMail(mailOptions)
+      console.log("Email Sent : ", info)
+    } catch (error) {
+      console.log("Email Sent : ", error)
+    }
+
     return NextResponse.json(user)
   } catch (error) {
     return NextResponse.json(error)
