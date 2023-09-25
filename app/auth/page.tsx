@@ -84,15 +84,6 @@ const Auth = () => {
     return success
   }
 
-  const validateData = () => {
-    return (
-      validateUsername(name) &&
-      validateEmail(email) &&
-      validatePassword(password) &&
-      validateConfirmPassword(confirmPassword)
-    )
-  }
-
   const notify = (value: string) => toast(value)
   const notifyEmail = (value: string) => toast(value)
 
@@ -132,7 +123,8 @@ const Auth = () => {
     } catch (error) {
       notify("Email Already Exists")
     }
-  }, [email, name, password, login, confirmPassword, validateConfirmPassword, validatePassword])
+  }, [email, name, password, login, confirmPassword])
+
   if (session) {
     router.push("/")
   }
@@ -239,6 +231,9 @@ const Auth = () => {
                 </p>
               )}
             </div>
+            <p className="text-xs mt-2 text-red-500 font-bold text-right">
+              <a href="/reset">Forgot Password?</a>
+            </p>
             {variant == "login" ? (
               <button
                 onClick={login}

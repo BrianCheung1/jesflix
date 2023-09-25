@@ -1,17 +1,10 @@
 import prismadb from "@/libs/prismadb"
-import { redirect } from "next/navigation"
-import { NextRequest } from "next/server"
+import { redirect, useParams } from "next/navigation"
+import { NextRequest, NextResponse } from "next/server"
+import bcrypt from "bcrypt"
 
-export async function GET(
-  _request: NextRequest,
-  {
-    params,
-  }: {
-    params: { token: string }
-  }
-) {
-  const { token } = params
-
+export const POST = async (req: Request) => {
+  const { resetPassword: password, token } = await req.json()
   const user = await prismadb.user.findFirst({
     where: {
       activationTokens: {
@@ -33,26 +26,24 @@ export async function GET(
       },
     },
   })
-
   const activatedToken = await prismadb.activationToken.findUnique({
     where: {
       token,
     },
   })
-  console.log(token)
-  console.log(user)
-  console.log(activatedToken)
 
+  console.log(user)
   if (!user) {
     throw new Error("Token is invalid or expired")
   }
-
+  const hashedPassword = await bcrypt.hash(password, 12)
   await prismadb.user.update({
     where: {
       id: user.id,
     },
     data: {
       active: true,
+      hashedPassword: hashedPassword,
     },
   })
 
@@ -64,6 +55,5 @@ export async function GET(
       activatedAt: new Date(),
     },
   })
-
-  redirect("/auth")
+  return NextResponse.json(user)
 }

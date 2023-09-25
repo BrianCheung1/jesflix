@@ -6,29 +6,22 @@ import nodemailer from "nodemailer"
 
 export const POST = async (req: Request) => {
   try {
-    const { name, email, password } = await req.json()
+    const { resetEmail: email } = await req.json()
     const existingUser = await prismadb.user.findUnique({
       where: {
         email,
       },
     })
-    if (existingUser) {
-      return NextResponse.json(
-        { error: "Email already exists" },
-        { status: 409 }
-      )
+    if (!existingUser) {
+      return new NextResponse("Email does not exist")
     }
-    const hashedPassword = await bcrypt.hash(password, 12)
-    const user = await prismadb.user.create({
+
+    const token = await prismadb.activationToken.create({
       data: {
-        name,
-        email,
-        hashedPassword,
-        image: "",
-        emailVerified: new Date(),
+        userId: existingUser.id,
+        token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ""),
       },
     })
-
     const transporter = nodemailer.createTransport({
       service: "gmail",
       host: "smtp.gmail.com",
@@ -39,22 +32,19 @@ export const POST = async (req: Request) => {
         pass: process.env.EMAIL_SERVER_PASSWORD,
       },
     })
-
     try {
       let info = await transporter.sendMail({
         from: '"Jesflix" ' + process.env.EMAIL_SERVER_USER,
         to: email,
         subject: "Jesflix Confirmation",
-        html: `Your account has been activated, Enjoy watching on Jesflix!`,
+        html: `Reset your account here: http://localhost:3000/reset/${token.token}`,
         //text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
         //html: `<p>Activate your account with this link: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
       })
-      console.log(info)
     } catch (err) {
       console.log("Email (Sign Up) Error", err)
     }
-
-    return NextResponse.json(user)
+    return NextResponse.json(existingUser)
   } catch (error) {
     return NextResponse.json(error)
   }
