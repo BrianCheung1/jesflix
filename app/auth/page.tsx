@@ -20,9 +20,9 @@ const Auth = () => {
   const [errorPasswordMessage, setPasswordErrorMessage] = useState("")
   const [errorEmailMessage, setEmailErrorMessage] = useState("")
   const [errorUsernameMessage, setUsernameErrorMessage] = useState("")
-  const [validPassword, setValidPassword] = useState(false)
-  const [validEmail, setValidEmail] = useState(false)
-  const [validUsername, setValidUsername] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [errorConfirmPasswordMessage, setConfirmPasswordErrorMessage] =
+    useState("")
 
   const [variant, setVariant] = useState("login")
   const toggleVariant = useCallback(() => {
@@ -31,83 +31,70 @@ const Auth = () => {
     )
   }, [])
 
-  const validateUsername = (value: string) => {
-    if (
-      validator.isLength(value, {
-        min: 1,
-      })
-    ) {
-      setValidUsername(true)
-      setUsernameErrorMessage("Valid Username")
+  const validateUsername = (username: string) => {
+    const success = username.length > 0
+    if (success) {
+      setUsernameErrorMessage("")
     } else {
-      setValidUsername(false)
-      setUsernameErrorMessage("Username has less than 3 characters")
+      setUsernameErrorMessage("Username can't be empty")
     }
+    return success
   }
 
-  const validateEmail = (value: string) => {
-    if (validator.isEmail(value)) {
-      setValidEmail(true)
-      setEmailErrorMessage("Valid Email")
+  const validateEmail = (email: string) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const success = re.test(email)
+    if (success) {
+      setEmailErrorMessage("")
     } else {
-      setValidEmail(false)
-      setEmailErrorMessage("Invalid Email")
+      setEmailErrorMessage("Invalid email")
     }
+    return success
   }
 
-  const validatePassword = (value: string) => {
-    if (
-      !validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 0,
-        minUppercase: 0,
-        minNumbers: 0,
-        minSymbols: 0,
-      })
-    ) {
-      setValidPassword(false)
-      setPasswordErrorMessage("Password has less than 8 characters")
-    } else if (
-      !validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 0,
-        minUppercase: 0,
-        minNumbers: 1,
-        minSymbols: 0,
-      })
-    ) {
-      setValidPassword(false)
-      setPasswordErrorMessage("Password has no numbers")
-    } else if (
-      !validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 0,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 0,
-      })
-    ) {
-      setValidPassword(false)
-      setPasswordErrorMessage("Password has no capital letters")
-    } else if (
-      !validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 0,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-      })
-    ) {
-      setValidPassword(false)
-      setPasswordErrorMessage("Password has no symbols")
+  const validatePassword = (password: string) => {
+    const re =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    const success = re.test(password)
+    if (success) {
+      setPasswordErrorMessage("")
     } else {
-      setValidPassword(true)
-      setPasswordErrorMessage("Strong password")
+      setPasswordErrorMessage(
+        "Password must be at least 8 characters, no spaces and must contain an uppercase letter, a number and a special character"
+      )
     }
+
+    const success2 = password === confirmPassword
+    if (success2) {
+      setConfirmPasswordErrorMessage("")
+    } else {
+      setConfirmPasswordErrorMessage("Passwords must match")
+    }
+    return success && success2
   }
 
-  const notify = () => toast("Email already exists")
-  const notifyEmail = () => toast("Please check your email to activate account")
+  const validateConfirmPassword = (confirmPassword: string) => {
+    const success = password === confirmPassword
+    if (success) {
+      setConfirmPasswordErrorMessage("")
+    } else {
+      setConfirmPasswordErrorMessage("Passwords must match")
+    }
+    return success
+  }
+
+  const validateData = () => {
+    return (
+      validateUsername(name) &&
+      validateEmail(email) &&
+      validatePassword(password) &&
+      validateConfirmPassword(confirmPassword)
+    )
+  }
+
+  const notify = (value: string) => toast(value)
+  const notifyEmail = (value: string) => toast(value)
 
   const login = useCallback(async () => {
     try {
@@ -117,6 +104,7 @@ const Auth = () => {
         password,
         callbackUrl: "/profiles",
       })
+      if (success?.error) notifyEmail(success.error)
       console.log(success)
     } catch (error) {
       console.log(error)
@@ -124,6 +112,15 @@ const Auth = () => {
   }, [email, password])
 
   const register = useCallback(async () => {
+    if (
+      !validateUsername(name) ||
+      !validateEmail(email) ||
+      !validatePassword(password) ||
+      !validateConfirmPassword(confirmPassword)
+    ) {
+      notify("Unable to sign up")
+      return
+    }
     try {
       const res = await axios.post("/api/register", {
         redirect: false,
@@ -131,20 +128,11 @@ const Auth = () => {
         name,
         password,
       })
-      // notifyEmail()
-      // setVariant("login")
-      // setEmail("")
-      // setName("")
-      // setPassword("")
-      // setUsernameErrorMessage("")
-      // setEmailErrorMessage("")
-      // setPasswordErrorMessage("")
       login()
     } catch (error) {
-      console.log(error)
-      notify()
+      notify("Email Already Exists")
     }
-  }, [email, name, password])
+  }, [email, name, password, login, confirmPassword, validateConfirmPassword, validatePassword])
   if (session) {
     router.push("/")
   }
@@ -179,22 +167,22 @@ const Auth = () => {
                 Do not use your real netflix password
               </p>
               {variant === "register" && (
-                <div>
-                  <Input
-                    label="Username"
-                    id="name"
-                    value={name}
-                    onChange={(event: any) => {
-                      validateUsername(event.target.value)
-                      setName(event.target.value)
-                    }}
-                  />
-                  {errorUsernameMessage === "" ? null : (
-                    <p className="text-xs text-red-500 font-bold">
-                      {errorUsernameMessage}
-                    </p>
-                  )}
-                </div>
+                <Input
+                  label="Username"
+                  id="name"
+                  value={name}
+                  onChange={(event: any) => {
+                    validateUsername(event.target.value)
+                    setName(event.target.value)
+                  }}
+                />
+              )}
+              {variant === "login" ||
+              errorUsernameMessage === "" ||
+              name.length === 0 ? null : (
+                <p className="text-xs text-red-500 font-bold">
+                  {errorUsernameMessage}
+                </p>
               )}
 
               <Input
@@ -207,7 +195,9 @@ const Auth = () => {
                   validateEmail(event.target.value)
                 }}
               />
-              {variant === "login" || errorEmailMessage === "" ? null : (
+              {variant === "login" ||
+              errorEmailMessage === "" ||
+              email.length === 0 ? null : (
                 <p className="text-xs text-red-500 font-bold">
                   {errorEmailMessage}
                 </p>
@@ -222,30 +212,44 @@ const Auth = () => {
                   validatePassword(event.target.value)
                 }}
               />
-              {variant === "login" || errorPasswordMessage === "" ? null : (
+              {variant === "login" ||
+              errorPasswordMessage === "" ||
+              password.length === 0 ? null : (
                 <p className="text-xs text-red-500 font-bold">
                   {errorPasswordMessage}
                 </p>
               )}
+              {variant === "register" && (
+                <Input
+                  label="Confirm Password"
+                  id="confirmPassword"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(event: any) => {
+                    setConfirmPassword(event.target.value)
+                    validateConfirmPassword(event.target.value)
+                  }}
+                />
+              )}
+              {variant === "login" ||
+              errorConfirmPasswordMessage === "" ||
+              confirmPassword.length === 0 ? null : (
+                <p className="text-xs text-red-500 font-bold">
+                  {errorConfirmPasswordMessage}
+                </p>
+              )}
             </div>
-            {variant == "login" && (
+            {variant == "login" ? (
               <button
                 onClick={login}
                 className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
               >
                 Login
               </button>
-            )}
-
-            {variant == "register" && (
+            ) : (
               <button
-                disabled={!validPassword || !validEmail || !validUsername}
                 onClick={register}
-                className={
-                  validPassword
-                    ? `bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition`
-                    : `bg-gray-300 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition`
-                }
+                className={`bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition`}
               >
                 Sign up
               </button>

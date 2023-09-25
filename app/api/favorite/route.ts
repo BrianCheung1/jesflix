@@ -47,7 +47,6 @@ export async function DELETE(req: Request, res: Response) {
   const session = await getServerSession(authOptions)
   if (session) {
     try {
-      const { searchParams } = new URL(req.url)
       const { movieId, type } = await req.json()
       const user = await prismadb.user.findUnique({
         where: {

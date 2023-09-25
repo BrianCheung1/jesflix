@@ -9,6 +9,7 @@ import ShowInfoModal from "@/components/ShowInfoModal"
 import useInfoModal from "@/hooks/useMovieInfoModal"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
 import SearchList from "@/components/SearchList"
+import { isEmpty } from "lodash"
 
 const Search = () => {
   const router = useRouter()
@@ -37,6 +38,16 @@ const Search = () => {
           aria-label="loading"
         >
           <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
+  }
+  if (isEmpty(results.movies) && isEmpty(results.shows)) {
+    return (
+      <div>
+        <Navbar />
+        <div className="flex h-screen items-center justify-center text-white">
+          <p>No results please try another query</p>
         </div>
       </div>
     )

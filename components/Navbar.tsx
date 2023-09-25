@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const handleSearch = (event: any) => {
     event.preventDefault()
-    console.log(query)
+    if (query.length === 0) return
     router.push(`/search/${query}`)
   }
 
@@ -78,7 +78,6 @@ const Navbar = () => {
               showMobileMenu ? "rotate-180" : "rotate-0"
             } `}
           />
-          {/* <MobileMenu visible={showMobileMenu} /> */}
         </div>
         <div className="flex flex-row items-center gap-4 ml-auto">
           <div className="px-3">
@@ -94,17 +93,11 @@ const Navbar = () => {
             </form>
           </div>
           <div
-            onClick={() => {
-              router.push(`/search/${query}`)
-            }}
+            onClick={handleSearch}
             className="text-gray-200 hover:text-gray-300 cursor-pointer transition"
           >
             <BsSearch />
           </div>
-
-          {/* <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsBell />
-          </div> */}
           <div
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
