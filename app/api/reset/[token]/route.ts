@@ -15,7 +15,7 @@ export const POST = async (req: Request) => {
             },
             {
               createdAt: {
-                gt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 24 hours ago
+                gt: new Date(Date.now() - 1 * 60 * 60 * 1000), // 24 hours ago
               },
             },
             {
@@ -26,13 +26,13 @@ export const POST = async (req: Request) => {
       },
     },
   })
+  
   const activatedToken = await prismadb.activationToken.findUnique({
     where: {
       token,
     },
   })
 
-  console.log(user)
   if (!user) {
     throw new Error("Token is invalid or expired")
   }
@@ -55,5 +55,21 @@ export const POST = async (req: Request) => {
       activatedAt: new Date(),
     },
   })
-  return NextResponse.json(user)
+  return NextResponse.json(activatedToken)
+}
+
+
+export async function GET(
+  req: Request,
+  { params }: { params: { token: string } }
+) {
+  const token = params.token
+
+  const activatedToken = await prismadb.activationToken.findUnique({
+    where: {
+      token,
+    },
+  })
+
+  return NextResponse.json(activatedToken)
 }

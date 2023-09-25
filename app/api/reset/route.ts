@@ -22,6 +22,7 @@ export const POST = async (req: Request) => {
         token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ""),
       },
     })
+    
     const transporter = nodemailer.createTransport({
       service: "gmail",
       host: "smtp.gmail.com",

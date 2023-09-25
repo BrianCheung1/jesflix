@@ -7,7 +7,6 @@ import { useRouter, redirect } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 import { ToastContainer, toast } from "react-toastify"
-import validator from "validator"
 import "react-toastify/dist/ReactToastify.css"
 
 const Auth = () => {

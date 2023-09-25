@@ -3,12 +3,15 @@
 import { useState, useCallback } from "react"
 import axios from "axios"
 import { redirect, useParams, useRouter } from "next/navigation"
+import useToken from "@/hooks/useToken"
+import Navbar from "@/components/Navbar"
 
 const Reset = () => {
   const { token } = useParams()
   const [resetPassword, setResetPassword] = useState("")
   const router = useRouter()
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
+  const { data, isLoading } = useToken(token as string)
 
   const reset = useCallback(
     async (e: any) => {
@@ -45,6 +48,28 @@ const Reset = () => {
     return success
   }
 
+  if (isLoading) {
+    return (
+      <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
+        <div
+          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-red-600 rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
+  }
+  if (data?.activatedAt !== null) {
+    return (
+      <div>
+        <div className="flex h-screen items-center justify-center text-white">
+          <p>Link invalid/expired</p>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="bg-black w-full h-full justify-center items-center flex">
       <form
