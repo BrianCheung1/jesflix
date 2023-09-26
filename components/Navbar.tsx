@@ -59,7 +59,7 @@ const Navbar = () => {
       >
         <img
           onClick={() => router.push(`/`)}
-          className="h-4 md:h-10 cursor-pointer"
+          className="h-10 cursor-pointer pt-2"
           src="/images/logo.png"
           alt="Logo="
         />

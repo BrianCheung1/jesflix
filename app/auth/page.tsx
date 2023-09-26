@@ -285,7 +285,7 @@ const Auth = () => {
             </div>
             <p className="text-neutral-500 mt-12">
               {variant === "login"
-                ? "First time using Netflix?"
+                ? "First time using Jesflix?"
                 : "Already have an account?"}
               <span
                 onClick={toggleVariant}

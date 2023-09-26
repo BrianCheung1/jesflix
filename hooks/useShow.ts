@@ -3,7 +3,7 @@ import fetcher from "@/libs/fetcher"
 
 const useShow = (id?: string) => {
   const { data, error, isLoading } = useSWR(
-    id ? `/api/shows/trending/${id}` : null,
+    id ? `/api/shows/${id}` : null,
     fetcher,
     {
       revalidateIfStale: false,

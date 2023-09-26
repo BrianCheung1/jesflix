@@ -33,9 +33,9 @@ const NavbarItem: React.FC<NavbarItemProps> = ({ label, visible }) => {
         </div>
         <div
           className="text-white cursor-pointer hover:text-gray-300 transition "
-          onClick={() => router.push("/popular")}
+          onClick={() => router.push("/top")}
         >
-          New & Popular
+          Top Rated
         </div>
         <div
           className="text-white cursor-pointer hover:text-gray-300 transition "
@@ -64,9 +64,9 @@ const NavbarItem: React.FC<NavbarItemProps> = ({ label, visible }) => {
           </div>
           <div
             className="px-3 text-center text-white hover:underline"
-            onClick={() => router.push("/popular")}
+            onClick={() => router.push("/top")}
           >
-            New & Popular
+            Top Rated
           </div>
           <div
             className="px-3 text-center text-white hover:underline"

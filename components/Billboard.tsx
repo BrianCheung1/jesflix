@@ -5,7 +5,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai"
 import PlayButton from "./PlayButton"
 import useInfoModal from "@/hooks/useMovieInfoModal"
 const Billboard = () => {
-  const { data } = useBillboard()
+  const { data, isLoading } = useBillboard()
   const { openModal } = useInfoModal()
   let video = data?.videos?.results?.find(
     (result: any) => result.type == "Trailer"
@@ -17,11 +17,29 @@ const Billboard = () => {
     openModal(data?.id)
   }, [openModal, data?.id])
 
+  if (isLoading) {
+    return (
+      <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
+        <div
+          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-red-600 rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="relative flex items-center h-screen mb-12 pt-24">
       <iframe
         className="w-full h-screen object-cover brightness-[60%] pointer-events-none"
-        src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&vq=hd1080&controls=0&modestbranding=1&showinfo=0&loop=1&playlist=${video}`}
+        src={
+          video
+            ? `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&vq=hd1080&&controls=0&modestbranding=1&showinfo=0&loop=1&disablekb=1&playlist=${video}`
+            : `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
+        }
+        title="Youtube app player"
       ></iframe>
 
       <div className="absolute ml-4 md:ml-16">
