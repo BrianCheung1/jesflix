@@ -34,8 +34,10 @@ const PlayButton: React.FC<PlayButtonProps> = ({
     flex
     flex-row
     items-center
-    hover:bg-neutral-300
-    transition"
+    hover:scale-110
+    transition
+    hover:text-blue-800
+    "
       >
         <BsFillPlayFill size={20} className="mr-1" />
         Play
@@ -44,9 +46,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   }
   return (
     <button
-      onClick={() =>
-        router.push(`/watch/show/${movieId}/${season}/${episode}`)
-      }
+      onClick={() => router.push(`/watch/show/${movieId}/${season}/${episode}`)}
       className="bg-white
   rounded-md
   py-1
@@ -59,8 +59,9 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   flex
   flex-row
   items-center
-  hover:bg-neutral-300
-  transition"
+  transition
+  hover:scale-110
+  hover:text-blue-800"
     >
       <BsFillPlayFill size={20} className="mr-1" />
       Play

@@ -23,7 +23,6 @@ const Home = () => {
     },
   })
 
-  const { data: favorites = [] } = useFavorites()
   const { data: trendingMovies = [], isLoading } = useTrendingMovieList()
   const { data: trendingShows = [], isLoading: isLoadingShows } =
     useTrendingShowList()
@@ -51,11 +50,8 @@ const Home = () => {
           <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
           <Navbar />
           <Billboard />
-          <div className="pb-40">
-            <FavoriteList title="Favorites" data={favorites} />
-            <MovieList title="Trending Movies Today" data={trendingMovies} />
-            <ShowList title="Trending Shows Today" data={trendingShows} />
-          </div>
+          <MovieList title="Trending Movies Today" data={trendingMovies} />
+          <ShowList title="Trending Shows Today" data={trendingShows} />
         </>
       )
     }

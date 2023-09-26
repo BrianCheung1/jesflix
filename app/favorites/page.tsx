@@ -20,16 +20,6 @@ const Favorites = () => {
       redirect("/auth")
     },
   })
-  if (isEmpty(favorites.movies) && isEmpty(favorites.shows)) {
-    return (
-      <div>
-        <Navbar />
-        <div className="flex h-screen items-center justify-center text-white">
-          <p>Nothing on your list</p>
-        </div>
-      </div>
-    )
-  }
   if (isLoading) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
@@ -43,13 +33,23 @@ const Favorites = () => {
       </div>
     )
   }
+  if (isEmpty(favorites.movies) && isEmpty(favorites.shows)) {
+    return (
+      <div>
+        <Navbar />
+        <div className="flex h-screen items-center justify-center text-white">
+          <p>Nothing on your list</p>
+        </div>
+      </div>
+    )
+  }
   return (
     <div>
       <Navbar />
-      <div className="pt-5">
+      <div className="pt-3">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-        <FavoriteList title="My List" data={favorites} />
+        <FavoriteList data={favorites} />
       </div>
     </div>
   )

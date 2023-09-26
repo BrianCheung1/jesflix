@@ -31,7 +31,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
       <div className="bg-zinc-800 p-2 lg:p-3 w-full shadow-md rounded-b-md ">
         <div className="flex flex-row items-center">
           <div
-            className="cursor-pointer text-white transition"
+            className="cursor-pointer text-white transition hover:scale-125 hover:text-blue-800"
             onClick={() => router.push(`/watch/show/${data?.id}/1/1`)}
           >
             <BsFillPlayFill size={30} />
@@ -41,11 +41,11 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
             onClick={() => {
               openModal(data?.id)
             }}
-            className="cursor-pointer ml-auto group/item w-6 h-6 border-white border-2 rounded-full flex justify-center items-center transition hover:border-neutral-300"
+            className="cursor-pointer ml-auto group/item w-6 h-6 flex justify-center items-center transition hover:scale-125"
           >
             <BiChevronDown
               size={30}
-              className="text-white gorup-hover/item:text-neutral-300"
+              className="text-white hover:text-blue-800"
             />
           </div>
         </div>
