@@ -9,7 +9,8 @@ export async function POST(req: Request) {
   if (session) {
     try {
       const { movieId, type } = await req.json()
-      
+      console.log(movieId, type)
+
       if (type === "movie") {
         const user = await prismadb.user.update({
           where: {
@@ -48,30 +49,32 @@ export async function DELETE(req: Request, res: Response) {
   if (session) {
     try {
       const { movieId, type } = await req.json()
+      console.log(movieId, type)
       const user = await prismadb.user.findUnique({
         where: {
           email: session?.user?.email || "",
         },
       })
-      const updatedFavoriteIds = without(user?.favoriteMovieIds, movieId)
+
+      const updatedFavoriteMovieIds = without(user?.favoriteMovieIds, movieId)
+      const updatedFavoriteShowIds = without(user?.favoriteShowIds, movieId)
       if (type == "movie") {
         const updatedUser = await prismadb.user.update({
           where: {
             email: session?.user?.email || "",
           },
           data: {
-            favoriteMovieIds: updatedFavoriteIds,
+            favoriteMovieIds: updatedFavoriteMovieIds,
           },
         })
         return NextResponse.json(updatedUser)
-      }
-      else if(type =="show"){
+      } else if (type == "show") {
         const updatedUser = await prismadb.user.update({
           where: {
             email: session?.user?.email || "",
           },
           data: {
-            favoriteShowIds: updatedFavoriteIds,
+            favoriteShowIds: updatedFavoriteShowIds,
           },
         })
         return NextResponse.json(updatedUser)
