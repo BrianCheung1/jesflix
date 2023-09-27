@@ -22,7 +22,7 @@ export const POST = async (req: Request) => {
         token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ""),
       },
     })
-    
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       host: "smtp.gmail.com",
@@ -38,7 +38,7 @@ export const POST = async (req: Request) => {
         from: '"Jesflix" ' + process.env.EMAIL_SERVER_USER,
         to: email,
         subject: "Jesflix Confirmation",
-        html: `Reset your account here: http://localhost:3000/reset/${token.token}`,
+        html: `<p>Reset your account here: <a href=https://jesflix.vercel.app/reset/${token.token}>Click Here</a><p>`,
         //text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
         //html: `<p>Activate your account with this link: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
       })

@@ -5,6 +5,7 @@ import FavoriteButton from "./FavoriteButton"
 import { useRouter } from "next/navigation"
 import useInfoModal from "@/hooks/useMovieInfoModal"
 import { BiChevronDown } from "react-icons/bi"
+import Image from "next/image"
 
 interface MovieCardProps {
   data: Record<string, any>
@@ -15,7 +16,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   const { openModal } = useInfoModal()
 
   return (
-    <div className="group bg-zinc-900 relative">
+    <div className="group bg-zinc-900 relative" >
       <img
         onClick={() => {
           openModal(data?.id)

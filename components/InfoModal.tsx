@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState, useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 
 import PlayButton from "./PlayButton"
@@ -18,10 +18,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
   const { movieId } = useMovieInfoModal()
   const { data, isLoading } = useMovie(movieId)
-
-  const video = data?.videos?.results?.filter(
-    (result: any) => result.type == "Trailer"
-  )?.[0]?.["key"]
 
   useEffect(() => {
     setIsVisible(!!visible)
@@ -67,11 +63,15 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
       <div className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
         <div className="relative w-full mx-auto max-w-3xl rounded-md overflow-hidden">
           <div
-            className={isVisible ? 'transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md scale-100' : 'scale-0'}
+            className={
+              isVisible
+                ? "transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md scale-100"
+                : "scale-0"
+            }
           >
-            <div className="relative h-96">
+            <div className="relative">
               <video
-                className="w-full brightness-[60%] object-cover h-full"
+                className="brightness-[60%] object-cover h-full"
                 autoPlay
                 muted
                 loop
@@ -98,7 +98,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 </div>
               </div>
             </div>
-            <div className="px-4 py-2 pt-6 flex flex-row gap-2 items-center justify-start">
+            <div className="px-4 py-2 pt-6 flex flex-row flex-wrap gap-2 items-center justify-start">
               <p className="text-green-400">
                 <BsFillCalendarFill size={15} />
               </p>
