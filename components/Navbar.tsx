@@ -31,10 +31,12 @@ const Navbar = () => {
 
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current)
+    setShowAccountMenu(false)
   }, [])
 
   const toggleAccountMenu = useCallback(() => {
     setShowAccountMenu((current) => !current)
+    setShowMobileMenu(false)
   }, [])
 
   const handleSearch = (event: any) => {
