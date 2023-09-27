@@ -49,7 +49,7 @@ const Watch = () => {
         <iframe
           id="video"
           className="h-full w-full"
-          src={`https://multiembed.mov/?video_id=${data?.id}&tmdb=1&s=${season}&e=${episode}`}
+          src={`https://multiembed.mov/directstream.php?video_id=${data?.id}&tmdb=1&s=${season}&e=${episode}`}
           allowFullScreen
         ></iframe>
       </div>

@@ -85,6 +85,7 @@ const Navbar = () => {
               <input
                 className="w-full rounded-md bg-neutral-700 text-white outline-none px-2 text-sm h-6 lg:h-8"
                 type="text"
+                placeholder="Search..."
                 value={query}
                 onChange={(event) => {
                   setQuery(event.target.value)
