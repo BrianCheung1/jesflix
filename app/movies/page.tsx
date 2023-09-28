@@ -91,7 +91,7 @@ const Movies = () => {
   return (
     <div>
       <Navbar />
-      <div className="pt-5">
+      <div className="pt-10">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <MovieList title="Trending Movies Today" data={trendingMovies} />

@@ -81,11 +81,11 @@ const Navbar = () => {
             } `}
           />
         </div>
-        <div className="flex flex-row items-center gap-4 ml-auto">
+        <div className="flex flex-row items-center gap-1 md:gap-4 lg:gap-6 ml-auto">
           <div className="px-3">
             <form onSubmit={handleSearch}>
               <input
-                className="w-full rounded-md bg-neutral-700 text-white outline-none px-2 text-sm h-6 lg:h-8"
+                className="text-xs text-white bg-neutral-700 rounded-full px-3 outline-0 py-2 w-full h-6 sm:h-8"
                 type="text"
                 placeholder="Search..."
                 value={query}

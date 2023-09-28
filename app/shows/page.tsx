@@ -69,7 +69,7 @@ const Shows = () => {
   return (
     <div>
       <Navbar />
-      <div className="pt-5">
+      <div className="pt-10">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <ShowList title="Trending Shows Today" data={trendingShows} />

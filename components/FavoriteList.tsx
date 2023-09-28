@@ -23,10 +23,10 @@ const FavoriteList: React.FC<FavoriteListProps> = ({ data }) => {
   })
 
   return (
-    <div className="flex flex-col justify-center items-center mt-16 ">
+    <div className="flex flex-col justify-center items-center mt-24 ">
       <form className="">
         <input
-          className="text-white bg-neutral-700 rounded-full px-2 outline-0 py-2 w-full h-8"
+          className="text-white bg-neutral-700 rounded-full px-2 outline-0 py-2 w-full h-10 md:h-14 md:px-6"
           type="text"
           value={filter}
           placeholder="Search..."

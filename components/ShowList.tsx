@@ -12,9 +12,9 @@ const ShowList: React.FC<ShowListProps> = ({ data, title }) => {
     return null
   }
   return (
-    <div className="px-4 md:px-12 mt-4 pt-10 space-y-8">
+    <div className="px-4 md:px-12 space-y-8">
       <div>
-        <p className="text-white text-md md:text-xl lg:text-2xl font-semibold mb-4">
+        <p className="text-white text-2xl md:text-3xl font-bold mb-4 pt-10">
           {title}
         </p>
         <div className="grid lg:grid-cols-5 md:grid-cols-4 gap-2 grid-cols-2">

@@ -50,8 +50,10 @@ const Home = () => {
           <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
           <Navbar />
           <Billboard />
+          <div className="pt-5">
           <MovieList title="Trending Movies Today" data={trendingMovies} />
           <ShowList title="Trending Shows Today" data={trendingShows} />
+          </div>
         </>
       )
     }
