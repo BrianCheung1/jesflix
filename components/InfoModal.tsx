@@ -30,6 +30,14 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     }, 300)
   }, [onClose])
 
+  const renderGenres = () => {
+    const genres = data?.genres?.map((genre:any)=>{
+      return genre.name
+    }).join(", ")
+    console.log(genres)
+    return genres
+  }
+
   if (!isVisible) {
     return null
   }
@@ -89,8 +97,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 <AiOutlineClose className="text-white" size={20} />
               </div>
               <div className="absolute bottom-[10%] left-10">
-                <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-4">
+                <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-1">
                   {data?.title}
+                </p>
+                <p className="text-xs text-neutral-400 font-semibold mb-4">
+                  "{data?.tagline}"
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton movieId={data?.id} type="movie" />
@@ -120,6 +131,9 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             </div>
             <div className="px-4 py-4 pb-6">
               <p className="text-white text-1xl">{data?.overview}</p>
+            </div>
+            <div className="px-4 pb-6">
+              <p className="text-white text-1xl">{renderGenres()}</p>
             </div>
           </div>
         </div>

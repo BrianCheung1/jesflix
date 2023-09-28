@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react"
 import { redirect, useParams, useRouter } from "next/navigation"
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import useShow from "@/hooks/useShow"
+import { BiSkipNext } from "react-icons/bi"
 
 const Watch = () => {
   const { data: session } = useSession({
@@ -44,15 +45,39 @@ const Watch = () => {
     <div className="h-full bg-black flex flex-wrap">
       <div
         className="absolute w-full flex items-center p-4
-        gap-8 bg-black bg-opacity-70"
+        gap-8 bg-black bg-opacity-70 "
       >
           <AiOutlineArrowLeft
             onClick={() => router.push("/")}
-            className="text-white cursor-pointer"
+            className="text-white cursor-pointer 
+            transition
+            hover:text-blue-800
+            hover:scale-150"
             size={30}
           />
           <div className="ml-auto">
-            <button onClick={()=> load_next_eps()} className="text-white bg-blue-800 rounded-full px-2 py-1">Next Episode</button>
+            
+            <button
+        onClick={() => load_next_eps()}
+        className="bg-white
+    rounded-md
+    py-1
+    px-2
+    md:px-4
+    w-auto
+    text-xs lg:text-lg
+    font-semibold
+    flex
+    flex-row
+    items-center
+    hover:scale-110
+    transition
+    hover:text-blue-800
+    "
+      >
+        <BiSkipNext size={25} />
+        Next Episode
+      </button>
           </div>
       </div>
         <iframe

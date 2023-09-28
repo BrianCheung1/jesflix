@@ -41,7 +41,9 @@ const Watch = () => {
       >
         <AiOutlineArrowLeft
           onClick={() => router.back()}
-          className="text-white cursor-pointer"
+          className="text-white cursor-pointer transition
+          hover:text-blue-800
+          hover:scale-150"
           size={30}
         />
       </div>
