@@ -20,6 +20,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const { data, isLoading } = useMovie(movieId)
   const ref = useRef<any>();
 
+  const handleClose = useCallback(() => {
+    setIsVisible(false)
+    setTimeout(() => {
+      onClose()
+    }, 300)
+  }, [onClose])
+
   useEffect(() => {
     setIsVisible(!!visible)
     const handleOutSideClick = (event:any) => {
@@ -32,14 +39,9 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return () => {
       window.removeEventListener("mousedown", handleOutSideClick);
     };
-  }, [visible])
+  }, [visible,ref, handleClose])
 
-  const handleClose = useCallback(() => {
-    setIsVisible(false)
-    setTimeout(() => {
-      onClose()
-    }, 300)
-  }, [onClose])
+
 
   const renderGenres = () => {
     const genres = data?.genres?.map((genre:any)=>{

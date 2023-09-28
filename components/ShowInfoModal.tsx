@@ -21,6 +21,15 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [episode, setEpisode] = useState(0)
   const ref = useRef<any>();
 
+  const handleClose = useCallback(() => {
+    setIsVisible(false)
+    setSeason(0)
+    setEpisode(0)
+    setTimeout(() => {
+      onClose()
+    }, 300)
+  }, [onClose])
+
   useEffect(() => {
     setIsVisible(!!visible)
     const handleOutSideClick = (event:any) => {
@@ -34,16 +43,9 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return () => {
       window.removeEventListener("mousedown", handleOutSideClick);
     };
-  }, [visible, ref])
+  }, [visible, ref, handleClose])
 
-  const handleClose = useCallback(() => {
-    setIsVisible(false)
-    setSeason(0)
-    setEpisode(0)
-    setTimeout(() => {
-      onClose()
-    }, 300)
-  }, [onClose])
+  
 
   const renderGenres = () => {
     const genres = data?.genres?.map((genre:any)=>{
