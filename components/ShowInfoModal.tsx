@@ -56,7 +56,8 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   const renderEpisodes = () => {
     const listItems = []
-    for (let i = 0; i < data?.seasons[season].episode_count; i++) {
+    const seasons = data?.seasons.filter((season:any)=> {return season.season_number >= 1})
+    for (let i = 0; i < seasons[season]?.episode_count; i++) {
       listItems.push(
         <option className="block py-2 px-4 hover:bg-gray-100" value={i}>
           Episode {i + 1}

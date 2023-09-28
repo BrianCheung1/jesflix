@@ -16,8 +16,14 @@ const Watch = () => {
   const { showId, season, episode } = useParams()
   const { data, isLoading } = useShow(showId as string)
 
-  const test = () => {
-    alert("video ended")
+  const load_next_eps= () => {
+    let number_of_seasons = data?.seasons?.filter((season:any)=> {return season.season_number >= 1})[season-1]
+    if(Number(episode)+1 > number_of_seasons?.episode_count){
+      router.push(`/watch/show/${data?.id}/${Number(season)+1}/1`)
+    }
+    else{
+      router.push(`/watch/show/${data?.id}/${season}/${Number(episode)+1}`)
+    }
   }
 
   if (isLoading) {
@@ -46,7 +52,7 @@ const Watch = () => {
             size={30}
           />
           <div className="ml-auto">
-            <button onClick={()=> router.push(`/watch/show/${data?.id}/${season}/${Number(episode)+1}`)} className="text-white bg-blue-800 rounded-full px-2 py-1">Next Episode</button>
+            <button onClick={()=> load_next_eps()} className="text-white bg-blue-800 rounded-full px-2 py-1">Next Episode</button>
           </div>
       </div>
         <iframe
