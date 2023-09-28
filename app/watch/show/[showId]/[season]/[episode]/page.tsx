@@ -17,7 +17,7 @@ const Watch = () => {
   const { data, isLoading } = useShow(showId as string)
 
   const load_next_eps= () => {
-    let number_of_seasons = data?.seasons?.filter((season:any)=> {return season.season_number >= 1})[season-1]
+    let number_of_seasons = data?.seasons?.filter((season:any)=> {return season.season_number >= 1})[Number(season)-1]
     if(Number(episode)+1 > number_of_seasons?.episode_count){
       router.push(`/watch/show/${data?.id}/${Number(season)+1}/1`)
     }
@@ -56,7 +56,7 @@ const Watch = () => {
           </div>
       </div>
         <iframe
-        onEnded={()=>test()}
+   
           id="video"
           className="pt-16 h-screen w-full"
           src={`https://multiembed.mov/directstream.php?video_id=${data?.id}&tmdb=1&s=${season}&e=${episode}`}
