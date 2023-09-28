@@ -3,13 +3,18 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { NextResponse } from "next/server"
 import axios from "axios"
 
-export async function GET(req: Request) {
-  const session = await getServerSession(authOptions)
+export async function GET(
+  req: Request,
+  { params }: { params: { page: string; genre: string } }
+) {
+  const session = await getServerSession(authOptions);
   if (session) {
     try {
+      const page = params.page;
+      const genre = params.genre;
       const options = {
         method: "GET",
-        url: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=80",
+        url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genre}`,
         params: { language: "en-US" },
         headers: {
           accept: "application/json",

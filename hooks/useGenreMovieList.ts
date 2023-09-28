@@ -1,9 +1,9 @@
 import useSWR from "swr"
 import fetcher from "@/libs/fetcher"
 
-const useGenreMovieList = (genre: string) => {
+const useGenreMovieList = (genre: string, page:string) => {
   const { data, error, isLoading } = useSWR(
-    `/api/movies/genre/${genre}`,
+    `/api/movies/genre/${genre}/${page}`,
     fetcher,
     {
       revalidateIfStale: false,

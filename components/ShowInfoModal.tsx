@@ -24,8 +24,6 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   useEffect(() => {
     setIsVisible(!!visible)
     const handleOutSideClick = (event:any) => {
-      console.log(ref.current)
-      console.log(event.target)
       if (ref.current === event.target) {
         handleClose()
       }
