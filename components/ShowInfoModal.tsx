@@ -132,7 +132,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 poster={
                   data?.backdrop_path
                     ? `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
-                    : "/images/placeholder.png"
+                    : `/images/placeholder.png`
                 }
               ></video>
               <div
@@ -146,7 +146,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   {data?.name ? data?.name : data?.original_name}
                 </p>
                 <p className="text-xs text-neutral-400 font-semibold mb-4">
-                  "{data?.tagline}"
+                  {`"${data?.tagline}"`}
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton
