@@ -1,7 +1,7 @@
 import useSWR from "swr"
 import fetcher from "@/libs/fetcher"
 
-const useRecommendationMovieList = (id:string) => {
+const useRecommendationMovieList = () => {
   const { data, error, isLoading } = useSWR(
     `/api/movies/recommendations/`,
     fetcher,
