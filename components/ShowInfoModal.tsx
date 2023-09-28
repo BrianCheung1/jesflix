@@ -97,7 +97,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   } else {
     return (
       <div className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
-        <div className="w-full rounded-md overflow-hidden">
+        <div className="w-full mx-auto max-w-3xl rounded-md overflow-hidden">
           <div
             className={`${isVisible} ? 'scale-100': 'scale-0' transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md`}
           >
