@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState, useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 
 import PlayButton from "./PlayButton"
@@ -7,7 +7,6 @@ import useShowInfoModal from "@/hooks/useShowInfoModal"
 import useShow from "@/hooks/useShow"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
-import { BiSolidTimeFive } from "react-icons/bi"
 
 interface InfoModalProps {
   visible?: boolean
@@ -20,10 +19,24 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const { data, isLoading } = useShow(showId)
   const [season, setSeason] = useState(0)
   const [episode, setEpisode] = useState(0)
+  const ref = useRef<any>();
 
   useEffect(() => {
     setIsVisible(!!visible)
-  }, [visible])
+    const handleOutSideClick = (event:any) => {
+      console.log(ref.current)
+      console.log(event.target)
+      if (ref.current === event.target) {
+        handleClose()
+      }
+    };
+
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [visible, ref])
 
   const handleClose = useCallback(() => {
     setIsVisible(false)
@@ -38,7 +51,6 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     const genres = data?.genres?.map((genre:any)=>{
       return genre.name
     }).join(", ")
-    console.log(genres)
     return genres
   }
 
@@ -84,6 +96,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
       <div className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
         <div className="max-w-3xl rounded-md overflow-hidden">
           <div
+            
             className={`${isVisible} ? 'scale-100': 'scale-0' transform duration-300 relative flex bg-zinc-900 drop-shadow-md `}
           >
             <div className="h-96 w-screen animate-pulse justify-center items-center flex">
@@ -105,7 +118,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     )
   } else {
     return (
-      <div className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
+      <div ref={ref} className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
         <div className="w-full mx-auto max-w-3xl rounded-md overflow-hidden">
           <div
             className={`${isVisible} ? 'scale-100': 'scale-0' transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md`}

@@ -18,9 +18,22 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
   const { movieId } = useMovieInfoModal()
   const { data, isLoading } = useMovie(movieId)
+  const ref = useRef<any>();
 
   useEffect(() => {
     setIsVisible(!!visible)
+    const handleOutSideClick = (event:any) => {
+      console.log(ref.current)
+      console.log(event.target)
+      if (ref.current === event.target) {
+        handleClose()
+      }
+    };
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
   }, [visible])
 
   const handleClose = useCallback(() => {
@@ -68,7 +81,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     )
   } else {
     return (
-      <div className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
+      <div ref={ref} className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
         <div className="relative w-full mx-auto max-w-3xl rounded-md overflow-hidden">
           <div
             className={
