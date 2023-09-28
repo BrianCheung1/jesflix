@@ -31,28 +31,24 @@ const Watch = () => {
   }
 
   return (
-    <div className="h-screen w-screen bg-black flex flex-col justify-end">
+    <div className="h-full bg-black flex flex-wrap">
       <div
-        className="
-         w-full p-4 z-10 
-         items-center 
-        gap-8 bg-black bg-opacity-70
-      "
+        className="absolute w-full flex items-center p-4
+        gap-8 bg-black bg-opacity-70"
       >
-        <AiOutlineArrowLeft
-          onClick={() => router.push("/")}
-          className="text-white cursor-pointer"
-          size={30}
-        />
+          <AiOutlineArrowLeft
+            onClick={() => router.push("/")}
+            className="text-white cursor-pointer"
+            size={30}
+          />
       </div>
-      <div className="flex justify-center items-center flex-grow">
         <iframe
           id="video"
-          className="h-full w-full"
+          className="pt-16 h-screen w-full"
           src={`https://multiembed.mov/directstream.php?video_id=${data?.id}`}
           allowFullScreen
         ></iframe>
-      </div>
+
     </div>
   )
 }

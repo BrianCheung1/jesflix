@@ -16,6 +16,10 @@ const Watch = () => {
   const { showId, season, episode } = useParams()
   const { data, isLoading } = useShow(showId as string)
 
+  const test = () => {
+    alert("video ended")
+  }
+
   if (isLoading) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
@@ -30,29 +34,28 @@ const Watch = () => {
     )
   }
 
-  return (
-    <div className="h-screen w-screen bg-black flex flex-col justify-end">
+  return ( 
+    <div className="h-full bg-black flex flex-wrap">
       <div
-        className="
-         w-full p-4 z-10 
-         items-center 
-        gap-8 bg-black bg-opacity-70
-      "
+        className="absolute w-full flex items-center p-4
+        gap-8 bg-black bg-opacity-70"
       >
-        <AiOutlineArrowLeft
-          onClick={() => router.push("/")}
-          className="text-white cursor-pointer"
-          size={30}
-        />
+          <AiOutlineArrowLeft
+            onClick={() => router.push("/")}
+            className="text-white cursor-pointer"
+            size={30}
+          />
+          <div className="ml-auto">
+            <button onClick={()=> router.push(`/watch/show/${data?.id}/${season}/${Number(episode)+1}`)} className="text-white bg-blue-800 rounded-full px-2 py-1">Next Episode</button>
+          </div>
       </div>
-      <div className="flex justify-center items-center flex-grow">
         <iframe
+        onEnded={()=>test()}
           id="video"
-          className="h-full w-full"
+          className="pt-16 h-screen w-full"
           src={`https://multiembed.mov/directstream.php?video_id=${data?.id}&tmdb=1&s=${season}&e=${episode}`}
           allowFullScreen
         ></iframe>
-      </div>
     </div>
   )
 }

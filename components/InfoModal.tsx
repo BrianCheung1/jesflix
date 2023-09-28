@@ -78,7 +78,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 poster={
                   data?.backdrop_path
                     ? `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
-                    : "https://critics.io/img/movies/poster-placeholder.png"
+                    : "/images/placeholder.png"
                 }
                 // src={`https://www.youtube.com/watch?v=${video}`}
               ></video>
