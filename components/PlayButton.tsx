@@ -2,6 +2,7 @@ import React from "react"
 
 import { BsFillPlayFill } from "react-icons/bs"
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 
 interface PlayButtonProps {
   movieId: string
@@ -17,11 +18,14 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   episode,
 }) => {
   const router = useRouter()
+  const { data: session } = useSession()
 
   if (type === "movie") {
     return (
       <button
-        onClick={() => router.push(`/watch/movie/${movieId}`)}
+        onClick={() =>
+          router.push(session ? `/watch/movie/${movieId}` : `/auth`)
+        }
         className="bg-white
     rounded-md
     py-1
@@ -46,7 +50,11 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   }
   return (
     <button
-      onClick={() => router.push(`/watch/show/${movieId}/${season}/${episode}`)}
+      onClick={() =>
+        router.push(
+          session ? `/watch/show/${movieId}/${season}/${episode}` : `/auth`
+        )
+      }
       className="bg-white
   rounded-md
   py-1

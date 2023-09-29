@@ -51,4 +51,7 @@ Nextjs, React, Tailwind, Mongodb, Prismadb, NextAuth, Vercel, Github
 ## Status
 Jesflix is still a work in progress but fully functional with features being added
 
+## Planned Features
+- Autoplay next episode
+
 

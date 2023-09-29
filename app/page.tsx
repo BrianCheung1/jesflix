@@ -17,12 +17,7 @@ import useSimiliarShowList from "@/hooks/useSimiliarShowList"
 import Footer from "@/components/Footer"
 
 const Home = () => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/auth")
-    },
-  })
+  const { data: session } = useSession()
 
   const { data: trendingMovies = [], isLoading } = useTrendingMovieList()
   const { data: trendingShows = [], isLoading: isLoadingShows } =
@@ -63,29 +58,44 @@ const Home = () => {
           <Billboard />
           <div className="pt-5">
             <MovieList
-              title={`Because ${similarMovies.choice.title} is in your favorites`}
-              data={similarMovies.results}
+              title={`Because ${similarMovies?.choice?.title} is in your favorites`}
+              data={similarMovies?.results}
             />
             <ShowList
               title={`Because ${similarShows?.choice?.name} is in your favorites`}
-              data={similarShows.results}
+              data={similarShows?.results}
             />
             <MovieList title="Trending Movies Today" data={trendingMovies} />
             <ShowList title="Trending Shows Today" data={trendingShows} />
           </div>
-          <Footer/>
+          <Footer />
         </>
       )
     }
   } else {
+    if (isLoading || isLoadingShows || isBillBoardLoading) {
+      return (
+        <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
+          <div
+            className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-red-600 rounded-full"
+            role="status"
+            aria-label="loading"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      )
+    }
     return (
-      <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
-        <div
-          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-red-600 rounded-full"
-          role="status"
-          aria-label="loading"
-        >
-          <span className="sr-only">Loading...</span>
+      <div>
+        <InfoModal visible={isOpen} onClose={closeModal} />
+        <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
+        <Navbar />
+        <Billboard />
+        <div className="pt-5">
+          <MovieList title="Trending Movies Today" data={trendingMovies} />
+          <ShowList title="Trending Shows Today" data={trendingShows} />
+          <Footer />
         </div>
       </div>
     )

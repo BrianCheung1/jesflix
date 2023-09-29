@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
 import { BiChevronDown } from "react-icons/bi"
 import Image from "next/image"
+import { useSession } from "next-auth/react"
 interface ShowCardProps {
   data: Record<string, any>
 }
@@ -13,6 +14,7 @@ interface ShowCardProps {
 const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
   const router = useRouter()
   const { openModal } = useShowInfoModal()
+  const { data: session } = useSession()
 
   return (
     <div className="group bg-zinc-900 relative">
@@ -34,7 +36,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
         <div className="flex flex-row items-center">
           <div
             className="cursor-pointer text-white transition hover:scale-125 hover:text-blue-800"
-            onClick={() => router.push(`/watch/show/${data?.id}/1/1`)}
+            onClick={() => router.push(session ? `/watch/show/${data?.id}/1/1`: `/auth`) }
           >
             <BsFillPlayFill size={30} />
           </div>

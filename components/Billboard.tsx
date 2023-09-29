@@ -36,7 +36,7 @@ const Billboard = () => {
         className="w-full h-screen object-cover brightness-[60%] pointer-events-none"
         src={
           video
-            ? `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&vq=hd1080&&controls=0&modestbranding=1&showinfo=0&loop=1&disablekb=1&playlist=${video}`
+            ? `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&vq=hd1080&&controls=0&modestbranding=1&showinfo=0&&rel=0loop=1&disablekb=1&playlist=${video}`
             : `https://image.tmdb.org/t/p/original/${data?.backdrop_path}`
         }
         title="Youtube app player"

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import useInfoModal from "@/hooks/useMovieInfoModal"
 import { BiChevronDown } from "react-icons/bi"
 import Image from "next/image"
+import { useSession } from "next-auth/react"
 
 interface MovieCardProps {
   data: Record<string, any>
@@ -14,6 +15,7 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   const router = useRouter()
   const { openModal } = useInfoModal()
+  const { data: session } = useSession()
 
   return (
     <div className="group bg-zinc-900 relative">
@@ -35,7 +37,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         <div className="flex flex-row items-center">
           <div
             className="cursor-pointer text-white transition hover:scale-125 hover:text-blue-800"
-            onClick={() => router.push(`/watch/movie/${data?.id}`)}
+            onClick={() => router.push(session ? `/watch/movie/${data?.id}` : `/auth`)}
           >
             <BsFillPlayFill size={30} />
           </div>
