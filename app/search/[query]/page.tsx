@@ -10,6 +10,7 @@ import useInfoModal from "@/hooks/useMovieInfoModal"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
 import SearchList from "@/components/SearchList"
 import { isEmpty } from "lodash"
+import Footer from "@/components/Footer"
 
 const Search = () => {
   const router = useRouter()
@@ -65,6 +66,7 @@ const Search = () => {
           data={results}
         />
       </div>
+      <Footer/>
     </div>
   )
 }

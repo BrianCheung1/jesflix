@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jesflix
 
-## Getting Started
+## Demo link:
+Access my site at [Jesflix](https://jesflix.vercel.app/)
 
-First, run the development server:
+## Table of Content:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [About The App](#about-the-app)
+- [Screenshots](#screenshots)
+- [Technologies](#technologies)
+- [Setup](#setup)
+- [Status](#status)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## About The App
+JesFlix offers a diverse collection of movies and TV shows catering to all tastes and genres. Whether you're a fan of gripping dramas, side-splitting comedies, or heart-pounding thrillers, JesFlix has something for everyone.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Screenshots
+![Billboard](https://i.imgur.com/2Z9IjhU.png)
+![Homescreen](https://i.imgur.com/FoC5BSW.png)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies
+Nextjs, React, Tailwind, Mongodb, Prismadb, NextAuth, Vercel, Github
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Setup
+- download or clone the repository
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- run `npm install`
+- fill out .env file with tokens
+    ```
+    DATABASE_URL=
+    NEXTAUTH_JWT_SECRET=
+    NEXTAUTH_SECRET=
 
-## Deploy on Vercel
+    GITHUB_ID=
+    GITHUB_SECRET=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    GOOGLE_CLIENT_ID=
+    GOOGLE_CLIENT_SECRET=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    TMDB_API_KEY = 
+    TMDB_BEARER_TOKEN = 
+
+    EMAIL_SERVER_USER=
+    EMAIL_SERVER_PASSWORD=
+    ```
+- run `npm run dev`
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Status
+Jesflix is still a work in progress but fully functional with features being added
+
+

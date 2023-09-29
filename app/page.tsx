@@ -14,6 +14,7 @@ import useTrendingShowList from "@/hooks/useTrendingShowList"
 import ShowList from "@/components/ShowList"
 import useSimilarMoviesList from "@/hooks/useSimiliarMovieList"
 import useSimiliarShowList from "@/hooks/useSimiliarShowList"
+import Footer from "@/components/Footer"
 
 const Home = () => {
   const { data: session } = useSession({
@@ -72,6 +73,7 @@ const Home = () => {
             <MovieList title="Trending Movies Today" data={trendingMovies} />
             <ShowList title="Trending Shows Today" data={trendingShows} />
           </div>
+          <Footer/>
         </>
       )
     }

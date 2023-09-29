@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import Footer from "@/components/Footer"
 
 const Auth = () => {
   const { data: session } = useSession()
@@ -297,6 +298,7 @@ const Auth = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

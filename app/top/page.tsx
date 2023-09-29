@@ -10,6 +10,7 @@ import ShowList from "@/components/ShowList"
 import useTopMovie from "@/hooks/useTopMovie"
 import MovieList from "@/components/MovieList"
 import useTopShow from "@/hooks/useTopShow"
+import Footer from "@/components/Footer"
 
 const Shows = () => {
   const router = useRouter()
@@ -45,6 +46,7 @@ const Shows = () => {
         <MovieList title="Top Rated Movies " data={data} />
         <ShowList title="Top Rated Shows" data={topShows} />
       </div>
+      <Footer/>
     </div>
   )
 }

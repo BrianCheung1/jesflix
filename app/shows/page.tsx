@@ -10,6 +10,7 @@ import useShowInfoModal from "@/hooks/useShowInfoModal"
 import ShowList from "@/components/ShowList"
 import useTrendingShowList from "@/hooks/useTrendingShowList"
 import useGenreShowList from "@/hooks/useGenreShowList"
+import Footer from "@/components/Footer"
 
 const Shows = () => {
   const [actionPage, setActionPage] = useState(1)
@@ -115,14 +116,14 @@ const Shows = () => {
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <ShowList title="Trending Shows Today" data={trendingShows} />
         <ShowList title="Popular Action & Adventure Shows" data={actionShows} />
-          <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
-            <button
-              onClick={() => setActionPage(actionPage + 1)}
-              className="text-white"
-            >
-              See More
-            </button>
-          </div>
+        <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
+          <button
+            onClick={() => setActionPage(actionPage + 1)}
+            className="text-white"
+          >
+            See More
+          </button>
+        </div>
         <ShowList title="Popular Animation Shows" data={animationShows} />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
@@ -254,6 +255,7 @@ const Shows = () => {
           See More
         </button>
       </div>
+      <Footer />
     </div>
   )
 }

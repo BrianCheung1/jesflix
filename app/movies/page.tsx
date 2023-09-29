@@ -10,6 +10,7 @@ import useInfoModal from "@/hooks/useMovieInfoModal";
 import useShowInfoModal from "@/hooks/useShowInfoModal";
 import useTrendingMovieList from "@/hooks/useTrendingMovieList";
 import useGenreMovieList from "@/hooks/useGenreMovieList";
+import Footer from "@/components/Footer";
 
 const Movies = () => {
   const [actionPage, setActionPage] = useState(1);
@@ -273,6 +274,7 @@ const Movies = () => {
           </button>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

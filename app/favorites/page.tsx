@@ -9,6 +9,7 @@ import useShowInfoModal from "@/hooks/useShowInfoModal"
 import useFavorites from "@/hooks/useFavorites"
 import FavoriteList from "@/components/FavoriteList"
 import { isEmpty } from "lodash"
+import Footer from "@/components/Footer"
 
 const Favorites = () => {
   const { data: favorites = [], isLoading } = useFavorites()
@@ -51,6 +52,7 @@ const Favorites = () => {
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <FavoriteList data={favorites} />
       </div>
+      <Footer/>
     </div>
   )
 }
