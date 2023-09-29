@@ -1,9 +1,9 @@
 import useSWR from "swr"
 import fetcher from "@/libs/fetcher"
 
-const useRecommendationMovieList = () => {
+const useSimiliarShowList = () => {
   const { data, error, isLoading } = useSWR(
-    `/api/movies/recommendations/`,
+    `/api/shows/similar`,
     fetcher,
     {
       revalidateIfStale: false,
@@ -19,4 +19,4 @@ const useRecommendationMovieList = () => {
   }
 }
 
-export default useRecommendationMovieList
+export default useSimiliarShowList

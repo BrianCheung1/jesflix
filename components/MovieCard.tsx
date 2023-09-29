@@ -16,12 +16,14 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   const { openModal } = useInfoModal()
 
   return (
-    <div className="group bg-zinc-900 relative" >
-      <img
+    <div className="group bg-zinc-900 relative">
+      <Image
         onClick={() => {
           openModal(data?.id)
         }}
-        className="cursor-pointer object-cover transition duraiton shadow-xl rounded-t-md w-full h-5/6"
+        width={500}
+        height={800}
+        className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-5/6"
         src={
           data?.poster_path
             ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`

@@ -1,99 +1,99 @@
-"use client";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
-import { redirect, useRouter, useParams } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import InfoModal from "@/components/InfoModal";
-import ShowInfoModal from "@/components/ShowInfoModal";
-import useInfoModal from "@/hooks/useMovieInfoModal";
-import useShowInfoModal from "@/hooks/useShowInfoModal";
-import ShowList from "@/components/ShowList";
-import useTrendingShowList from "@/hooks/useTrendingShowList";
-import useGenreShowList from "@/hooks/useGenreShowList";
+"use client"
+import { useState } from "react"
+import { useSession } from "next-auth/react"
+import { redirect, useRouter, useParams } from "next/navigation"
+import Navbar from "@/components/Navbar"
+import InfoModal from "@/components/InfoModal"
+import ShowInfoModal from "@/components/ShowInfoModal"
+import useInfoModal from "@/hooks/useMovieInfoModal"
+import useShowInfoModal from "@/hooks/useShowInfoModal"
+import ShowList from "@/components/ShowList"
+import useTrendingShowList from "@/hooks/useTrendingShowList"
+import useGenreShowList from "@/hooks/useGenreShowList"
 
 const Shows = () => {
-  const [actionPage, setActionPage] = useState(1);
-  const [adventurePage, setAdventurePage] = useState(1);
-  const [animationPage, setAnimationPage] = useState(1);
-  const [comedyPage, setComedyPage] = useState(1);
-  const [crimePage, setCrimePage] = useState(1);
-  const [documentaryPage, setDocumentaryPage] = useState(1);
-  const [dramaPage, setDramaPage] = useState(1);
-  const [familyPage, setFamilyPage] = useState(1);
-  const [kidsPage, setKidsPage] = useState(1);
-  const [mysteryPage, setMysteryPage] = useState(1);
-  const [newsPage, setNewsPage] = useState(1);
-  const [realityPage, setRealityPage] = useState(1);
-  const [scifiPage, setScifiPage] = useState(1);
-  const [soapPage, setSoapPage] = useState(1);
-  const [talkPage, setTalkPage] = useState(1);
-  const [warPage, setWarPage] = useState(1);
-  const [westernPage, setWesternPage] = useState(1);
+  const [actionPage, setActionPage] = useState(1)
+  const [adventurePage, setAdventurePage] = useState(1)
+  const [animationPage, setAnimationPage] = useState(1)
+  const [comedyPage, setComedyPage] = useState(1)
+  const [crimePage, setCrimePage] = useState(1)
+  const [documentaryPage, setDocumentaryPage] = useState(1)
+  const [dramaPage, setDramaPage] = useState(1)
+  const [familyPage, setFamilyPage] = useState(1)
+  const [kidsPage, setKidsPage] = useState(1)
+  const [mysteryPage, setMysteryPage] = useState(1)
+  const [newsPage, setNewsPage] = useState(1)
+  const [realityPage, setRealityPage] = useState(1)
+  const [scifiPage, setScifiPage] = useState(1)
+  const [soapPage, setSoapPage] = useState(1)
+  const [talkPage, setTalkPage] = useState(1)
+  const [warPage, setWarPage] = useState(1)
+  const [westernPage, setWesternPage] = useState(1)
 
-  const router = useRouter();
-  const { data: trendingShows = [], isLoading } = useTrendingShowList();
+  const router = useRouter()
+  const { data: trendingShows = [], isLoading } = useTrendingShowList()
   const { data: actionShows = [], isLoading: actionLoading } = useGenreShowList(
     "10759",
     String(actionPage)
-  );
+  )
   const { data: animationShows = [], isLoading: animationLoading } =
-    useGenreShowList("16", String(animationPage));
+    useGenreShowList("16", String(animationPage))
   const { data: comedyShows = [], isLoading: comedyLoading } = useGenreShowList(
     "35",
     String(comedyPage)
-  );
+  )
   const { data: crimeShows = [], isLoading: crimeLoading } = useGenreShowList(
     "80",
     String(crimePage)
-  );
+  )
   const { data: documentaryShows = [], isLoading: documentaryLoading } =
-    useGenreShowList("99", String(documentaryPage));
+    useGenreShowList("99", String(documentaryPage))
   const { data: dramaShows = [], isLoading: dramaLoading } = useGenreShowList(
     "18",
     String(dramaPage)
-  );
+  )
   const { data: familyShows = [], isLoading: familyLoading } = useGenreShowList(
     "10751",
     String(familyPage)
-  );
+  )
   const { data: kidsShows = [], isLoading: kidsLoading } = useGenreShowList(
     "10762",
     String(kidsPage)
-  );
+  )
   const { data: mysteryShows = [], isLoading: mysteryLoading } =
-    useGenreShowList("9648", String(mysteryPage));
+    useGenreShowList("9648", String(mysteryPage))
   const { data: newsShows = [], isLoading: newsLoading } = useGenreShowList(
     "10763",
     String(newsPage)
-  );
+  )
   const { data: realityShows = [], isLoading: realityLoading } =
-    useGenreShowList("10764", String(realityPage));
+    useGenreShowList("10764", String(realityPage))
   const { data: scifiShows = [], isLoading: scifiLoading } = useGenreShowList(
     "10765",
     String(scifiPage)
-  );
+  )
   const { data: soapShows = [], isLoading: soapLoading } = useGenreShowList(
     "10766",
     String(soapPage)
-  );
+  )
   const { data: talkShows = [], isLoading: talkLoading } = useGenreShowList(
     "10767",
     String(talkPage)
-  );
+  )
   const { data: warShows = [], isLoading: warLoading } = useGenreShowList(
     "10768",
     String(warPage)
-  );
+  )
   const { data: westernShows = [], isLoading: westernLoading } =
-    useGenreShowList("37", String(westernPage));
-  const { isOpen, closeModal } = useInfoModal();
-  const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal();
+    useGenreShowList("37", String(westernPage))
+  const { isOpen, closeModal } = useInfoModal()
+  const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal()
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/auth");
+      redirect("/auth")
     },
-  });
+  })
   if (isLoading) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center">
@@ -105,7 +105,7 @@ const Shows = () => {
           <span className="sr-only">Loading...</span>
         </div>
       </div>
-    );
+    )
   }
   return (
     <div>
@@ -115,14 +115,14 @@ const Shows = () => {
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <ShowList title="Trending Shows Today" data={trendingShows} />
         <ShowList title="Popular Action & Adventure Shows" data={actionShows} />
-        <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
-          <button
-            onClick={() => setActionPage(actionPage + 1)}
-            className="text-white"
-          >
-            See More
-          </button>
-        </div>
+          <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
+            <button
+              onClick={() => setActionPage(actionPage + 1)}
+              className="text-white"
+            >
+              See More
+            </button>
+          </div>
         <ShowList title="Popular Animation Shows" data={animationShows} />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
@@ -255,7 +255,7 @@ const Shows = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Shows;
+export default Shows

@@ -5,7 +5,7 @@ import FavoriteButton from "./FavoriteButton"
 import { useRouter } from "next/navigation"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
 import { BiChevronDown } from "react-icons/bi"
-
+import Image from "next/image"
 interface ShowCardProps {
   data: Record<string, any>
 }
@@ -16,11 +16,13 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
 
   return (
     <div className="group bg-zinc-900 relative">
-      <img
+      <Image
         onClick={() => {
           openModal(data?.id)
         }}
-        className="cursor-pointer object-cover transition duraiton shadow-xl rounded-t-md w-full h-5/6"
+        width={500}
+        height={800}
+        className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-5/6"
         src={
           data?.poster_path
             ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`

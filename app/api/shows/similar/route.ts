@@ -50,11 +50,10 @@ export async function GET(
       list["shows"].push(show.data);
     }
     const random = Math.floor(Math.random() * list?.movies?.length);
-
-    const id = list?.movies[random]?.id
+    const genre_ids = list?.shows[random]?.genres.map((genre:any) => genre.id)
     const options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${id}/recommendations`,
+      url: `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre_ids.join("%2C%20")}`,
       params: { language: "en-US" },
       headers: {
         accept: "application/json",
@@ -62,7 +61,7 @@ export async function GET(
       },
     };
 
-    const movies = await axios.request(options);
-    return NextResponse.json(movies.data.results);
+    let shows = await axios.request(options);
+    return NextResponse.json({choice:  list?.shows[random], results: shows.data.results});
   }
 }
