@@ -13,15 +13,12 @@ const Footer = () => {
             href="https://jesflix.vercel.app/"
             className="flex items-center mb-4 sm:mb-0"
           >
-            <img
-              src="images/logo.png"
-              className="h-8 mr-3"
-              alt="Flowbite Logo"
-            />
+            <img src="/images/logo.png" alt="Logo=" className="h-8 mr-3" />
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-            Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.
+              Disclaimer: This site does not store any files on its server. All
+              contents are provided by non-affiliated third parties.
             </li>
           </ul>
         </div>

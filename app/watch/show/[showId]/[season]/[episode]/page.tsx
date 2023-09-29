@@ -17,13 +17,14 @@ const Watch = () => {
   const { showId, season, episode } = useParams()
   const { data, isLoading } = useShow(showId as string)
 
-  const load_next_eps= () => {
-    let number_of_seasons = data?.seasons?.filter((season:any)=> {return season.season_number >= 1})[Number(season)-1]
-    if(Number(episode)+1 > number_of_seasons?.episode_count){
-      router.push(`/watch/show/${data?.id}/${Number(season)+1}/1`)
-    }
-    else{
-      router.push(`/watch/show/${data?.id}/${season}/${Number(episode)+1}`)
+  const load_next_eps = () => {
+    let number_of_seasons = data?.seasons?.filter((season: any) => {
+      return season.season_number >= 1
+    })[Number(season) - 1]
+    if (Number(episode) + 1 > number_of_seasons?.episode_count) {
+      router.push(`/watch/show/${data?.id}/${Number(season) + 1}/1`)
+    } else {
+      router.push(`/watch/show/${data?.id}/${season}/${Number(episode) + 1}`)
     }
   }
 
@@ -41,25 +42,24 @@ const Watch = () => {
     )
   }
 
-  return ( 
+  return (
     <div className="h-full bg-black flex flex-wrap">
       <div
         className="absolute w-full flex items-center p-4
         gap-8 bg-black bg-opacity-70 "
       >
-          <AiOutlineArrowLeft
-            onClick={() => router.push("/")}
-            className="text-white cursor-pointer 
+        <AiOutlineArrowLeft
+          onClick={() => router.push("/")}
+          className="text-white cursor-pointer 
             transition
             hover:text-blue-800
             hover:scale-150"
-            size={30}
-          />
-          <div className="ml-auto">
-            
-            <button
-        onClick={() => load_next_eps()}
-        className="bg-white
+          size={30}
+        />
+        <div className="ml-auto">
+          <button
+            onClick={() => load_next_eps()}
+            className="bg-white
     rounded-md
     py-1
     px-2
@@ -74,19 +74,18 @@ const Watch = () => {
     transition
     hover:text-blue-800
     "
-      >
-        <BiSkipNext size={25} />
-        Next Episode
-      </button>
-          </div>
+          >
+            <BiSkipNext size={25} />
+            Next Episode
+          </button>
+        </div>
       </div>
-        <iframe
-   
-          id="video"
-          className="pt-16 h-screen w-full"
-          src={`https://multiembed.mov/directstream.php?video_id=${data?.id}&tmdb=1&s=${season}&e=${episode}`}
-          allowFullScreen
-        ></iframe>
+      <iframe
+        id="video"
+        className="pt-16 h-screen w-full"
+        src={`https://multiembed.mov/directstream.php?video_id=${data?.id}&tmdb=1&s=${season}&e=${episode}`}
+        allowFullScreen
+      ></iframe>
     </div>
   )
 }

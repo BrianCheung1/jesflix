@@ -45,28 +45,30 @@ const Search = () => {
   }
   if (isEmpty(results.movies) && isEmpty(results.shows)) {
     return (
-      <div>
+      <div className="flex flex-col h-full">
         <Navbar />
         <div className="flex h-screen items-center justify-center text-white">
           <p>No results please try another query</p>
         </div>
+        <Footer />
       </div>
     )
   }
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <Navbar />
       <InfoModal visible={isOpen} onClose={closeModal} />
       <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-      <div className="flex items-center h-full justify-center pt-5">
+      <div className="pt-5 h-screen">
         <SearchList
           title={`Search results for ${title(
             (query as string).replaceAll("%20", " ")
           )}`}
           data={results}
         />
+        
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

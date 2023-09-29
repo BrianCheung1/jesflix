@@ -147,7 +147,14 @@ const Auth = () => {
       </div>
       <div className="bg-black w-full h-full lg:bg-opacity-50">
         <nav className="md:px-12 md:py-5 lg:justify-normal flex justify-center py-5">
-          <img src="/images/logo.png" alt="Logo" className="h-12" />
+          <div className="cursor-pointer">
+            <img
+              onClick={() => router.push("/")}
+              src="/images/logo.png"
+              alt="Logo"
+              className="h-12"
+            />
+          </div>
         </nav>
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 max-w-md rounded-md w-full">
@@ -298,7 +305,7 @@ const Auth = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
