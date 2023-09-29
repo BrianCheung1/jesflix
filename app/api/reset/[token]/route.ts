@@ -15,7 +15,7 @@ export const POST = async (req: Request) => {
             },
             {
               createdAt: {
-                gt: new Date(Date.now() - 1 * 60 * 60 * 1000), // 24 hours ago
+                gt: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
               },
             },
             {

@@ -18,7 +18,6 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId, type }) => {
   const { data: currentUser, mutate } = useCurrentUser()
   const router = useRouter()
 
-
   const isFavorite = useMemo(() => {
     const list = currentUser?.favoriteMovieIds || []
     const listShows = currentUser?.favoriteShowIds || []
@@ -53,6 +52,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId, type }) => {
       onClick={session ? toggleFavorites : login}
       className={`cursor-pointer group/item w-6 h-6 flex justify-center items-center transition hover:scale-125`}
     >
+
       <AiFillHeart
         className={isFavorite ? `text-red-800` : `text-white`}
         size={25}

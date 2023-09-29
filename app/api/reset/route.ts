@@ -37,11 +37,12 @@ export const POST = async (req: Request) => {
       let info = await transporter.sendMail({
         from: '"Jesflix" ' + process.env.EMAIL_SERVER_USER,
         to: email,
-        subject: "Jesflix Confirmation",
+        subject: "Jesflix Reset Password",
         html: `<p>Reset your account here: <a href=https://jesflix.vercel.app/reset/${token.token}>Click Here</a><p>`,
         //text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
         //html: `<p>Activate your account with this link: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
       })
+      console.log(info)
     } catch (err) {
       console.log("Email (Sign Up) Error", err)
     }
