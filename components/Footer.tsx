@@ -8,10 +8,10 @@ const Footer = () => {
   return (
     <footer className="bg-black rounded-lg shadow dark:bg-gray-900 mt-10">
       <div className="w-full mx-auto p-4 md:py-6">
-        <div className="sm:flex sm:items-center sm:justify-between">
+        <div className="sm:flex sm:items-center sm:justify-center">
           <a
             href="https://jesflix.vercel.app/"
-            className="flex items-center mb-4 sm:mb-0"
+            className="flex items-center justify-center mb-4 sm:mb-0"
           >
             <img src="/images/logo.png" alt="Logo=" className="h-8 mr-3" />
           </a>
