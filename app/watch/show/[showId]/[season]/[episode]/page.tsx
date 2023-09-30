@@ -39,7 +39,7 @@ const Watch = () => {
       if (Number(season) - 1 < 1) {
         return
       }
-      let prev_season = data?.seasons[season-1]
+      let prev_season = data?.seasons[Number(season)-1]
       router.push(
         `/watch/show/${data?.id}/${Number(season) - 1}/${Number(
           prev_season?.episode_count
