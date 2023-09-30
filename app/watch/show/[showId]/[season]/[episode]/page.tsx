@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react"
 import { redirect, useParams, useRouter } from "next/navigation"
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import useShow from "@/hooks/useShow"
-import { BiSkipNext } from "react-icons/bi"
+import { BiSkipNext,BiSkipPrevious } from "react-icons/bi"
 
 const Watch = () => {
   const { data: session } = useSession({
@@ -18,13 +18,35 @@ const Watch = () => {
   const { data, isLoading } = useShow(showId as string)
 
   const load_next_eps = () => {
-    let number_of_seasons = data?.seasons?.filter((season: any) => {
+    let number_of_eps = data?.seasons?.filter((season: any) => {
       return season.season_number >= 1
-    })[Number(season) - 1]
-    if (Number(episode) + 1 > number_of_seasons?.episode_count) {
+    })[Number(season) - 1].episode_count
+    let number_of_seasons2 = data?.seasons?.filter((season: any) => {
+      return season.season_number >= 1
+    }).length
+    if (Number(episode) + 1 > number_of_eps ) {
+      if (Number(season) + 1 > number_of_seasons2) {
+        return
+      }
       router.push(`/watch/show/${data?.id}/${Number(season) + 1}/1`)
     } else {
       router.push(`/watch/show/${data?.id}/${season}/${Number(episode) + 1}`)
+    }
+  }
+
+  const load_prev_eps = () => {
+    if (Number(episode) - 1 < 1) {
+      if (Number(season) - 1 < 1) {
+        return
+      }
+      let prev_season = data?.seasons[season-1]
+      router.push(
+        `/watch/show/${data?.id}/${Number(season) - 1}/${Number(
+          prev_season?.episode_count
+        )}`
+      )
+    } else {
+      router.push(`/watch/show/${data?.id}/${season}/${Number(episode) - 1}`)
     }
   }
 
@@ -56,28 +78,50 @@ const Watch = () => {
             hover:scale-150"
           size={30}
         />
-        <div className="ml-auto">
+        <div className="ml-auto flex gap-2">
+           <button
+            onClick={() => load_prev_eps()}
+            className="bg-white
+            rounded-md
+            py-1
+            px-2
+            md:px-4
+            w-auto
+            text-xs lg:text-lg
+            font-semibold
+            flex
+            flex-row
+            items-center
+            hover:scale-110
+            transition
+            hover:text-blue-800
+            "
+          >
+            <BiSkipPrevious size={25} />
+            Prev Episode
+          </button>
           <button
             onClick={() => load_next_eps()}
             className="bg-white
-    rounded-md
-    py-1
-    px-2
-    md:px-4
-    w-auto
-    text-xs lg:text-lg
-    font-semibold
-    flex
-    flex-row
-    items-center
-    hover:scale-110
-    transition
-    hover:text-blue-800
-    "
+            rounded-md
+            py-1
+            px-2
+            md:px-4
+            w-auto
+            text-xs lg:text-lg
+            font-semibold
+            flex
+            flex-row
+            items-center
+            hover:scale-110
+            transition
+            hover:text-blue-800
+            "
           >
             <BiSkipNext size={25} />
             Next Episode
           </button>
+         
         </div>
       </div>
       <iframe
