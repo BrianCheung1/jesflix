@@ -89,13 +89,23 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return listItems
   }
 
+  const renderCast = () => {
+    const listItems = []
+    const cast = data?.credits?.cast
+    for (let i = 0; i < data?.credits?.cast?.length; i++) {
+      listItems.push(`${cast[i]?.name} as ${cast[i]?.character}`)
+    }
+
+    return listItems.join(", ")
+  }
+
   if (!isVisible) {
     return null
   }
 
   if (isLoading) {
     return (
-      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
+      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex justify-center items-center overflow-y-auto no-scrollbar fixed inset-0">
         <div className="max-w-3xl rounded-md overflow-hidden">
           <div
             className={`${
@@ -123,7 +133,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return (
       <div
         ref={ref}
-        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center fixed inset-0 overflow-y-auto"
+        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center fixed inset-0 overflow-y-auto no-scrollbar"
       >
         <div className="w-full max-w-3xl mx-auto rounded-md">
           <div
@@ -202,10 +212,15 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               </div>
             </div>
             <div className="px-4 py-1 pb-4 ">
-              <p className="text-white md:text-xl text-sm">{data?.overview}</p>
+              <p className="text-white text-lg">{data?.overview}</p>
             </div>
+            
             <div className="px-4 pb-6">
-              <p className="text-white md:text-xl text-sm">{renderGenres()}</p>
+              <p className="text-white text-sm">{renderGenres()}</p>
+            </div>
+            
+            <div className="px-4 pb-6">
+              <p className="text-white text-sm">{renderCast()}</p>
             </div>
           </div>
         </div>

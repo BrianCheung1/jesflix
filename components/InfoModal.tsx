@@ -22,7 +22,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   const handleClose = useCallback(() => {
     setIsVisible(false)
-    
+
     setTimeout(() => {
       onClose()
     }, 300)
@@ -52,13 +52,22 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return genres
   }
 
+  const renderCast = () => {
+    const listItems = []
+    const cast = data?.credits?.cast
+    for (let i = 0; i < data?.credits?.cast?.length; i++) {
+      listItems.push(`${cast[i]?.name} as ${cast[i]?.character}`)
+    }
+
+    return listItems.join(", ")
+  }
   if (!isVisible) {
     return null
   }
 
   if (isLoading) {
     return (
-      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
+      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center  overflow-y-auto no-scrollbar fixed inset-0">
         <div className="max-w-3xl rounded-md overflow-hidden">
           <div
             className={`${
@@ -86,9 +95,9 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return (
       <div
         ref={ref}
-        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-y-auto fixed inset-0"
+        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-y-auto fixed inset-0 no-scrollbar"
       >
-        <div className="w-full mx-auto max-w-3xl rounded-md" >
+        <div className="w-full mx-auto max-w-3xl rounded-md">
           <div
             className={`${
               isVisible ? "scale-100" : "scale-0"
@@ -118,7 +127,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   {data?.title}
                 </p>
                 <p className="text-xs text-neutral-400 font-semibold mb-4">
-                {data?.tagline ? `"${data?.tagline}"` : null}
+                  {data?.tagline ? `"${data?.tagline}"` : null}
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton movieId={data?.id} type="movie" />
@@ -147,10 +156,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               </p>
             </div>
             <div className="px-4 py-1 pb-4">
-              <p className="text-white md:text-xl text-sm">{data?.overview}</p>
+              <p className="text-white text-lg">{data?.overview}</p>
             </div>
             <div className="px-4 pb-6">
-              <p className="text-white md:text-xl text-sm">{renderGenres()}</p>
+              <p className="text-white text-sm">{renderGenres()}</p>
+            </div>
+            <div className="px-4 pb-6">
+              <p className="text-white text-sm">{renderCast()}</p>
             </div>
           </div>
         </div>
