@@ -123,7 +123,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return (
       <div
         ref={ref}
-        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center fixed inset-0 overflow-scroll"
+        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center fixed inset-0 overflow-y-auto"
       >
         <div className="w-full max-w-3xl mx-auto rounded-md">
           <div
@@ -133,7 +133,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
           >
             <div className="relative">
               <video
-                className="brightness-[60%] object-cover h-full"
+                className="brightness-[60%]"
                 autoPlay
                 muted
                 loop

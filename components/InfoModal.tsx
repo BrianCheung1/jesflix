@@ -86,7 +86,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     return (
       <div
         ref={ref}
-        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-scroll fixed inset-0"
+        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-y-auto fixed inset-0"
       >
         <div className="w-full mx-auto max-w-3xl rounded-md" >
           <div
@@ -96,7 +96,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
           >
             <div className="relative">
               <video
-                className="brightness-[60%] object-cover h-full"
+                className="brightness-[60%] "
                 autoPlay
                 muted
                 loop
