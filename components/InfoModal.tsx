@@ -18,10 +18,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible)
   const { movieId } = useMovieInfoModal()
   const { data, isLoading } = useMovie(movieId)
-  const ref = useRef<any>();
+  const ref = useRef<any>()
 
   const handleClose = useCallback(() => {
     setIsVisible(false)
+    
     setTimeout(() => {
       onClose()
     }, 300)
@@ -29,24 +30,24 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   useEffect(() => {
     setIsVisible(!!visible)
-    const handleOutSideClick = (event:any) => {
+    const handleOutSideClick = (event: any) => {
       if (ref.current === event.target) {
         handleClose()
       }
-    };
-    window.addEventListener("mousedown", handleOutSideClick);
+    }
+    window.addEventListener("mousedown", handleOutSideClick)
 
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
-    };
-  }, [visible,ref, handleClose])
-
-
+      window.removeEventListener("mousedown", handleOutSideClick)
+    }
+  }, [visible, ref, handleClose])
 
   const renderGenres = () => {
-    const genres = data?.genres?.map((genre:any)=>{
-      return genre.name
-    }).join(", ")
+    const genres = data?.genres
+      ?.map((genre: any) => {
+        return genre.name
+      })
+      .join(", ")
     console.log(genres)
     return genres
   }
@@ -57,10 +58,12 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   if (isLoading) {
     return (
-      <div className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
+      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
         <div className="max-w-3xl rounded-md overflow-hidden">
           <div
-            className={`${isVisible} ? 'scale-100': 'scale-0' transform duration-300 relative flex bg-zinc-900 drop-shadow-md `}
+            className={`${
+              isVisible ? "scale-100" : "scale-0"
+            } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md `}
           >
             <div className="h-96 w-screen animate-pulse justify-center items-center flex">
               <div
@@ -81,14 +84,15 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     )
   } else {
     return (
-      <div ref={ref} className="z-50 transition duration-30 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-hidden fixed inset-0">
-        <div className="relative w-full mx-auto max-w-3xl rounded-md overflow-hidden">
+      <div
+        ref={ref}
+        className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center overflow-scroll fixed inset-0"
+      >
+        <div className="w-full mx-auto max-w-3xl rounded-md" >
           <div
-            className={
-              isVisible
-                ? "transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md scale-100"
-                : "scale-0"
-            }
+            className={`${
+              isVisible ? "scale-100" : "scale-0"
+            } transform duration-300 flex-auto bg-zinc-900 drop-shadow-md `}
           >
             <div className="relative">
               <video
@@ -114,7 +118,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   {data?.title}
                 </p>
                 <p className="text-xs text-neutral-400 font-semibold mb-4">
-                  {`"${data?.tagline}"`}
+                {data?.tagline ? `"${data?.tagline}"` : null}
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton movieId={data?.id} type="movie" />
@@ -126,13 +130,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               <p className="text-green-400">
                 <BsFillCalendarFill size={15} />
               </p>
-              <p className="text-white font-semibold text-1xl">
+              <p className="text-white font-semibold md:text-xl text-sm">
                 {data?.release_date}
               </p>
               <p className="text-green-400">
                 <AiFillStar size={20} />
               </p>
-              <p className="text-white font-semibold text-1xl">
+              <p className="text-white font-semibold md:text-xl text-sm">
                 {data?.vote_average.toFixed(1)}
               </p>
               <p className="text-green-400">
@@ -142,11 +146,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 {Math.floor(data?.runtime / 60)}h {data?.runtime % 60}m
               </p>
             </div>
-            <div className="px-4 py-4 pb-6">
-              <p className="text-white text-1xl">{data?.overview}</p>
+            <div className="px-4 py-1 pb-4">
+              <p className="text-white md:text-xl text-sm">{data?.overview}</p>
             </div>
             <div className="px-4 pb-6">
-              <p className="text-white text-1xl">{renderGenres()}</p>
+              <p className="text-white md:text-xl text-sm">{renderGenres()}</p>
             </div>
           </div>
         </div>
