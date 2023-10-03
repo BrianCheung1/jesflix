@@ -6,13 +6,20 @@ import Provider from "./Provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Jesflix",
-  description: "Stream Movies and Tv Shows For Free",
+  // title: "Jesflix",
+  // description: "Stream Movies and Tv Shows For Free",
+
   verification: {
     google: "S664YpT-7_myf-ca76-tavenmtnw031bDi4DJipw3Ms",
   },
   openGraph: {
+    title: "Jesflix",
+    description: "Stream Movies and Tv Shows For Free",
     images: "/images/logo.png",
+    url: "https://jesflix.vercel.app/",
+    siteName: "Jesflix",
+    locale: "en_US",
+    type: "website",
   },
 }
 
