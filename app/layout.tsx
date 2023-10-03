@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     google: "S664YpT-7_myf-ca76-tavenmtnw031bDi4DJipw3Ms",
   },
   openGraph: {
-    images: "/images/opengraph-image.png",
+    images: "public/images/opengraph-image.png",
   },
 }
 
@@ -23,10 +23,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <meta property="og:image" content="<generated>" />
-      <meta property="og:image:type" content="<generated>" />
-      <meta property="og:image:width" content="<generated>" />
-      <meta property="og:image:height" content="<generated>" />
       <body className={inter.className}>
         <Provider>{children}</Provider>
       </body>
