@@ -45,9 +45,9 @@ const Favorites = () => {
     )
   }
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <Navbar />
-      <div className="pt-3">
+      <div className="pt-3 flex-1">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <FavoriteList data={favorites} />

@@ -152,12 +152,14 @@ const Shows = () => {
           </button>
         </div>
         <ShowList title="Popular Documentary Shows" data={documentaryShows} />
-        <button
-          onClick={() => setDocumentaryPage(documentaryPage + 1)}
-          className="text-white"
-        >
-          See More
-        </button>
+        <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
+          <button
+            onClick={() => setDocumentaryPage(documentaryPage + 1)}
+            className="text-white"
+          >
+            See More
+          </button>
+        </div>
       </div>
       <ShowList title="Popular Drama Shows" data={dramaShows} />
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">

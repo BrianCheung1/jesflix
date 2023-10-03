@@ -59,7 +59,7 @@ const Search = () => {
       <Navbar />
       <InfoModal visible={isOpen} onClose={closeModal} />
       <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-      <div className="pt-5 h-screen">
+      <div className="pt-5 flex-1">
         <SearchList
           title={`Search results for ${title(
             (query as string).replaceAll("%20", " ")

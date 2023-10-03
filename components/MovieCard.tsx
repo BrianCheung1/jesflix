@@ -20,7 +20,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
   return (
     <div className="group bg-zinc-900 relative">
-      <Image
+      <img
         onClick={() => {
           openModal(data?.id)
         }}
