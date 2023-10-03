@@ -15,12 +15,7 @@ const Movie = () => {
   const { movieId } = useParams()
   const router = useRouter()
   const { data, isLoading } = useMovie(movieId as string)
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/auth")
-    },
-  })
+  const { data: session } = useSession()
 
   const renderGenres = () => {
     const genres = data?.genres
@@ -157,7 +152,7 @@ const Movie = () => {
                 .join(", ")}
             </div>
           </div>
-          
+
           <div className="flex flex-col flex-wrap mx-16 mb-4">
             <div className="mr-32 md:text-3xl text-xl text-slate-400">Cast</div>
             <div className="text-white">{renderCast()}</div>
