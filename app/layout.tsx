@@ -2,20 +2,20 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Provider from "./Provider"
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  // title: "Jesflix",
-  // description: "Stream Movies and Tv Shows For Free",
-
+  title: "Jesflix",
+  description: "Stream Movies and Tv Shows For Free",
   verification: {
     google: "S664YpT-7_myf-ca76-tavenmtnw031bDi4DJipw3Ms",
   },
   openGraph: {
     title: "Jesflix",
     description: "Stream Movies and Tv Shows For Free",
-    images: "/images/logo.png",
+    images: "/images/hero.jpg",
     url: "https://jesflix.vercel.app/",
     siteName: "Jesflix",
     locale: "en_US",
@@ -32,6 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider>{children}</Provider>
+        <Analytics />
       </body>
     </html>
   )
