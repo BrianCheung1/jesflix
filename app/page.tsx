@@ -1,6 +1,5 @@
 "use client"
 import { useSession, signOut } from "next-auth/react"
-import { redirect } from "next/navigation"
 import Navbar from "@/components/Navbar"
 import Billboard from "@/components/Billboard"
 import MovieList from "@/components/MovieList"
@@ -18,7 +17,6 @@ import Footer from "@/components/Footer"
 
 const Home = () => {
   const { data: session } = useSession()
-
   const { data: trendingMovies = [], isLoading } = useTrendingMovieList()
   const { data: trendingShows = [], isLoading: isLoadingShows } =
     useTrendingShowList()

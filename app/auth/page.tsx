@@ -13,7 +13,6 @@ import Footer from "@/components/Footer"
 const Auth = () => {
   const { data: session } = useSession()
   const router = useRouter()
-
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
