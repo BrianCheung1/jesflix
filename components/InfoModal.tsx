@@ -9,6 +9,7 @@ import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
 import { BiSolidTimeFive } from "react-icons/bi"
 import ShareButton from "./ShareButton"
+import InfoButton from "./InfoButton"
 
 interface InfoModalProps {
   visible?: boolean
@@ -124,6 +125,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   <PlayButton movieId={data?.id} type="movie" />
                   <FavoriteButton movieId={data?.id} type="movie" />
                   <ShareButton movieId={data?.id} type="movie" />
+                  <InfoButton movieId={data?.id} type="movie" />
                 </div>
               </div>
             </div>

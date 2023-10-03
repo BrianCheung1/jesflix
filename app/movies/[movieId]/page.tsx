@@ -64,7 +64,7 @@ const Movie = () => {
       <div className="bg-black bg-opacity-50">
         <Navbar />
         <div className="h-full w-full flex items-center justify-start pt-32">
-          <div className="flex flex-col mx-16 gap-4 w-1/2">
+          <div className="flex flex-col mx-16 gap-4 lg:w-1/3 w-w-5/6">
             <p className="text-white text-4xl md:text-6xl h-full lg:text-8xl font-bold drop-shadow-xl ">
               {data?.title}
               <p className="text-xs text-neutral-400 font-semibold mb-4">
@@ -103,10 +103,10 @@ const Movie = () => {
                 </p>
               </div>
             </div>
-            <div className="flex text-white h-96">{data?.overview}</div>
+            <div className="flex text-white h-auto pb-44">{data?.overview}</div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
           <div className="flex flex-col flex-wrap mx-16 mb-4">
             <div className="mr-32 md:text-3xl text-xl text-slate-400">
               Genre

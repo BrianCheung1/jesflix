@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai"
-
 import PlayButton from "./PlayButton"
 import FavoriteButton from "./FavoriteButton"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
@@ -8,6 +7,7 @@ import useShow from "@/hooks/useShow"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
 import ShareButton from "./ShareButton"
+import InfoButton from "./InfoButton"
 
 interface InfoModalProps {
   visible?: boolean
@@ -38,9 +38,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
         handleClose()
       }
     }
-
     window.addEventListener("mousedown", handleOutSideClick)
-
     return () => {
       window.removeEventListener("mousedown", handleOutSideClick)
     }
@@ -88,16 +86,6 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
       )
     }
     return listItems
-  }
-
-  const renderCast = () => {
-    const listItems = []
-    const cast = data?.credits?.cast
-    for (let i = 0; i < data?.credits?.cast?.length; i++) {
-      listItems.push(`${cast[i]?.name} as ${cast[i]?.character}`)
-    }
-
-    return listItems.join(", ")
   }
 
   if (!isVisible) {
@@ -176,6 +164,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   />
                   <FavoriteButton movieId={data?.id} type="show" />
                   <ShareButton movieId={data?.id} type="show" />
+                  <InfoButton movieId={data?.id} type="show" />
                 </div>
               </div>
             </div>
@@ -216,11 +205,10 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             <div className="px-4 py-1 pb-4 ">
               <p className="text-white text-lg">{data?.overview}</p>
             </div>
-            
+
             <div className="px-4 pb-6">
               <p className="text-white text-sm">{renderGenres()}</p>
             </div>
-          
           </div>
         </div>
       </div>

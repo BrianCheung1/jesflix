@@ -1,6 +1,6 @@
 "use client"
 import { useSession } from "next-auth/react"
-import { redirect, useRouter, useParams } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import useShow from "@/hooks/useShow"
@@ -8,19 +8,15 @@ import PlayButton from "@/components/PlayButton"
 import FavoriteButton from "@/components/FavoriteButton"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
-import { BiSolidTimeFive } from "react-icons/bi"
 import ShareButton from "@/components/ShareButton"
+import { useState } from "react"
 
 const Show = () => {
   const { showId } = useParams()
-  const router = useRouter()
+  const [season, setSeason] = useState(0)
+  const [episode, setEpisode] = useState(0)
   const { data, isLoading } = useShow(showId as string)
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/auth")
-    },
-  })
+  const { data: session } = useSession()
 
   const renderGenres = () => {
     const genres = data?.genres
@@ -41,6 +37,42 @@ const Show = () => {
 
     return listItems.join(", ")
   }
+
+  const handleEpisodeChange = (e: any) => {
+    setEpisode(Number(e.target.value))
+  }
+
+  const handleSeasonsChange = (e: any) => {
+    setSeason(Number(e.target.value))
+  }
+
+  const renderSeasons = () => {
+    const listItems = []
+    for (let i = 0; i < data?.number_of_seasons; i++) {
+      listItems.push(
+        <option className="block py-2 px-4 hover:bg-gray-100" value={i}>
+          Season {i + 1}
+        </option>
+      )
+    }
+    return listItems
+  }
+
+  const renderEpisodes = () => {
+    const listItems = []
+    const seasons = data?.seasons.filter((season: any) => {
+      return season.season_number >= 1
+    })
+    for (let i = 0; i < seasons[season]?.episode_count; i++) {
+      listItems.push(
+        <option className="block py-2 px-4 hover:bg-gray-100" value={i}>
+          Episode {i + 1}
+        </option>
+      )
+    }
+    return listItems
+  }
+
   if (isLoading) {
     return (
       <div className="animate-pulse text-white w-full h-full flex justify-center items-center ">
@@ -63,8 +95,8 @@ const Show = () => {
     >
       <div className="bg-black bg-opacity-50">
         <Navbar />
-        <div className="h-full w-full  flex items-center justify-start pt-32">
-          <div className="flex flex-col mx-16 gap-4 w-1/3">
+        <div className="h-full w-full flex items-center justify-start pt-32">
+          <div className="flex flex-col mx-16 gap-4 lg:w-1/3 w-5/6">
             <p className="text-white text-4xl md:text-6xl h-full lg:text-8xl font-bold drop-shadow-xl ">
               {data?.name}
               <p className="text-xs text-neutral-400 font-semibold mb-4">
@@ -72,11 +104,37 @@ const Show = () => {
               </p>
             </p>
             <div className="flex items-center gap-4">
-              <PlayButton movieId={data?.id} type="movie" />
-              <FavoriteButton movieId={data?.id} type="movie" />
-              <ShareButton movieId={data?.id} type="movie" />
+              <PlayButton
+                movieId={data?.id}
+                type="show"
+                episode={episode + 1}
+                season={season + 1}
+              />
+              <FavoriteButton movieId={data?.id} type="show" />
+              <ShareButton movieId={data?.id} type="show" />
             </div>
-
+            <div className="flex flex-wrap items-center gap-4">
+              <div>
+                <select
+                  onChange={handleSeasonsChange}
+                  id="Seasons"
+                  className="text-white bg-neutral-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
+                >
+                  <option selected>Choose a season</option>
+                  {renderSeasons()}
+                </select>
+              </div>
+              <div>
+                <select
+                  onChange={handleEpisodeChange}
+                  id="Episodes"
+                  className="text-white bg-neutral-700 rounded-lg text-sm px-2 py-1 text-center flex items-center"
+                >
+                  <option selected>Choose an episode</option>
+                  {renderEpisodes()}
+                </select>
+              </div>
+            </div>
             <div className="flex flex-wrap gap-2">
               <div className="flex items-center gap-2">
                 <p className="text-green-400">
@@ -95,10 +153,10 @@ const Show = () => {
                 </p>
               </div>
             </div>
-            <div className="flex text-white h-96">{data?.overview}</div>
+            <div className="flex text-white h-auto pb-44">{data?.overview}</div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
           <div className="flex flex-col flex-wrap mx-16 mb-4">
             <div className="mr-32 md:text-3xl text-xl text-slate-400">
               Genre

@@ -37,7 +37,7 @@ const Watch = () => {
         gap-8 bg-black bg-opacity-70"
       >
         <AiOutlineArrowLeft
-          onClick={() => router.push("/")}
+          onClick={() => router.back()}
           className="text-white cursor-pointer"
           size={30}
         />
