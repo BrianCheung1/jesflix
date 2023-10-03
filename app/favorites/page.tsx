@@ -36,11 +36,12 @@ const Favorites = () => {
   }
   if (isEmpty(favorites.movies) && isEmpty(favorites.shows)) {
     return (
-      <div>
+      <div className="flex flex-col h-full">
         <Navbar />
-        <div className="flex h-screen items-center justify-center text-white">
+        <div className="flex flex-1 h-full items-center justify-center text-white">
           <p>Nothing on your list</p>
         </div>
+        <Footer />
       </div>
     )
   }

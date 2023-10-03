@@ -43,17 +43,17 @@ const ShowList: React.FC<ShowListProps> = ({ data, title }) => {
   }
   if (isEmpty(data)) {
     return (
-      // <div className="px-4 md:px-12 space-y-8">
-      //   <div>
-      //     <p className="text-white text-2xl md:text-3xl font-bold mb-4 pt-10">
-      //     Loading...
-      //     </p>
-      //     <div className="grid lg:grid-cols-5 md:grid-cols-4 gap-2 grid-cols-2">
-      //       {emptyData()}
-      //     </div>
-      //   </div>
-      // </div>
-      null
+      <div className="px-4 md:px-12 space-y-8">
+        <div>
+          <p className="text-white text-2xl md:text-3xl font-bold mb-4 pt-10">
+          Loading...
+          </p>
+          <div className="grid lg:grid-cols-5 md:grid-cols-4 gap-2 grid-cols-2">
+            {emptyData()}
+          </div>
+        </div>
+      </div>
+      // null
     )
   }
   return (
