@@ -1,9 +1,12 @@
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 import prismadb from "@/libs/prismadb"
-import { randomUUID } from "crypto"
 import nodemailer from "nodemailer"
 
+
+//saves users credentials to database
+//checks if email already exists if not successfully saves
+//and sends a confirmation email
 export const POST = async (req: Request) => {
   try {
     const { name, email, password } = await req.json()

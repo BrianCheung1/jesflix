@@ -3,6 +3,9 @@ import { authOptions } from "../../auth/[...nextauth]/route"
 import { NextResponse } from "next/server"
 import axios from "axios"
 
+
+//Searchs movies and tv shows based on the keywords given
+//returns an object of arrays of movies and tv shows
 export async function GET(
   req: Request,
   { params }: { params: { query: string } }

@@ -4,6 +4,8 @@ import { NextResponse } from "next/server"
 import { without } from "lodash"
 import prismadb from "@/libs/prismadb"
 
+//Saves movies and tv shows to the database
+//If not logged in, redirects to sign in
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
   if (session) {
@@ -44,6 +46,8 @@ export async function POST(req: Request) {
     return NextResponse.redirect("/api/auth/signin")
   }
 }
+
+//Deletes movies and tv shows from database of the current user
 export async function DELETE(req: Request, res: Response) {
   const session = await getServerSession(authOptions)
   if (session) {

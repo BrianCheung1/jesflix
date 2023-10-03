@@ -4,6 +4,8 @@ import prismadb from "@/libs/prismadb"
 import { NextResponse } from "next/server"
 import axios, { AxiosResponse } from "axios"
 
+//Returns current users favorite movies and shows
+//Returns as an object of arrays
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions)
   if (session) {

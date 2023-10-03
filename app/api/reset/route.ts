@@ -4,6 +4,8 @@ import prismadb from "@/libs/prismadb"
 import { randomUUID } from "crypto"
 import nodemailer from "nodemailer"
 
+//checks to see if user email is in the database
+//if in the database will send a reset email with reset token
 export const POST = async (req: Request) => {
   try {
     const { resetEmail: email } = await req.json()
@@ -39,8 +41,6 @@ export const POST = async (req: Request) => {
         to: email,
         subject: "Jesflix Reset Password",
         html: `<p>Reset your account here: <a href=https://jesflix.vercel.app/reset/${token.token}>Click Here</a><p>`,
-        //text: `https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}`,
-        //html: `<p>Activate your account with this link: <a href=https://netflix-clone-tau-murex.vercel.app/api/activate/${token.token}> Click Here </a> </p>`,
       })
       console.log(info)
     } catch (err) {

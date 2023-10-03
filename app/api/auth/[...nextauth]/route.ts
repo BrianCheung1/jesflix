@@ -6,6 +6,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { compare } from "bcrypt"
 import prismadb from "@/libs/prismadb"
 
+//Different Login options for the user
+//Github, Google, Email+Password
 export const authOptions: AuthOptions = {
   providers: [
     GithubProvider({
@@ -43,13 +45,6 @@ export const authOptions: AuthOptions = {
         if (!user || !user.hashedPassword) {
           throw new Error("Email does not exist")
         }
-
-        // if (!user.active) {
-        //   throw new Error(
-        //     JSON.stringify({ errors: "User not active", status: false })
-        //   )
-        // }
-
         const isCorrectPassword = await compare(
           credentials.password,
           user.hashedPassword

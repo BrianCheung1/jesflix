@@ -1,6 +1,5 @@
 import NavbarItem from "./NavbarItem"
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs"
-import MobileMenu from "./MobileMenu"
 import { useCallback, useState, useEffect } from "react"
 import AccountMenu from "./AccountMenu"
 import { useRouter } from "next/navigation"

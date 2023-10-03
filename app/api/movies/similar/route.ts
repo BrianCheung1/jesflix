@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 import prismadb from "@/libs/prismadb"
 
+//returns movies based on similarity
+//returns as a object of arrays 
+//the similaritys are based on a list of genre of chosen movie from user favorites
 export async function GET(
   req: Request,
   { params }: { params: { movieId: string } }

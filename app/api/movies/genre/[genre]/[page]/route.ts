@@ -3,6 +3,10 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { NextResponse } from "next/server"
 import axios from "axios"
 
+
+//returns popular movies based on genre
+//based on the paramaters given
+//sorted by popularity in descending order
 export async function GET(
   req: Request,
   { params }: { params: { page: string; genre: string } }

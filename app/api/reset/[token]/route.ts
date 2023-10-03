@@ -3,6 +3,8 @@ import { redirect, useParams } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcrypt"
 
+//if token given is undefined and created within an hour
+//allows the users to reset their password
 export const POST = async (req: Request) => {
   const { resetPassword: password, token } = await req.json()
   const user = await prismadb.user.findFirst({

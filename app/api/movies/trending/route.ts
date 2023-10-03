@@ -3,6 +3,7 @@ import { authOptions } from "../../auth/[...nextauth]/route"
 import { NextResponse } from "next/server"
 import axios from "axios"
 
+//returns trending movies based on the time frame of a day
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions)
   

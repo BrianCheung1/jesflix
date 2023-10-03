@@ -3,6 +3,10 @@ import { authOptions } from "../auth/[...nextauth]/route"
 import { NextResponse } from "next/server"
 import axios from "axios"
 
+
+//takes a list of popular movies
+//chooses a random movie from that list
+//videos is appended in addition to the details of the movie chosen
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions)
 

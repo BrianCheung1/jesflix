@@ -3,6 +3,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { getServerSession } from "next-auth"
 import axios from "axios"
 
+//Returns the details of a specific movie
+//credits and videos are appended to the API
 export async function GET(
   req: Request,
   { params }: { params: { movieId: string } }
