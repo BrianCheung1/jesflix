@@ -8,6 +8,7 @@ import useMovie from "@/hooks/useMovie"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
 import { BiSolidTimeFive } from "react-icons/bi"
+import ShareButton from "./ShareButton"
 
 interface InfoModalProps {
   visible?: boolean
@@ -50,16 +51,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
       .join(", ")
     console.log(genres)
     return genres
-  }
-
-  const renderCast = () => {
-    const listItems = []
-    const cast = data?.credits?.cast
-    for (let i = 0; i < data?.credits?.cast?.length; i++) {
-      listItems.push(`${cast[i]?.name} as ${cast[i]?.character}`)
-    }
-
-    return listItems.join(", ")
   }
   if (!isVisible) {
     return null
@@ -132,6 +123,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton movieId={data?.id} type="movie" />
                   <FavoriteButton movieId={data?.id} type="movie" />
+                  <ShareButton movieId={data?.id} type="movie" />
                 </div>
               </div>
             </div>
@@ -160,9 +152,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             </div>
             <div className="px-4 pb-6">
               <p className="text-white text-sm">{renderGenres()}</p>
-            </div>
-            <div className="px-4 pb-6">
-              <p className="text-white text-sm">{renderCast()}</p>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import useInfoModal from "@/hooks/useMovieInfoModal"
 import { BiChevronDown } from "react-icons/bi"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
+import ShareButton from "./ShareButton"
 
 interface MovieCardProps {
   data: Record<string, any>
@@ -42,6 +43,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             <BsFillPlayFill size={30} />
           </div>
           <FavoriteButton movieId={data?.id} type="movie" />
+          <ShareButton movieId={data?.id} type="movie" />
           <div
             onClick={() => {
               openModal(data?.id)

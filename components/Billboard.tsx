@@ -4,6 +4,7 @@ import React, { useCallback } from "react"
 import { AiOutlineInfoCircle } from "react-icons/ai"
 import PlayButton from "./PlayButton"
 import useInfoModal from "@/hooks/useMovieInfoModal"
+import ShareButton from "./ShareButton"
 const Billboard = () => {
   const { data, isLoading } = useBillboard()
   const { openModal } = useInfoModal()
@@ -55,6 +56,7 @@ const Billboard = () => {
             <AiOutlineInfoCircle className="mr-1 " size={20} />
             More Info
           </button>
+          <ShareButton movieId={data?.id} type="movie" />
         </div>
       </div>
     </div>

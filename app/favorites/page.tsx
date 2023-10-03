@@ -52,7 +52,7 @@ const Favorites = () => {
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
         <FavoriteList data={favorites} />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

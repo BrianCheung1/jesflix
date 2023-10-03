@@ -50,7 +50,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId, type }) => {
   return (
     <div
       onClick={session ? toggleFavorites : login}
-      className={`cursor-pointer group/item w-6 h-6 flex justify-center items-center transition hover:scale-125`}
+      className={`cursor-pointer group/item w-6 h-6 flex justify-center items-center transition hover:scale-110`}
     >
 
       <AiFillHeart

@@ -1,92 +1,92 @@
-"use client";
-import { useState } from "react";
-import MovieList from "@/components/MovieList";
-import { useSession } from "next-auth/react";
-import { redirect, useRouter, useParams } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import InfoModal from "@/components/InfoModal";
-import ShowInfoModal from "@/components/ShowInfoModal";
-import useInfoModal from "@/hooks/useMovieInfoModal";
-import useShowInfoModal from "@/hooks/useShowInfoModal";
-import useTrendingMovieList from "@/hooks/useTrendingMovieList";
-import useGenreMovieList from "@/hooks/useGenreMovieList";
-import Footer from "@/components/Footer";
+"use client"
+import { useState } from "react"
+import MovieList from "@/components/MovieList"
+import { useSession } from "next-auth/react"
+import { redirect, useRouter, useParams } from "next/navigation"
+import Navbar from "@/components/Navbar"
+import InfoModal from "@/components/InfoModal"
+import ShowInfoModal from "@/components/ShowInfoModal"
+import useInfoModal from "@/hooks/useMovieInfoModal"
+import useShowInfoModal from "@/hooks/useShowInfoModal"
+import useTrendingMovieList from "@/hooks/useTrendingMovieList"
+import useGenreMovieList from "@/hooks/useGenreMovieList"
+import Footer from "@/components/Footer"
 
 const Movies = () => {
-  const [actionPage, setActionPage] = useState(1);
-  const [adventurePage, setAdventurePage] = useState(1);
-  const [animationPage, setAnimationPage] = useState(1);
-  const [comedyPage, setComedyPage] = useState(1);
-  const [crimePage, setCrimePage] = useState(1);
-  const [documentaryPage, setDocumentaryPage] = useState(1);
-  const [dramaPage, setDramaPage] = useState(1);
-  const [familyPage, setFamilyPage] = useState(1);
-  const [fantasyPage, setFantasyPage] = useState(1);
-  const [historyPage, setHistoryPage] = useState(1);
-  const [horrorPage, setHorrorPage] = useState(1);
-  const [musicPage, setMusicPage] = useState(1);
-  const [mysteryPage, setMysteryPage] = useState(1);
-  const [romancePage, setRomancePage] = useState(1);
-  const [scifiPage, setScifiPage] = useState(1);
-  const [thrillerPage, setThrillerPage] = useState(1);
-  const [warPage, setWarPage] = useState(1);
-  const [westernPage, setWesternPage] = useState(1);
+  const [actionPage, setActionPage] = useState(1)
+  const [adventurePage, setAdventurePage] = useState(1)
+  const [animationPage, setAnimationPage] = useState(1)
+  const [comedyPage, setComedyPage] = useState(1)
+  const [crimePage, setCrimePage] = useState(1)
+  const [documentaryPage, setDocumentaryPage] = useState(1)
+  const [dramaPage, setDramaPage] = useState(1)
+  const [familyPage, setFamilyPage] = useState(1)
+  const [fantasyPage, setFantasyPage] = useState(1)
+  const [historyPage, setHistoryPage] = useState(1)
+  const [horrorPage, setHorrorPage] = useState(1)
+  const [musicPage, setMusicPage] = useState(1)
+  const [mysteryPage, setMysteryPage] = useState(1)
+  const [romancePage, setRomancePage] = useState(1)
+  const [scifiPage, setScifiPage] = useState(1)
+  const [thrillerPage, setThrillerPage] = useState(1)
+  const [warPage, setWarPage] = useState(1)
+  const [westernPage, setWesternPage] = useState(1)
 
-  const { data: trendingMovies = [], isLoading } = useTrendingMovieList();
+  const { data: trendingMovies = [], isLoading } = useTrendingMovieList()
   const { data: actionMovies = [], isLoading: actionLoading } =
-    useGenreMovieList("28", String(actionPage));
+    useGenreMovieList("28", String(actionPage))
   const { data: adventureMovies = [], isLoading: adventureLoading } =
-    useGenreMovieList("12", String(adventurePage));
+    useGenreMovieList("12", String(adventurePage))
   const { data: animationMovies = [], isLoading: animationLoading } =
-    useGenreMovieList("16", String(animationPage));
+    useGenreMovieList("16", String(animationPage))
   const { data: comedyMovies = [], isLoading: comedyLoading } =
-    useGenreMovieList("35", String(comedyPage));
+    useGenreMovieList("35", String(comedyPage))
   const { data: crimeMovies = [], isLoading: crimeLoading } = useGenreMovieList(
     "80",
     String(crimePage)
-  );
+  )
   const { data: documentaryMovies = [], isLoading: documentaryLoading } =
-    useGenreMovieList("99", String(documentaryPage));
+    useGenreMovieList("99", String(documentaryPage))
   const { data: dramaMovies = [], isLoading: dramaLoading } = useGenreMovieList(
     "18",
     String(dramaPage)
-  );
+  )
   const { data: familyMovies = [], isLoading: familyLoading } =
-    useGenreMovieList("10751", String(familyPage));
+    useGenreMovieList("10751", String(familyPage))
   const { data: fantasyMovies = [], isLoading: fantasyLoading } =
-    useGenreMovieList("14", String(fantasyPage));
+    useGenreMovieList("14", String(fantasyPage))
   const { data: historyMovies = [], isLoading: historyLoading } =
-    useGenreMovieList("36", String(historyPage));
+    useGenreMovieList("36", String(historyPage))
   const { data: horrorMovies = [], isLoading: horrorLoading } =
-    useGenreMovieList("27", String(horrorPage));
+    useGenreMovieList("27", String(horrorPage))
   const { data: musicMovies = [], isLoading: musicLoading } = useGenreMovieList(
     "10402",
     String(musicPage)
-  );
+  )
   const { data: mysteryMovies = [], isLoading: mysteryLoading } =
-    useGenreMovieList("9648", String(mysteryPage));
+    useGenreMovieList("9648", String(mysteryPage))
   const { data: romanceMovies = [], isLoading: romanceLoading } =
-    useGenreMovieList("10749", String(romancePage));
+    useGenreMovieList("10749", String(romancePage))
   const { data: scifiMovies = [], isLoading: scifiLoading } = useGenreMovieList(
     "878",
     String(scifiPage)
-  );
+  )
   const { data: thrillerMovies = [], isLoading: thrillerLoading } =
-    useGenreMovieList("53", String(thrillerPage));
+    useGenreMovieList("53", String(thrillerPage))
   const { data: warMovies = [], isLoading: warLoading } = useGenreMovieList(
     "10752",
     String(warPage)
-  );
+  )
   const { data: westernMovies = [], isLoading: westernLoading } =
-    useGenreMovieList("37", String(westernPage));
-  const { isOpen, closeModal } = useInfoModal();
-  const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal();
+    useGenreMovieList("37", String(westernPage))
+  const { isOpen, closeModal } = useInfoModal()
+  const { isOpen: isOpenShow, closeModal: closeModalShow } = useShowInfoModal()
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/auth");
+      redirect("/auth")
     },
-  });
+  })
 
   if (isLoading) {
     return (
@@ -99,7 +99,7 @@ const Movies = () => {
           <span className="sr-only">Loading...</span>
         </div>
       </div>
-    );
+    )
   }
   return (
     <div>
@@ -157,7 +157,7 @@ const Movies = () => {
           title="Popular Documentary Movies"
           data={documentaryMovies}
         />
-                <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
+        <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setDocumentaryPage(documentaryPage + 1)}
             className="text-white"
@@ -274,9 +274,9 @@ const Movies = () => {
           </button>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Movies;
+export default Movies

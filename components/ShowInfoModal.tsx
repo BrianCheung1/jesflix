@@ -7,6 +7,7 @@ import useShowInfoModal from "@/hooks/useShowInfoModal"
 import useShow from "@/hooks/useShow"
 import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
+import ShareButton from "./ShareButton"
 
 interface InfoModalProps {
   visible?: boolean
@@ -174,6 +175,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                     season={season + 1}
                   />
                   <FavoriteButton movieId={data?.id} type="show" />
+                  <ShareButton movieId={data?.id} type="show" />
                 </div>
               </div>
             </div>
@@ -218,10 +220,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             <div className="px-4 pb-6">
               <p className="text-white text-sm">{renderGenres()}</p>
             </div>
-            
-            <div className="px-4 pb-6">
-              <p className="text-white text-sm">{renderCast()}</p>
-            </div>
+          
           </div>
         </div>
       </div>
