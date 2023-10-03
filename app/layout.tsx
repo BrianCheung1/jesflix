@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     google: "S664YpT-7_myf-ca76-tavenmtnw031bDi4DJipw3Ms",
   },
   openGraph: {
-    images: "public/images/opengraph-image.png",
+    images: "/images/logo.png",
   },
 }
 
