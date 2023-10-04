@@ -43,10 +43,18 @@ const Shows = () => {
       <div className="pt-10">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-        <MovieList title="Top Rated Movies " data={data} />
-        <ShowList title="Top Rated Shows" data={topShows} />
+        <MovieList
+          title="Top Rated Movies "
+          data={data}
+          isLoading={isLoading}
+        />
+        <ShowList
+          title="Top Rated Shows"
+          data={topShows}
+          isLoading={showsLoading}
+        />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
