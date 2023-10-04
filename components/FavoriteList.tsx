@@ -33,8 +33,16 @@ const FavoriteList: React.FC<FavoriteListProps> = ({ data }) => {
           onChange={(e) => setFilter(e.target.value)}
         />
       </form>
-      <MovieList title="Movies" data={filteredMovies.toReversed()} />
-      <ShowList title="Shows" data={filteredShows.toReversed()} />
+      <MovieList
+        title="Movies"
+        data={filteredMovies.toReversed()}
+        isLoading={false}
+      />
+      <ShowList
+        title="Shows"
+        data={filteredShows.toReversed()}
+        isLoading={false}
+      />
     </div>
   )
 }
