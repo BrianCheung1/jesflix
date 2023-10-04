@@ -24,9 +24,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         onClick={() => {
           openModal(data?.id)
         }}
+        loading="lazy"
         placeholder = "data:image/poster-placeholder.png"
-        width={500}
-        height={800}
         className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-5/6"
         src={
           data?.poster_path

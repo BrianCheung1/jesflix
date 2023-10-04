@@ -7,9 +7,11 @@ import { BiChevronDown } from "react-icons/bi"
 interface ShowListProps {
   data: Record<string, any>[]
   title: string
+  isLoading: boolean
 }
 
-const ShowList: React.FC<ShowListProps> = ({ data, title }) => {
+const ShowList: React.FC<ShowListProps> = ({ data, title, isLoading }) => {
+  console.log(isLoading)
   const emptyData = () => {
     let listItems = []
     for (let i = 0; i < 20; i++) {
@@ -41,21 +43,24 @@ const ShowList: React.FC<ShowListProps> = ({ data, title }) => {
     }
     return listItems
   }
-  if (isEmpty(data)) {
+  if (isLoading) {
     return (
       <div className="px-4 md:px-12 space-y-8">
         <div>
           <p className="text-white text-2xl md:text-3xl font-bold mb-4 pt-10">
-          Loading...
+            Loading...
           </p>
           <div className="grid lg:grid-cols-5 md:grid-cols-4 gap-2 grid-cols-2">
             {emptyData()}
           </div>
         </div>
       </div>
-      // null
     )
   }
+  if (isEmpty(data)) {
+    return null
+  }
+
   return (
     <div className="px-4 md:px-12 space-y-8">
       <div>

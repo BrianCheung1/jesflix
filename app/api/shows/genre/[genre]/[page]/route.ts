@@ -31,4 +31,5 @@ export async function GET(
       return NextResponse.json(error);
     }
   }
+  return NextResponse.json({ message: "error", success: false });
 }

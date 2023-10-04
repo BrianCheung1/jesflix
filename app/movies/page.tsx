@@ -107,8 +107,16 @@ const Movies = () => {
       <div className="pt-10">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-        <MovieList title="Trending Movies Today" data={trendingMovies} />
-        <MovieList title="Popular Action Movies" data={actionMovies} />
+        <MovieList
+          title="Trending Movies Today"
+          data={trendingMovies}
+          isLoading={isLoading}
+        />
+        <MovieList
+          title="Popular Action Movies"
+          data={actionMovies}
+          isLoading={actionLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setActionPage(actionPage + 1)}
@@ -117,7 +125,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Adventure Movies" data={adventureMovies} />
+        <MovieList
+          title="Popular Adventure Movies"
+          data={adventureMovies}
+          isLoading={adventureLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setAdventurePage(adventurePage + 1)}
@@ -126,7 +138,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Animation Movies" data={animationMovies} />
+        <MovieList
+          title="Popular Animation Movies"
+          data={animationMovies}
+          isLoading={animationLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setAnimationPage(animationPage + 1)}
@@ -135,7 +151,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Comedy Movies" data={comedyMovies} />
+        <MovieList
+          title="Popular Comedy Movies"
+          data={comedyMovies}
+          isLoading={comedyLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setComedyPage(comedyPage + 1)}
@@ -144,7 +164,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Crime Movies" data={crimeMovies} />
+        <MovieList
+          title="Popular Crime Movies"
+          data={crimeMovies}
+          isLoading={crimeLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setCrimePage(crimePage + 1)}
@@ -156,6 +180,7 @@ const Movies = () => {
         <MovieList
           title="Popular Documentary Movies"
           data={documentaryMovies}
+          isLoading={documentaryLoading}
         />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
@@ -165,7 +190,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Drama Movies" data={dramaMovies} />
+        <MovieList
+          title="Popular Drama Movies"
+          data={dramaMovies}
+          isLoading={dramaLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setDramaPage(dramaPage + 1)}
@@ -174,7 +203,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Family Movies" data={familyMovies} />
+        <MovieList
+          title="Popular Family Movies"
+          data={familyMovies}
+          isLoading={familyLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setFamilyPage(familyPage + 1)}
@@ -183,7 +216,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Fantasy Movies" data={fantasyMovies} />
+        <MovieList
+          title="Popular Fantasy Movies"
+          data={fantasyMovies}
+          isLoading={fantasyLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setFantasyPage(fantasyPage + 1)}
@@ -192,7 +229,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular History Movies" data={historyMovies} />
+        <MovieList
+          title="Popular History Movies"
+          data={historyMovies}
+          isLoading={historyLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setHistoryPage(historyPage + 1)}
@@ -201,7 +242,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Horror Movies" data={horrorMovies} />
+        <MovieList
+          title="Popular Horror Movies"
+          data={horrorMovies}
+          isLoading={historyLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setHorrorPage(horrorPage + 1)}
@@ -210,7 +255,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Music Movies" data={musicMovies} />
+        <MovieList
+          title="Popular Music Movies"
+          data={musicMovies}
+          isLoading={musicLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setMusicPage(musicPage + 1)}
@@ -219,7 +268,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Mystery Movies" data={mysteryMovies} />
+        <MovieList
+          title="Popular Mystery Movies"
+          data={mysteryMovies}
+          isLoading={mysteryLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setMysteryPage(mysteryPage + 1)}
@@ -228,7 +281,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Romance Movies" data={romanceMovies} />
+        <MovieList
+          title="Popular Romance Movies"
+          data={romanceMovies}
+          isLoading={romanceLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setRomancePage(romancePage + 1)}
@@ -237,7 +294,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Sci-Fi Movies" data={scifiMovies} />
+        <MovieList
+          title="Popular Sci-Fi Movies"
+          data={scifiMovies}
+          isLoading={scifiLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setScifiPage(scifiPage + 1)}
@@ -246,7 +307,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Thriller Movies" data={thrillerMovies} />
+        <MovieList
+          title="Popular Thriller Movies"
+          data={thrillerMovies}
+          isLoading={thrillerLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setThrillerPage(thrillerPage + 1)}
@@ -255,7 +320,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular War Movies" data={warMovies} />
+        <MovieList
+          title="Popular War Movies"
+          data={warMovies}
+          isLoading={warLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setWarPage(warPage + 1)}
@@ -264,7 +333,11 @@ const Movies = () => {
             See More
           </button>
         </div>
-        <MovieList title="Popular Western Movies" data={westernMovies} />
+        <MovieList
+          title="Popular Western Movies"
+          data={westernMovies}
+          isLoading={westernLoading}
+        />
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setWesternPage(westernPage + 1)}

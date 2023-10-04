@@ -114,8 +114,8 @@ const Shows = () => {
       <div className="pt-10">
         <InfoModal visible={isOpen} onClose={closeModal} />
         <ShowInfoModal visible={isOpenShow} onClose={closeModalShow} />
-        <ShowList title="Trending Shows Today" data={trendingShows} />
-        <ShowList title="Popular Action & Adventure Shows" data={actionShows} />
+        <ShowList title="Trending Shows Today" data={trendingShows} isLoading={isLoading}/>
+        <ShowList title="Popular Action & Adventure Shows" data={actionShows} isLoading={actionLoading}/>
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setActionPage(actionPage + 1)}
@@ -124,7 +124,7 @@ const Shows = () => {
             See More
           </button>
         </div>
-        <ShowList title="Popular Animation Shows" data={animationShows} />
+        <ShowList title="Popular Animation Shows" data={animationShows} isLoading={animationLoading}/>
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setAnimationPage(animationPage + 1)}
@@ -133,7 +133,7 @@ const Shows = () => {
             See More
           </button>
         </div>
-        <ShowList title="Popular Comedy Shows" data={comedyShows} />
+        <ShowList title="Popular Comedy Shows" data={comedyShows} isLoading={comedyLoading}/>
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setComedyPage(comedyPage + 1)}
@@ -142,7 +142,7 @@ const Shows = () => {
             See More
           </button>
         </div>
-        <ShowList title="Popular Crime Shows" data={crimeShows} />
+        <ShowList title="Popular Crime Shows" data={crimeShows} isLoading={crimeLoading}/>
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setCrimePage(crimePage + 1)}
@@ -151,7 +151,7 @@ const Shows = () => {
             See More
           </button>
         </div>
-        <ShowList title="Popular Documentary Shows" data={documentaryShows} />
+        <ShowList title="Popular Documentary Shows" data={documentaryShows} isLoading={documentaryLoading}/>
         <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
           <button
             onClick={() => setDocumentaryPage(documentaryPage + 1)}
@@ -161,7 +161,7 @@ const Shows = () => {
           </button>
         </div>
       </div>
-      <ShowList title="Popular Drama Shows" data={dramaShows} />
+      <ShowList title="Popular Drama Shows" data={dramaShows} isLoading={dramaLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setDramaPage(dramaPage + 1)}
@@ -170,7 +170,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Family Shows" data={familyShows} />
+      <ShowList title="Popular Family Shows" data={familyShows} isLoading={familyLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setFamilyPage(familyPage + 1)}
@@ -179,7 +179,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Kids Shows" data={kidsShows} />
+      <ShowList title="Popular Kids Shows" data={kidsShows} isLoading={kidsLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setKidsPage(kidsPage + 1)}
@@ -188,7 +188,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Mystery Shows" data={mysteryShows} />
+      <ShowList title="Popular Mystery Shows" data={mysteryShows} isLoading={mysteryLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setMysteryPage(mysteryPage + 1)}
@@ -197,7 +197,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular News Shows" data={newsShows} />
+      <ShowList title="Popular News Shows" data={newsShows} isLoading={newsLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setNewsPage(newsPage + 1)}
@@ -206,7 +206,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Reality Shows" data={realityShows} />
+      <ShowList title="Popular Reality Shows" data={realityShows} isLoading={realityLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setRealityPage(realityPage + 1)}
@@ -215,7 +215,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Sci-Fi & Fantasty Shows" data={scifiShows} />
+      <ShowList title="Popular Sci-Fi & Fantasty Shows" data={scifiShows} isLoading={scifiLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setScifiPage(scifiPage + 1)}
@@ -224,7 +224,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Soap Shows" data={soapShows} />
+      <ShowList title="Popular Soap Shows" data={soapShows} isLoading={soapLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setSoapPage(soapPage + 1)}
@@ -233,7 +233,7 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular Talk Shows" data={talkShows} />
+      <ShowList title="Popular Talk Shows" data={talkShows} isLoading={talkLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setTalkPage(talkPage + 1)}
@@ -242,13 +242,13 @@ const Shows = () => {
           See More
         </button>
       </div>
-      <ShowList title="Popular War & Politics Shows" data={warShows} />
+      <ShowList title="Popular War & Politics Shows" data={warShows} isLoading={warLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button onClick={() => setWarPage(warPage + 1)} className="text-white">
           See More
         </button>
       </div>
-      <ShowList title="Popular Western Shows" data={westernShows} />
+      <ShowList title="Popular Western Shows" data={westernShows} isLoading={westernLoading}/>
       <div className="flex px-4 md:px-12 space-y-8 items-center justify-center">
         <button
           onClick={() => setWesternPage(westernPage + 1)}

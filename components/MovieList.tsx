@@ -7,9 +7,10 @@ import { BiChevronDown } from "react-icons/bi"
 interface MovieListProps {
   data: Record<string, any>[]
   title: string
+  isLoading: boolean
 }
 
-const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
+const MovieList: React.FC<MovieListProps> = ({ data, title, isLoading }) => {
   const emptyData = () => {
     let listItems = []
     for (let i = 0; i < 20; i++) {
@@ -42,7 +43,7 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
     return listItems
   }
 
-  if (isEmpty(data)) {
+  if (isLoading) {
     return (
       <div className="px-4 md:px-12 space-y-8">
         <div>
@@ -54,8 +55,10 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
           </div>
         </div>
       </div>
-      // null
     )
+  }
+  if (isEmpty(data)) {
+    return null
   }
   return (
     <div className="px-4 md:px-12 space-y-8">

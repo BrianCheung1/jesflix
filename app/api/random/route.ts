@@ -38,4 +38,5 @@ export async function GET(req: Request) {
   } catch (error) {
     return NextResponse.json(error)
   }
+  
 }

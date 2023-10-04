@@ -58,13 +58,23 @@ const Home = () => {
             <MovieList
               title={`Because ${similarMovies?.choice?.title} is in your favorites`}
               data={similarMovies?.results}
+              isLoading={isLoadingSimilarMovies}
             />
             <ShowList
               title={`Because ${similarShows?.choice?.name} is in your favorites`}
               data={similarShows?.results}
+              isLoading={isLoadingSimilarShows}
             />
-            <MovieList title="Trending Movies Today" data={trendingMovies} />
-            <ShowList title="Trending Shows Today" data={trendingShows} />
+            <MovieList
+              title="Trending Movies Today"
+              data={trendingMovies}
+              isLoading={isLoading}
+            />
+            <ShowList
+              title="Trending Shows Today"
+              data={trendingShows}
+              isLoading={isLoadingShows}
+            />
           </div>
           <Footer />
         </>
@@ -91,8 +101,16 @@ const Home = () => {
         <Navbar />
         <Billboard />
         <div className="pt-5">
-          <MovieList title="Trending Movies Today" data={trendingMovies} />
-          <ShowList title="Trending Shows Today" data={trendingShows} />
+          <MovieList
+            title="Trending Movies Today"
+            data={trendingMovies}
+            isLoading={isLoading}
+          />
+          <ShowList
+            title="Trending Shows Today"
+            data={trendingShows}
+            isLoading={isLoadingShows}
+          />
           <Footer />
         </div>
       </div>

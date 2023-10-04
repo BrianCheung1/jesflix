@@ -45,6 +45,7 @@ export async function POST(req: Request) {
   } else {
     return NextResponse.redirect("/api/auth/signin")
   }
+  return NextResponse.json({ message: "error", success: false })
 }
 
 //Deletes movies and tv shows from database of the current user
@@ -87,4 +88,5 @@ export async function DELETE(req: Request, res: Response) {
       return NextResponse.json(error, { status: 400 })
     }
   }
+  return NextResponse.json({ message: "error", success: false })
 }

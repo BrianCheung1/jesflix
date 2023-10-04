@@ -24,8 +24,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
         onClick={() => {
           openModal(data?.id)
         }}
-        width={640}
-        height={960}
+        loading="lazy"
         placeholder = "data:image/poster-placeholder.png"
         className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-5/6"
         src={
