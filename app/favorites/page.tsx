@@ -34,19 +34,8 @@ const Favorites = () => {
       </div>
     )
   }
-  if (isEmpty(favorites.movies) && isEmpty(favorites.shows)) {
-    return (
-      <div className="flex flex-col h-full">
-        <Navbar />
-        <div className="flex flex-1 h-full items-center justify-center text-white">
-          <p>Nothing on your list</p>
-        </div>
-        <Footer />
-      </div>
-    )
-  }
   return (
-    <div className="flex flex-col h-full">
+    <div>
       <Navbar />
       <div className="pt-3 flex-1">
         <InfoModal visible={isOpen} onClose={closeModal} />
