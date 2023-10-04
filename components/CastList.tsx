@@ -12,7 +12,7 @@ const CastList: React.FC<CastListProps> = ({ data }) => {
       listItems.push(`${cast[i]?.name} as ${cast[i]?.character}`)
     }
 
-    return listItems.join("\n")
+    return listItems.join(", ")
   }
 
   return <div>{renderCast()}</div>

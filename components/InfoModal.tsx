@@ -50,12 +50,12 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
   if (isLoading) {
     return (
-      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex flex-wrap justify-center items-center  overflow-y-auto no-scrollbar fixed inset-0">
+      <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex justify-center items-center overflow-y-auto no-scrollbar fixed inset-0">
         <div className="max-w-3xl rounded-md overflow-hidden">
           <div
             className={`${
               isVisible ? "scale-100" : "scale-0"
-            } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md `}
+            } transform duration-300 relative flex bg-zinc-900 drop-shadow-md `}
           >
             <div className="h-96 w-screen animate-pulse justify-center items-center flex">
               <div
@@ -88,7 +88,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
         >
           <div className="relative">
             <video
-              className="brightness-[60%] "
+              className="brightness-[60%]"
               autoPlay
               muted
               loop
@@ -124,19 +124,19 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             <p className="text-green-400">
               <BsFillCalendarFill size={15} />
             </p>
-            <p className="text-white font-semibold md:text-xl text-sm">
+            <p className="text-white font-semibold text-sm">
               {data?.release_date}
             </p>
             <p className="text-green-400">
               <AiFillStar size={20} />
             </p>
-            <p className="text-white font-semibold md:text-xl text-sm">
+            <p className="text-white font-semibold text-sm">
               {data?.vote_average.toFixed(1)}
             </p>
             <p className="text-green-400">
               <BiSolidTimeFive size={20} />
             </p>
-            <p className="text-white font-semibold text-1xl">
+            <p className="text-white font-semibold text-sm">
               {Math.floor(data?.runtime / 60)}h {data?.runtime % 60}m
             </p>
           </div>

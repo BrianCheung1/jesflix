@@ -24,10 +24,14 @@ const InfoButton: React.FC<InfoButtonProps> = ({ movieId, type }) => {
 
   return (
     <div className="">
-      <button onClick={moreInfo} className="cursor-pointer transition">
+      <button
+        onClick={moreInfo}
+        className="cursor-pointer py-1
+        md:py-2"
+      >
         <AiOutlineInfoCircle
           size={25}
-          className="hover:scale-125 text-white hover:text-blue-800"
+          className="hover:scale-125 text-white hover:text-blue-800 duration-300"
         />
       </button>
     </div>

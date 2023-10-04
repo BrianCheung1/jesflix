@@ -41,6 +41,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
     hover:scale-110
     transition
     hover:text-blue-800
+    duration-300
     "
       >
         <BsFillPlayFill size={20} className="mr-1" />
@@ -69,7 +70,8 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   items-center
   transition
   hover:scale-110
-  hover:text-blue-800"
+  hover:text-blue-800
+  duration-300"
     >
       <BsFillPlayFill size={20} className="mr-1" />
       Play

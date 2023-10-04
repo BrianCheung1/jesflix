@@ -19,20 +19,22 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
 
   return (
     <div className="group bg-zinc-900 relative">
-      <img
-        onClick={() => {
-          openModal(data?.id)
-        }}
-        loading="lazy"
-        placeholder = "data:image/poster-placeholder.png"
-        className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-5/6"
-        src={
-          data?.poster_path
-            ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`
-            : "https://critics.io/img/movies/poster-placeholder.png"
-        }
-        alt="Thumbnail"
-      />
+      <div className="overflow-hidden">
+        <img
+          onClick={() => {
+            openModal(data?.id)
+          }}
+          loading="lazy"
+          placeholder="data:image/poster-placeholder.png"
+          className="cursor-pointer object-cover transition ease-in-out duration-300 shadow-xl rounded-t-md w-full h-5/6 hover:scale-110"
+          src={
+            data?.poster_path
+              ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`
+              : "https://critics.io/img/movies/poster-placeholder.png"
+          }
+          alt="Thumbnail"
+        />
+      </div>
       <div className="bg-zinc-800 p-2 lg:p-3 w-full shadow-md rounded-b-md ">
         <div className="flex flex-row items-center">
           <div
@@ -44,7 +46,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
             <BsFillPlayFill size={30} />
           </div>
           <FavoriteButton movieId={data?.id} type="show" />
-            <ShareButton movieId={data?.id} type="show" />
+          <ShareButton movieId={data?.id} type="show" />
           <div
             onClick={() => {
               openModal(data?.id)
@@ -53,7 +55,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
           >
             <BiChevronDown
               size={30}
-              className="text-white hover:text-blue-800"
+              className="text-white hover:text-blue-800 duration-300"
             />
           </div>
         </div>

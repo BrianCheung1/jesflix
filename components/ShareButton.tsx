@@ -32,24 +32,23 @@ const ShareButton: React.FC<ShareButtonProps> = ({ movieId, type }) => {
   }, [movieId, type])
 
   return (
-    <div className="">
+    <div>
       <button
         disabled={isVisible ? true : false}
         onClick={copyToClipboard}
-        className="
-      cursor-pointer transition
-      "
+        className="cursor-pointer py-1
+        md:py-2"
       >
         <GoShare
           size={25}
-          className="hover:scale-125 text-white hover:text-blue-800"
+          className="hover:scale-125 text-white hover:text-blue-800 duration-300"
         />
       </button>
 
       <div
         className={
           isVisible
-            ? `absolute rounded-md flex items-center bg-blue-500 text-white text-sm font-bold px-2 py-2 z-50 text-center`
+            ? `absolute rounded-md bg-blue-500 text-white text-sm font-bold px-2 py-2 z-50 text-center`
             : `hidden`
         }
         role="alert"

@@ -120,7 +120,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
         <div className="w-full max-w-3xl mx-auto rounded-md">
           <div
             className={`${
-              isVisible ? "scale-100" : "scale-0 "
+              isVisible ? "scale-100" : "scale-0"
             } transform duration-300 flex-auto bg-zinc-900 drop-shadow-md `}
           >
             <div className="relative">
@@ -165,16 +165,16 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               <p className="text-green-400">
                 <BsFillCalendarFill size={15} />
               </p>
-              <p className="text-white font-semibold md:text-xl text-sm">
+              <p className="text-white font-semibold text-sm">
                 {data?.first_air_date}
               </p>
               <p className="text-green-400">
                 <AiFillStar size={20} />
               </p>
-              <p className="text-white font-semibold md:text-xl text-sm">
+              <p className="text-white font-semibold text-sm">
                 {data?.vote_average.toFixed(1)}
               </p>
-              <div>
+              <div className="flex flex-wrap gap-2">
                 <select
                   onChange={handleSeasonsChange}
                   id="Seasons"
@@ -183,8 +183,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                   <option selected>Choose a season</option>
                   {renderSeasons()}
                 </select>
-              </div>
-              <div>
+              
                 <select
                   onChange={handleEpisodeChange}
                   id="Episodes"

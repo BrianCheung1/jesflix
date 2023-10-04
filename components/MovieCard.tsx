@@ -20,25 +20,29 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
   return (
     <div className="group bg-zinc-900 relative">
-      <img
-        onClick={() => {
-          openModal(data?.id)
-        }}
-        loading="lazy"
-        placeholder = "data:image/poster-placeholder.png"
-        className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-5/6"
-        src={
-          data?.poster_path
-            ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`
-            : "https://critics.io/img/movies/poster-placeholder.png"
-        }
-        alt="Thumbnail"
-      />
+      <div className="overflow-hidden">
+        <img
+          onClick={() => {
+            openModal(data?.id)
+          }}
+          loading="lazy"
+          placeholder="data:image/poster-placeholder.png"
+          className="cursor-pointer object-cover transition ease-in-out duration-300 shadow-xl rounded-t-md w-full h-5/6 hover:scale-110"
+          src={
+            data?.poster_path
+              ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`
+              : "https://critics.io/img/movies/poster-placeholder.png"
+          }
+          alt="Thumbnail"
+        />
+      </div>
       <div className="bg-zinc-800 p-2 lg:p-3 w-full shadow-md rounded-b-md ">
         <div className="flex flex-row items-center">
           <div
             className="cursor-pointer text-white transition hover:scale-125 hover:text-blue-800"
-            onClick={() => router.push(session ? `/watch/movie/${data?.id}` : `/auth`)}
+            onClick={() =>
+              router.push(session ? `/watch/movie/${data?.id}` : `/auth`)
+            }
           >
             <BsFillPlayFill size={30} />
           </div>
@@ -52,7 +56,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           >
             <BiChevronDown
               size={30}
-              className="text-white hover:text-blue-800"
+              className="text-white hover:text-blue-800 duration-300"
             />
           </div>
         </div>
