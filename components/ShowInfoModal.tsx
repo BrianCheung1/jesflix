@@ -8,6 +8,7 @@ import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
 import ShareButton from "./ShareButton"
 import InfoButton from "./InfoButton"
+import GenreList from "./GenreList"
 
 interface InfoModalProps {
   visible?: boolean
@@ -44,14 +45,6 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     }
   }, [visible, ref, handleClose])
 
-  const renderGenres = () => {
-    const genres = data?.genres
-      ?.map((genre: any) => {
-        return genre.name
-      })
-      .join(", ")
-    return genres
-  }
 
   const handleEpisodeChange = (e: any) => {
     setEpisode(Number(e.target.value))
@@ -207,7 +200,7 @@ const ShowInfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             </div>
 
             <div className="px-4 pb-6">
-              <p className="text-white text-sm">{renderGenres()}</p>
+              <p className="text-white text-sm"><GenreList data={data}/></p>
             </div>
           </div>
         </div>

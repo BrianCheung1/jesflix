@@ -11,7 +11,6 @@ interface ShowListProps {
 }
 
 const ShowList: React.FC<ShowListProps> = ({ data, title, isLoading }) => {
-  console.log(isLoading)
   const emptyData = () => {
     let listItems = []
     for (let i = 0; i < 20; i++) {

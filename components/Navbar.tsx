@@ -64,6 +64,7 @@ const Navbar = () => {
         items-center
         transition
         duration-500
+        
         ${showBackground ? "bg-black bg-opacity-70" : "bg-black"}`}
         >
           <img
@@ -122,7 +123,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="w-full fixed z-40 ">
+    <nav className="w-full fixed z-40">
       <div
         className={`
         px-4
@@ -157,7 +158,7 @@ const Navbar = () => {
             } `}
           />
         </div>
-        <div className="flex flex-row items-center gap-1 md:gap-4 lg:gap-6 ml-auto">
+        <div className="flex flex-row items-center gap-1 md:gap-4 lg:gap-6 ml-auto ">
           <div className="px-3">
             <form onSubmit={handleSearch}>
               <input

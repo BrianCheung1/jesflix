@@ -10,6 +10,8 @@ import { BsFillCalendarFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"
 import ShareButton from "@/components/ShareButton"
 import { useState } from "react"
+import GenreList from "@/components/GenreList"
+import CastList from "@/components/CastList"
 
 const Show = () => {
   const { showId } = useParams()
@@ -18,25 +20,6 @@ const Show = () => {
   const { data, isLoading } = useShow(showId as string)
   const { data: session } = useSession()
 
-  const renderGenres = () => {
-    const genres = data?.genres
-      ?.map((genre: any) => {
-        return genre.name
-      })
-      .join(", ")
-    console.log(genres)
-    return genres
-  }
-
-  const renderCast = () => {
-    const listItems = []
-    const cast = data?.credits?.cast
-    for (let i = 0; i < data?.credits?.cast?.length; i++) {
-      listItems.push(`${cast[i]?.name} as ${cast[i]?.character}`)
-    }
-
-    return listItems.join(", ")
-  }
 
   const handleEpisodeChange = (e: any) => {
     setEpisode(Number(e.target.value))
@@ -161,7 +144,7 @@ const Show = () => {
             <div className="mr-32 md:text-3xl text-xl text-slate-400">
               Genre
             </div>
-            <div className="text-white">{renderGenres()}</div>
+            <div className="text-white"><GenreList data={data}/></div>
           </div>
 
           <div className="flex flex-col flex-wrap mx-16 mb-4">
@@ -226,7 +209,7 @@ const Show = () => {
           </div>
           <div className="flex flex-col flex-wrap mx-16 mb-4">
             <div className="mr-32 md:text-3xl text-xl text-slate-400">Cast</div>
-            <div className="text-white">{renderCast()}</div>
+            <div className="text-white"><CastList data={data} /></div>
           </div>
         </div>
         <Footer />

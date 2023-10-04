@@ -5,7 +5,6 @@ import FavoriteButton from "./FavoriteButton"
 import { useRouter } from "next/navigation"
 import useShowInfoModal from "@/hooks/useShowInfoModal"
 import { BiChevronDown } from "react-icons/bi"
-import Image from "next/image"
 import { useSession } from "next-auth/react"
 import ShareButton from "./ShareButton"
 
