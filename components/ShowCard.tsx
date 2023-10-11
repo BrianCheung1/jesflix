@@ -19,14 +19,14 @@ const ShowCard: React.FC<ShowCardProps> = ({ data }) => {
 
   return (
     <div className="group bg-zinc-900 relative">
-      <div className="overflow-hidden">
+      <div className="overflow-hidden h-5/6">
         <img
           onClick={() => {
             openModal(data?.id)
           }}
           loading="lazy"
           placeholder="data:image/poster-placeholder.png"
-          className="cursor-pointer object-cover transition ease-in-out duration-300 shadow-xl rounded-t-md w-full h-5/6 hover:scale-110"
+          className="cursor-pointer object-cover transition ease-in-out duration-300 shadow-xl rounded-t-md w-full h-full hover:scale-110"
           src={
             data?.poster_path
               ? `https://image.tmdb.org/t/p/original/${data?.poster_path}`

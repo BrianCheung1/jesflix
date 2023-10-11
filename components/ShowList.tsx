@@ -61,7 +61,7 @@ const ShowList: React.FC<ShowListProps> = ({ data, title, isLoading }) => {
   }
 
   return (
-    <div className="px-4 md:px-12 space-y-8">
+    <div className="px-4 md:px-12 space-y-8 pb-4">
       <div>
         <p className="text-white text-2xl md:text-3xl font-bold mb-4 pt-10">
           {title}
