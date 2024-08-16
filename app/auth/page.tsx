@@ -92,7 +92,7 @@ const Auth = () => {
         redirect: false,
         email,
         password,
-        callbackUrl: "/profiles",
+        callbackUrl: "/",
       })
       if (success?.error) notifyEmail(success.error)
       console.log(success)
